@@ -1,10 +1,35 @@
 const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
 const app = express();
+const dotenv = require("dotenv");
+dotenv.config();
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+const programMeetingRoutes = require("./routes/program_meetingRoutes");
+
+app.use(cors());
+app.use(express.json());
+app.options("*", cors());
+app.use("/api", programMeetingRoutes);
+
+const options = {
+  useNewUrlParser: true,
+  autoIndex: true,
+  keepAlive: true,
+  connectTimeoutMS: 10000,
+  socketTimeoutMS: 45000,
+  family: 4,
+  useUnifiedTopology: true,
+};
+
+mongoose.connect(process.env.DB, options, (error) => {
+  if (error) {
+    console.log(error);
+  } else {
+    console.log("Connected to database");
+  }
 });
 
-app.listen(3000, () => {
-  console.log("Example app listening on port 3000!");
+app.listen(process.env.PORT, () => {
+  console.log(`Server running on port  ${process.env.PORT}`);
 });
