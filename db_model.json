@@ -1,0 +1,54 @@
+{
+  "program_meeting": {
+    "name": {
+      "type": "String",
+      "required": true,
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "time": {
+      "type": "Date",
+      "required": true
+    },
+    "hour": {
+      "type": "Number",
+      "required": true,
+      "min": 0,
+      "max": 23
+    },
+    "place": {
+      "type": "String",
+      "required": true,
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "description": {
+      "type": "String",
+      "required": true,
+      "minLength": 1,
+      "maxLength": 3000
+    }
+  },
+  "users": {
+    "name": {
+      "type": "String",
+      "required": true,
+      "minLength": 1,
+      "maxLength": 100
+    },
+    "ocupation": {
+      "type": "String",
+      "required": true,
+      "minLength": 1,
+      "maxLength": 100
+    }
+  },
+  "acta_meeting": {
+    "description": {
+      "type": "String",
+      "required": true,
+      "minLength": 1,
+      "maxLength": 3000
+    }
+  }
+}
