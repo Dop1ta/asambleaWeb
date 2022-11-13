@@ -8,6 +8,12 @@ const userSchema = new schema({
     minLength: 3,
     maxLength: 100,
   },
+  rut: {
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 12,
+  },
   ocupation: {
     type: String,
     required: true,
