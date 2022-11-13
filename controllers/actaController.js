@@ -1,8 +1,9 @@
 const acta_Meeting = require("../models/acta_Meeting");
 
 const createActa = (req, res) => {
-  const { description, date } = req.body;
+  const { name, description, date } = req.body;
   const newMeeting = new acta_Meeting({
+    name,
     description,
     date,
   });

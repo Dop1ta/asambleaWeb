@@ -17,7 +17,7 @@ const userSchema = new schema({
   ocupation: {
     type: String,
     required: true,
-    minLength: 20,
+    minLength: 1,
     maxLength: 100,
   },
 });
