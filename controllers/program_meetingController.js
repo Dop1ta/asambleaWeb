@@ -56,7 +56,7 @@ const deleteMeeting = (req, res) => {
   });
 };
 
-const getMeeting = (req, res) => {
+const getMeetingById = (req, res) => {
   const { id } = req.params;
   programMeeting.findById(id, (error, meeting) => {
     if (error) {
@@ -74,5 +74,5 @@ module.exports = {
   getMeetings,
   deleteMeeting,
   updateMeeting,
-  getMeeting,
+  getMeetingById,
 };

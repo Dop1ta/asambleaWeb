@@ -6,11 +6,13 @@ const dotenv = require("dotenv");
 dotenv.config();
 
 const programMeetingRoutes = require("./routes/program_meetingRoutes");
+const actaRoutes = require("./routes/actaRoutes");
 
 app.use(cors());
 app.use(express.json());
 app.options("*", cors());
 app.use("/api", programMeetingRoutes);
+app.use("/api", actaRoutes);
 
 const options = {
   useNewUrlParser: true,
