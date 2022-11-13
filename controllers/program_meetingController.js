@@ -32,7 +32,7 @@ const getMeetings = (req, res) => {
 
 const updateMeeting = (req, res) => {
   const { id } = req.params;
-  programMeeting.findByIdAndUpdate(id, (error, meeting) => {
+  programMeeting.findByIdAndUpdate(id, req.body, (error, meeting) => {
     if (error) {
       return res.status(400).send({ message: "Error update meeting" });
     }

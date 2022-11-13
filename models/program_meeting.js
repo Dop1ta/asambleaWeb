@@ -5,31 +5,31 @@ const programMeetingSchema = new schema({
   name: {
     type: String,
     required: true,
-    minLength: 3,
+    minLength: 1,
     maxLength: 100,
   },
   time: {
-    type: Date,
+    type: String,
     required: true,
-    minLength: 10,
+    minLength: 1,
     maxLength: 100,
   },
   hour: {
-    type: Number,
+    type: String,
     required: true,
-    minLength: 10,
+    minLength: 1,
     maxLength: 100,
   },
   place: {
     type: String,
     required: true,
-    minLength: 20,
+    minLength: 1,
     maxLength: 100,
   },
   description: {
     type: String,
     required: true,
-    minLength: 20,
+    minLength: 1,
     maxLength: 100,
   },
 });

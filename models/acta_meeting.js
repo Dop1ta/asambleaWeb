@@ -5,7 +5,13 @@ const actaMeetingSchema = new schema({
   description: {
     type: String,
     required: true,
-    minLength: 3,
+    minLength: 1,
+    maxLength: 100,
+  },
+  date: {
+    type: String,
+    required: true,
+    minLength: 1,
     maxLength: 100,
   },
 });
