@@ -10,7 +10,7 @@ const createActa = (req, res) => {
 
   newMeeting.save((error, meeting) => {
     if (error) {
-      return res.status(400).send({ message: "Error create acta" });
+      return res.status(400).send({ message: "Error al crear acta" });
     }
     return res.status(201).send(meeting);
   });
@@ -19,7 +19,7 @@ const createActa = (req, res) => {
 const getActa = (req, res) => {
   acta_Meeting.find({}, (error, meetings) => {
     if (error) {
-      return res.status(400).send({ message: "Error getting actas" });
+      return res.status(400).send({ message: "Error obteniendo acta" });
     }
     if (meetings.length === 0) {
       return res.status(404).send({ message: "No actas found" });
@@ -32,12 +32,12 @@ const updateActa = (req, res) => {
   const { id } = req.params;
   acta_Meeting.findByIdAndUpdate(id, req.body, (error, meeting) => {
     if (error) {
-      return res.status(400).send({ message: "Error update acta" });
+      return res.status(400).send({ message: "Error actualizar acta" });
     }
     if (!meeting) {
-      return res.status(404).send({ message: "Acta not found" });
+      return res.status(404).send({ message: "Acta no encontrada" });
     }
-    return res.status(200).send({ message: "Acta Update" });
+    return res.status(200).send({ message: "Acta Actualizada" });
   });
 };
 
@@ -45,12 +45,12 @@ const deleteActa = (req, res) => {
   const { id } = req.params;
   acta_Meeting.findByIdAndDelete(id, (error, meeting) => {
     if (error) {
-      return res.status(400).send({ message: "Error deleting acta" });
+      return res.status(400).send({ message: "Error eliminando acta" });
     }
     if (!meeting) {
-      return res.status(404).send({ message: "Acta not found" });
+      return res.status(404).send({ message: "Acta no encontrada" });
     }
-    return res.status(200).send({ message: "Acta deleted" });
+    return res.status(200).send({ message: "Acta eliminada" });
   });
 };
 
@@ -61,7 +61,7 @@ const getActaById = (req, res) => {
       return res.status(400).send({ message: "Error" });
     }
     if (!meeting) {
-      return res.status(404).send({ message: "Acta not found" });
+      return res.status(404).send({ message: "Acta no encontrada" });
     }
     return res.status(200).send(meeting);
   });
