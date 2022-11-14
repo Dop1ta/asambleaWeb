@@ -12,7 +12,7 @@ const createMeeting = (req, res) => {
 
   newMeeting.save((error, meeting) => {
     if (error) {
-      return res.status(400).send({ message: "Error creating meeting" });
+      return res.status(400).send({ message: "Error creando reunion" });
     }
     return res.status(201).send(meeting);
   });
@@ -21,10 +21,10 @@ const createMeeting = (req, res) => {
 const getMeetings = (req, res) => {
   programMeeting.find({}, (error, meetings) => {
     if (error) {
-      return res.status(400).send({ message: "Error getting meetings" });
+      return res.status(400).send({ message: "Error encontrando reuniones" });
     }
     if (meetings.length === 0) {
-      return res.status(404).send({ message: "No meetings found" });
+      return res.status(404).send({ message: "Reunion no encontrada" });
     }
     return res.status(200).send(meetings);
   });
@@ -34,12 +34,12 @@ const updateMeeting = (req, res) => {
   const { id } = req.params;
   programMeeting.findByIdAndUpdate(id, req.body, (error, meeting) => {
     if (error) {
-      return res.status(400).send({ message: "Error update meeting" });
+      return res.status(400).send({ message: "Error actualiza reunion" });
     }
     if (!meeting) {
-      return res.status(404).send({ message: "Meeting not found" });
+      return res.status(404).send({ message: "Reunion no encontrada" });
     }
-    return res.status(200).send({ message: "Meeting Update" });
+    return res.status(200).send({ message: "Reunion actualizada" });
   });
 };
 
