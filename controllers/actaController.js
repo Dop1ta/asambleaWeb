@@ -32,7 +32,7 @@ const updateActa = (req, res) => {
   const { id } = req.params;
   acta_Meeting.findByIdAndUpdate(id, req.body, (error, meeting) => {
     if (error) {
-      return res.status(400).send({ message: "Error actualizar acta." });
+      return res.status(400).send({ message: "Error al actualizar acta." });
     }
     if (!meeting) {
       return res.status(404).send({ message: "Acta no encontrada." });
