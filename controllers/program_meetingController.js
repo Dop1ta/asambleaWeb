@@ -34,7 +34,7 @@ const updateMeeting = (req, res) => {
   const { id } = req.params;
   programMeeting.findByIdAndUpdate(id, req.body, (error, meeting) => {
     if (error) {
-      return res.status(400).send({ message: "Error actualiza reunión." });
+      return res.status(400).send({ message: "Error al actualizar reunión." });
     }
     if (!meeting) {
       return res.status(404).send({ message: "Reunión no encontrada." });
