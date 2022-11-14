@@ -21,9 +21,9 @@ const getActa = (req, res) => {
     if (error) {
       return res.status(400).send({ message: "Error obteniendo acta." });
     }
-    // if (meetings.length === 0) {
-    //   return res.status(404).send({ message: "Acta no encontrada." });
-    // }
+    if (meetings.length === 0) {
+      return res.status(404).send({ message: "Acta no encontrada." });
+    }
     return res.status(200).send(meetings);
   });
 };
