@@ -11,7 +11,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "pm2": "pm2 start yarn -- dev"
   },
   "repository": "https://github.com/Dop1ta/asambleaWeb.git",
   "author": "Dop1ta <gabrielrburgos@outlook.com>",
