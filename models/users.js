@@ -14,7 +14,7 @@ const userSchema = new schema({
     minLength: 1,
     maxLength: 12,
   },
-  ocupation: {
+  rol: {
     type: String,
     required: true,
     minLength: 1,

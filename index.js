@@ -8,6 +8,7 @@ dotenv.config();
 const programMeetingRoutes = require("./routes/program_meetingRoutes");
 const actaRoutes = require("./routes/actaRoutes");
 const userRoutes = require("./routes/userRoutes");
+const votingActivityRoutes = require("./routes/votingActivityRoutes");
 
 app.use(cors());
 app.use(express.json());
@@ -15,6 +16,7 @@ app.options("*", cors());
 app.use("/api", programMeetingRoutes);
 app.use("/api", actaRoutes);
 app.use("/api", userRoutes);
+app.use("/api", votingActivityRoutes);
 
 const options = {
   useNewUrlParser: true,

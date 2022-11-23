@@ -1,11 +1,11 @@
 const user = require("../models/users");
 
 const createUser = (req, res) => {
-  const { name, rut, ocupation } = req.body;
+  const { name, rut, rol } = req.body;
   const newUser = new user({
     name,
     rut,
-    ocupation,
+    rol,
   });
 
   newUser.save((error, person) => {

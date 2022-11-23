@@ -13,8 +13,8 @@ const createMeeting = (req, res) => {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
     if (
-      person.ocupation === "presidente" ||
-      person.ocupation === "secretario"
+      person.rol === "presidente" ||
+      person.rol === "secretario"
     ) {
       const newMeeting = new programMeeting({
         name,
