@@ -1,20 +1,38 @@
 const programMeeting = require("../models/program_meeting");
+const user = require("../models/users");
 
 const createMeeting = (req, res) => {
   const { name, time, hour, place, description } = req.body;
-  const newMeeting = new programMeeting({
-    name,
-    time,
-    hour,
-    place,
-    description,
-  });
+  const { id } = req.params;
 
-  newMeeting.save((error, meeting) => {
+  user.findById(id, (error, person) => {
     if (error) {
-      return res.status(400).send({ message: "Error creando reunión." });
+      return res.status(400).send({ message: "Error al buscar el usuario." });
     }
-    return res.status(201).send(meeting);
+    if (!person) {
+      return res.status(404).send({ message: "Usuario no encontrado." });
+    }
+    if (
+      person.ocupation === "presidente" ||
+      person.ocupation === "secretario"
+    ) {
+      const newMeeting = new programMeeting({
+        name,
+        time,
+        hour,
+        place,
+        description,
+      });
+
+      newMeeting.save((error, meeting) => {
+        if (error) {
+          return res.status(400).send({ message: "Error creando reunión." });
+        }
+        return res.status(201).send(meeting);
+      });
+    } else {
+      return res.status(404).send({ message: "Usuario no permitido." });
+    }
   });
 };
 
