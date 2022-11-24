@@ -21,10 +21,14 @@ const createUser = (req, res) => {
 const getUsers = (req, res) => {
   user.find({}, (error, person) => {
     if (error) {
-      return res.status(400).send({ message: "Hay un error al buscar usuario." });
+      return res
+        .status(400)
+        .send({ message: "Hay un error al buscar usuario." });
     }
     if (person.length === 0) {
-      return res.status(404).send({ message: "No se puede encontrar el usuario." });
+      return res
+        .status(404)
+        .send({ message: "No se puede encontrar el usuario." });
     }
     return res.status(200).send(person);
   });
@@ -72,22 +76,30 @@ const getUserById = (req, res) => {
 };
 
 const getUsersEmail = (req, res) => {
-  user.find({}, (error, person) => {
-    if (error) {
-      return res.status(400).send({ message: "Hay un error al buscar usuario." });
-    }
-    if (person.length === 0) {
-      return res.status(404).send({ message: "No se puede encontrar el usuario." });
-    }
-    return res.status(200).send(person);
-  }).select('email -_id');
+  user
+    .find({}, (error, person) => {
+      if (error) {
+        return res
+          .status(400)
+          .send({ message: "Hay un error al buscar usuario." });
+      }
+      if (person.length === 0) {
+        return res
+          .status(404)
+          .send({ message: "No se puede encontrar el usuario." });
+      }
+      return res.status(200).send(person);
+    })
+    .select("email -_id");
 };
 
 const getUserEmailById = (req, res) => {
   const { id } = req.params;
   user.findById(id, (error, person) => {
     if (error) {
-      return res.status(400).send({ message: "Error al buscar el correo del usuario." });
+      return res
+        .status(400)
+        .send({ message: "Error al buscar el correo del usuario." });
     }
     if (!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
