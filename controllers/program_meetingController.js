@@ -12,10 +12,7 @@ const createMeeting = (req, res) => {
     if (!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if (
-      person.rol === "presidente" ||
-      person.rol === "secretario"
-    ) {
+    if (person.rol === "administrador") {
       const newMeeting = new programMeeting({
         name,
         time,
@@ -71,19 +68,6 @@ const deleteMeeting = (req, res) => {
       return res.status(404).send({ message: "Reunión no encontrada." });
     }
     return res.status(200).send({ message: "Reunión eliminada." });
-  });
-};
-
-const getMeetingById = (req, res) => {
-  const { id } = req.params;
-  programMeeting.findById(id, (error, meeting) => {
-    if (error) {
-      return res.status(400).send({ message: "Error." });
-    }
-    if (!meeting) {
-      return res.status(404).send({ message: "Reunión no encontrada." });
-    }
-    return res.status(200).send(meeting);
   });
 };
 
