@@ -20,6 +20,18 @@ const userSchema = new schema({
     minLength: 1,
     maxLength: 100,
   },
+  email: {
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 100,
+  },
+  address: {
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 200,
+  },
 });
 
 module.exports = mongoose.model("user", userSchema);
