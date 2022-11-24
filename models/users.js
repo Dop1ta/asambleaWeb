@@ -24,7 +24,7 @@ const userSchema = new schema({
     type: String,
     required: true,
     minLength: 1,
-    maxLength: 100
+    maxLength: 100,
   },
   address: {
     type: String,
