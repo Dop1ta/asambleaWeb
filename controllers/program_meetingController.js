@@ -1,5 +1,6 @@
 const programMeeting = require("../models/program_meeting");
 const user = require("../models/users");
+const transporter = require("../controllers/mailerController");
 
 const createMeeting = (req, res) => {
   const { name, time, hour, place, description } = req.body;
@@ -24,6 +25,29 @@ const createMeeting = (req, res) => {
       newMeeting.save((error, meeting) => {
         if (error) {
           return res.status(400).send({ message: "Error creando reunión." });
+        }
+        try {
+          let directory = ["gabriel.ruiz1901@alumnos.ubiobio.cl"];
+          const mailOptions = {
+            from: `Administrador <Prueba de texto>`,
+            to: directory,
+            subject: "Prueba de correos",
+            text: `Hola, se ha realizado de forma correcta el envio de los correos`,
+            html: `
+                <h1>Felicitaciones, has enviado un correo</h1>
+                <p>${meeting.description}</p>
+            `,
+          };
+          transporter.sendMail(mailOptions, (err, info) => {
+            if (err) {
+              return res
+                .status(400)
+                .send({ message: "Error al enviar el correo" });
+            }
+            return res.status(200).send({ message: "Mensaje enviado" });
+          });
+        } catch (error) {
+          return res.status(400).send({ message: "Error enviando correo." });
         }
         return res.status(201).send(meeting);
       });
@@ -68,6 +92,18 @@ const deleteMeeting = (req, res) => {
       return res.status(404).send({ message: "Reunión no encontrada." });
     }
     return res.status(200).send({ message: "Reunión eliminada." });
+  });
+};
+
+const getMeetingById = (req, res) => {
+  programMeeting.findById({}, (error, meetings) => {
+    if (error) {
+      return res.status(400).send({ message: "Error al encontrar reuniones." });
+    }
+    if (!meetings) {
+      return res.status(404).send({ message: "Reunión no encontrada." });
+    }
+    return res.status(200).send(meetings);
   });
 };
 
