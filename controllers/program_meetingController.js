@@ -46,6 +46,14 @@ const createMeeting = (req, res) => {
             }
             return res.status(200).send({ message: "Mensaje enviado" });
           });
+          transporter
+            .verify()
+            .then(() => {
+              console.log("Servidor de correos habilitado");
+            })
+            .catch((err) => {
+              console.log("Error al utilizar servidor de correos");
+            });
         } catch (error) {
           return res.status(400).send({ message: "Error enviando correo." });
         }
