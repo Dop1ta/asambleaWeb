@@ -5,11 +5,8 @@ const fileSize = require("../middlewares/fileSize");
 
 const api = express.Router();
 
-api.post(
-  "/file/:archivo",
-  upload.array("archivos"),
-  fileSize,
-  fileController.uploadfile
-);
+api.post("/file/:archivo", upload.array("archivos"), fileSize, fileController.uploadfile);
+api.get('/files', fileController.getFiles);
+api.get('/file/download/:id', fileController.getSFiles);
 
 module.export = api;
