@@ -86,28 +86,54 @@ const getMeetings = (req, res) => {
 };
 
 const updateMeeting = (req, res) => {
-  const { id } = req.params;
-  programMeeting.findByIdAndUpdate(id, req.body, (error, meeting) => {
+  const { id, idadmin } = req.params;
+  user.findById(idadmin, (error, person) => {
     if (error) {
-      return res.status(400).send({ message: "Error al actualizar reunión." });
+      return res.status(400).send({ message: "Error al buscar el usuario." });
     }
-    if (!meeting) {
-      return res.status(404).send({ message: "Reunión no encontrada." });
+    if (!person) {
+      return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    return res.status(200).send({ message: "Reunión actualizada." });
+    if (person.rol === "administrador") {
+      programMeeting.findByIdAndUpdate(id, req.body, (error, meeting) => {
+        if (error) {
+          return res
+            .status(400)
+            .send({ message: "Error al actualizar reunión." });
+        }
+        if (!meeting) {
+          return res.status(404).send({ message: "Reunión no encontrada." });
+        }
+        return res.status(200).send({ message: "Reunión actualizada." });
+      });
+    } else {
+      return res.status(404).send({ message: "Usuario no permitido." });
+    }
   });
 };
 
 const deleteMeeting = (req, res) => {
-  const { id } = req.params;
-  programMeeting.findByIdAndDelete(id, (error, meeting) => {
+  const { id, idadmin } = req.params;
+  user.findById(idadmin, (error, person) => {
     if (error) {
-      return res.status(400).send({ message: "Error eliminando reunión." });
+      return res.status(400).send({ message: "Error al buscar el usuario." });
     }
-    if (!meeting) {
-      return res.status(404).send({ message: "Reunión no encontrada." });
+    if (!person) {
+      return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    return res.status(200).send({ message: "Reunión eliminada." });
+    if (person.rol === "administrador") {
+      programMeeting.findByIdAndDelete(id, (error, meeting) => {
+        if (error) {
+          return res.status(400).send({ message: "Error eliminando reunión." });
+        }
+        if (!meeting) {
+          return res.status(404).send({ message: "Reunión no encontrada." });
+        }
+        return res.status(200).send({ message: "Reunión eliminada." });
+      });
+    } else {
+      return res.status(404).send({ message: "Usuario no permitido." });
+    }
   });
 };
 
