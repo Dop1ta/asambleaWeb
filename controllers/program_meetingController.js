@@ -99,7 +99,7 @@ const updateMeeting = (req, res) => {
 };
 
 const deleteMeeting = (req, res) => {
-  const { id } = req.params;
+  const { id, idadmin } = req.params;
   programMeeting.findByIdAndDelete(id, (error, meeting) => {
     if (error) {
       return res.status(400).send({ message: "Error eliminando reunión." });
