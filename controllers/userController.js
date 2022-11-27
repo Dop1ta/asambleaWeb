@@ -11,7 +11,7 @@ const createUser = (req, res) => {
     if(!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if(person.rol === 'administrador') {
+    if(person.rol === "administrador") {
       const newUser = new user({
         name,
         rut,
@@ -26,7 +26,7 @@ const createUser = (req, res) => {
         return res.status(201).send(person);
       });
     } else {
-      return res.status(404).send({ message: "Usuario no permitido."})
+      return res.status(404).send({ message: "Usuario no permitido." })
     }
   });
 };
@@ -41,7 +41,7 @@ const getUsers = (req, res) => {
     if(!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if(person.rol === 'administrador') {
+    if(person.rol === "administrador") {
       user.find({}, (error, person) => {
         if(error) {
           return res.status(400).send({ message: "Hay un error al buscar usuario." });
@@ -52,7 +52,7 @@ const getUsers = (req, res) => {
         return res.status(200).send(person);
       });
     } else {
-      return res.status(404).send({ message: "Usuario no permitido."})
+      return res.status(404).send({ message: "Usuario no permitido." })
     }
   });
 };
@@ -79,7 +79,7 @@ const updateUser = (req, res) => {
     if(!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if(person.rol === 'administrador') {
+    if(person.rol === "administrador") {
       user.findByIdAndUpdate(userid, req.body, (error, person) => {
         if(error) {
           return res.status(400).send({ message: "Error al actualizar el usuario." });
@@ -90,7 +90,7 @@ const updateUser = (req, res) => {
         return res.status(200).send({ message: "Usuario actualizado." });
       });
     } else {
-      return res.status(404).send({ message: "Usuario no permitido."})
+      return res.status(404).send({ message: "Usuario no permitido." })
     }
   });
 };
@@ -105,7 +105,7 @@ const deleteUser = (req, res) => {
     if(!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if(person.rol === 'administrador') {
+    if(person.rol === "administrador") {
       user.findByIdAndDelete(userid, (error, person) => {
         if(error) {
           return res.status(400).send({ message: "Error al eliminar el usuario." });
@@ -116,7 +116,7 @@ const deleteUser = (req, res) => {
         return res.status(200).send({ message: "Usuario eliminado." });
       });
     } else {
-      return res.status(404).send({ message: "Usuario no permitido."})
+      return res.status(404).send({ message: "Usuario no permitido." })
     }
   });
 };
@@ -131,7 +131,7 @@ const getUserById = (req, res) => {
     if(!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if(person.rol === 'administrador') {
+    if(person.rol === "administrador") {
       user.findById(userid, (error, person) => {
         if(error) {
           return res.status(400).send({ message: "Error al buscar el usuario." });
@@ -142,7 +142,7 @@ const getUserById = (req, res) => {
         return res.status(200).send(person);
       });
     } else {
-      return res.status(404).send({ message: "Usuario no permitido."})
+      return res.status(404).send({ message: "Usuario no permitido." })
     }
   });
 };
@@ -157,7 +157,7 @@ const getUsersEmail = (req, res) => {
     if(!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if(person.rol === 'administrador') {
+    if(person.rol === "administrador") {
       user.find({}, (error, person) => {
         if(error) {
           return res.status(400).send({ message: "Hay un error al buscar usuario." });
@@ -168,7 +168,7 @@ const getUsersEmail = (req, res) => {
         return res.status(200).send(person);
       }).select("email -_id");
     } else {
-      return res.status(404).send({ message: "Usuario no permitido."})
+      return res.status(404).send({ message: "Usuario no permitido." })
     }
   });
 };
@@ -183,7 +183,7 @@ const getUserEmailById = (req, res) => {
     if(!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if(person.rol === 'administrador') {
+    if(person.rol === "administrador") {
       user.findById(userid, (error, person) => {
         if(error) {
           return res.status(400).send({ message: "Error al buscar el correo del usuario." });
@@ -194,7 +194,7 @@ const getUserEmailById = (req, res) => {
         return res.status(200).send(person.email);
       });
     } else {
-      return res.status(404).send({ message: "Usuario no permitido."})
+      return res.status(404).send({ message: "Usuario no permitido." })
     }
   });
 };
