@@ -17,9 +17,9 @@ const createVotingActivity = (req, res) => {
       person.rol === "secretario"
     ) {
       const newVotingActivity = new votingActivity({
-       name,
-       startDate_vote,
-       endDate_vote,
+      name,
+      startDate_vote,
+      endDate_vote,
       });
 
       newVotingActivity.save((error, vote) => {
@@ -33,7 +33,7 @@ const createVotingActivity = (req, res) => {
     }
   });
 };
- 
+
 const getVotingActivity = (req, res) => {
     votingActivity.find({}, (error, vote) => {
       if (error) {
@@ -45,8 +45,8 @@ const getVotingActivity = (req, res) => {
       return res.status(200).send(vote);
     });
   };
-  
-  const updateVotingActivity = (req, res) => {
+
+  const updateVotingActivity = (req, res) => { //esto es necesario cambiarlo
     const { id } = req.params;
     votingActivity.findByIdAndUpdate(id, req.body, (error, vote) => {
       if (error) {
@@ -58,7 +58,7 @@ const getVotingActivity = (req, res) => {
       return res.status(200).send({ message: "Votación actualizada." });
     });
   };
-  
+
   const deleteVotingActivity = (req, res) => {
     const { id } = req.params;
     votingActivity.findByIdAndDelete(id, (error, vote) => {
@@ -71,7 +71,7 @@ const getVotingActivity = (req, res) => {
       return res.status(200).send({ message: "Votación eliminada." });
     });
   };
-  
+
   const getVotingActivityById = (req, res) => {
     const { id } = req.params;
     votingActivity.findById(id, (error, vote) => {
