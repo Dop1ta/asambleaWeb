@@ -8,7 +8,7 @@ api.get("/getUsersAll", userController.getUsersAll);
 api.put("/getUsers/update/:id/:userid", userController.updateUser);
 api.delete("/getUsers/delete/:id/:userid", userController.deleteUser);
 api.get("/getUsers/search/:id/:userid", userController.getUserById);
-api.get("/getUsers/emails/:id", userController.getUsersEmail);
+api.get("/getEmails", userController.getUsersEmail);
 api.get("/getUsers/email/:id/:userid", userController.getUserEmailById);
 
 module.exports = api;
