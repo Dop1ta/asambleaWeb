@@ -8,7 +8,7 @@ console.log(process.env.PWD);
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 465,
+  port: 587,
   secure: true,
   auth: {
     user: "gabriel.ruiz1901@alumnos.ubiobio.cl",
