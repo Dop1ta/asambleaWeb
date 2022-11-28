@@ -59,10 +59,10 @@ const createMeeting = (req, res) => {
               return res.status(200).send({ message: "Mensaje enviado" });
             });
           });
+          return res.status(201).send(meeting);
         } catch (error) {
           return res.status(400).send({ message: "Error enviando correo." });
         }
-        return res.status(201).send(meeting);
       });
     } else {
       return res.status(404).send({ message: "Usuario no permitido." });
