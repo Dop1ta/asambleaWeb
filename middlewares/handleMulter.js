@@ -7,25 +7,26 @@ const storage = multer.diskStorage({
         if(!fs.existsSync(route)){
             fs.mkdirSync(route, { recursive: true})
         }
-        cb(null,ruta)
+        cb(null,route)
     },
     filename:function (req,file,cb){
-        cb(null, date.now() + '-' + file.originalname)
+        const fecha = Date.now();
+        cb(null, fecha + '-' + file.originalname)
     }
 })
 
 const upload = multer({
-    storgae:storage,
+    storage: storage,
     fileFilter:function (req,file,cb){
-        if(file.mimetype==='archivo/pdf'){
-            console.log("El archvio es un pdf")
+        if(file.mimetype==='application/pdf'){
+            console.log("El archivo es un pdf")
         }else{
-            console.log("El archivo tiene otra extension")
+            console.log("El archvio subido es de otro formato")
         }
-        cb(null, true)
+        cb(null, true);
     },
     limits:{
-        fileSize: 1024 * 1024 * 200
+        fileSize: 1024 * 1024 * 15
     }
 })
 

@@ -1,3 +1,4 @@
+const { application } = require("express");
 const fileUpload = require("../models/file");
 const uploadfile = (req, res) => {
     const {files} = req
@@ -33,14 +34,21 @@ const getSFiles = (req, res) =>{
       return res.status(400).send({message: "Error al obtener el archivo"})
     }
     if(!file){
-      return res.status(404).send({message: "Archivo mo existe"})
+      return res.status(404).send({message: "Archivo no existe"})
     }
     return res.download('./' + file.url)
-  })
+  });
+}
+
+const deleteFiles = async (req, res) =>{
+  await uploadToRemoteBucket(req.file.path)
+  await unlikAsync(req.file.path)
+  res.end("Eliminada")
 }
 
 module.exports = {
   uploadfile,
   getFiles,
-  getSFiles
+  getSFiles,
+  deleteFiles
 };

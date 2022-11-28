@@ -9,7 +9,7 @@ const programMeetingRoutes = require("./routes/program_meetingRoutes");
 const actaRoutes = require("./routes/actaRoutes");
 const userRoutes = require("./routes/userRoutes");
 const votingActivityRoutes = require("./routes/votingActivityRoutes");
-// const fileRoutes = require("./routes/fileRoutes");
+const fileRoutes = require("./routes/fileRoutes");
 // const foroRoutes = require(".routes/foroRoutes");
 
 app.use(cors());
@@ -19,7 +19,7 @@ app.use("/api", programMeetingRoutes);
 app.use("/api", actaRoutes);
 app.use("/api", userRoutes);
 app.use("/api", votingActivityRoutes);
-// app.use("/api", fileRoutes);
+app.use("/api", fileRoutes);
 // app.use("/api", foroRoutes);
 
 const options = {
