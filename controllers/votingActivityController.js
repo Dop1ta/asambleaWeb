@@ -21,9 +21,7 @@ const createVotingActivity = (req, res) => {
 
       newVotingActivity.save((error, vote) => {
         if (error) {
-          return res
-            .status(400)
-            .send({ message: "Error al crear la votación." });
+          return res.status(400).send({ message: "Error al crear la votación." });
         }
         return res.status(201).send(vote);
       });
