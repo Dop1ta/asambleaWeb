@@ -5,7 +5,7 @@ const foroSchema = new schema({
   username: {
     type: String,
     required: true,
-    minLength: 3,
+    minLength: 1,
     maxLength: 100,
   },
   comment: {
@@ -18,7 +18,7 @@ const foroSchema = new schema({
     type: String,
     required: true,
     minLength: 1,
-    maxLength: 123,
+    maxLength: 100,
   },
 });
 
