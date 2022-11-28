@@ -4,8 +4,6 @@ dotenv.config();
 
 const token = process.env.PWD;
 
-console.log(process.env.PWD);
-
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
   port: 587,
@@ -15,9 +13,10 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-transporter.verify(function (error, _) {
-  console.error(error);
+transporter.verify().then(() => {
+  console.log("Servidor de correos habilitado");
+}).catch((err) => {
+  console.log("Error al utilizar servidor de correos");
 });
-
 
 module.exports = transporter;
