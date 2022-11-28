@@ -44,10 +44,10 @@ const getUsers = (req, res) => {
     if(person.rol === "administrador") {
       user.find({}, (error, person) => {
         if(error) {
-          return res.status(400).send({ message: "Hay un error al buscar usuario." });
+          return res.status(400).send({ message: "Error al buscar usuario." });
         }
         if(person.length === 0) {
-          return res.status(404).send({ message: "No se puede encontrar el usuario." });
+          return res.status(404).send({ message: "Usuario no encontrado." });
         }
         return res.status(200).send(person);
       });
@@ -60,10 +60,10 @@ const getUsers = (req, res) => {
 const getUsersAll = (req, res) => {
   user.find({}, (error, person) => {
     if(error) {
-      return res.status(400).send({ message: "Hay un error al buscar usuario." });
+      return res.status(400).send({ message: "Error al buscar el usuario." });
     }
     if(person.length === 0) {
-      return res.status(404).send({ message: "No se puede encontrar el usuario." });
+      return res.status(404).send({ message: "Usuario no encontrado." });
     }
     return res.status(200).send(person);
   }).select("name -_id");
@@ -150,10 +150,10 @@ const getUserById = (req, res) => {
 const getUsersEmail = (req, res) => {
   user.find({}, (error, person) => {
     if(error) {
-      return res.status(400).send({ message: "Hay un error al buscar usuario." });
+      return res.status(400).send({ message: "Error al buscar usuario." });
     }
     if(person.length === 0) {
-      return res.status(404).send({ message: "No se puede encontrar el usuario." });
+      return res.status(404).send({ message: "Usuario no encontrado." });
     }
     return res.status(200).send(person);
   }).select("email -_id");

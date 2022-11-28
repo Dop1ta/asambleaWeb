@@ -15,8 +15,4 @@ const fileSchema = new Schema({
   },
 });
 
-fileSchema.methods.seturl = function seturl (){
-  
-}
-
 module.exports = mongoose.model("file", fileSchema);
