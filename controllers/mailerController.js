@@ -15,13 +15,9 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-transporter
-  .verify()
-  .then(() => {
-    console.log("Servidor de correos habilitado");
-  })
-  .catch((err) => {
-    console.log("Error al utilizar servidor de correos");
-  });
+transporter.verify(function (error, _) {
+  console.error(error);
+});
+
 
 module.exports = transporter;
