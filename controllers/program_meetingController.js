@@ -49,7 +49,7 @@ const createMeeting = (req, res) => {
               html: `
                     <h2>Hola estimados vecinos, se a agendado una reunion </h2>
                     <p>Dia: ${meeting.time}, Hora: ${meeting.hour}, lugar: ${meeting.place}</p>
-                    
+                    <a href="http://146.83.198.35:1203/api/getMeetings/search/${meeting._id}"> Para mas informacion </a>
                 `,
             };
             transporter.sendMail(mailOptions, (err, info) => {

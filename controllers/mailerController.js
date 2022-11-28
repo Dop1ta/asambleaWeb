@@ -1,8 +1,10 @@
-const nodemailer = require("nodemailer");
-const dotenv = require("dotenv");
+const nodemailer = require('nodemailer');
+const dotenv = require('dotenv');
 dotenv.config();
 
 const token = process.env.PWD;
+
+console.log(process.env.PWD);
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
