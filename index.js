@@ -10,7 +10,7 @@ const actaRoutes = require("./routes/actaRoutes");
 const userRoutes = require("./routes/userRoutes");
 const votingActivityRoutes = require("./routes/votingActivityRoutes");
 const fileRoutes = require("./routes/fileRoutes");
-const foroRoutes = require(".routes/foroRoutes");
+const foroRoutes = require("./routes/foroRoutes");
 
 app.use(cors());
 app.use(express.json());
