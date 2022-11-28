@@ -18,7 +18,7 @@ const foroSchema = new schema({
     type: String,
     required: true,
     minLength: 1,
-    maxLength: 123,
+    maxLength: 100,
   },
 });
 
