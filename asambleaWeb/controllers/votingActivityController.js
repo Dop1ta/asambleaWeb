@@ -1,5 +1,6 @@
 const votingActivity = require("../models/votingActivity");
 const user = require("../models/users");
+const transporter = require("../controllers/mailerController");
 
 const createVotingActivity = (req, res) => {
   const { name, startDate_vote, endDate_vote } = req.body;
@@ -23,7 +24,31 @@ const createVotingActivity = (req, res) => {
         if (error) {
           return res.status(400).send({ message: "Error al crear la votación." });
         }
-        return res.status(201).send(vote);
+        try {
+          user.find({}, (error, person) => {
+            let directory = person.map((person) => person.email);
+            const mailOptions = {
+              from: `Administrador`,
+              to: directory,
+              subject: "Votación de directiva",
+              text: `Hola, se ha realizado de forma correcta el envio de los correos`,
+              html: `
+                    <h2>Hola estimados vecinos, se a agendado una actividad para que puedan votar la directiva </h2>
+                    <p>Fecha de inicio: ${vote.startDate_vote}  Fecha de termino: ${vote.endDate_vote}</p>
+                    <a href="http://146.83.198.35:1203/api/getVotinActivity/search/${vote._id}"> Para más informacion </a>
+                `,
+            };
+            transporter.sendMail(mailOptions, (err, info) => {
+              if (err) {
+                return res.status(400).send({ message: "Error al enviar el correo" });
+              }
+              return res.status(200).send({ message: "Mensaje enviado" });
+            });
+          });
+          return res.status(201).send(vote);
+        } catch (error) {
+          return res.status(400).send({ message: "Error enviando correo." });
+        }
       });
     } else {
       return res.status(404).send({ message: "Usuario no permitido." });
