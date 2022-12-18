@@ -1,8 +1,7 @@
 import React from 'react'
 import { Input, Stack } from '@chakra-ui/react'
 
-const InputRut = () => {
-    const message = 'Ej: 99.999.999-k'
+const InputText = ({ message }) => {
   return (
     <Stack spacing = {3}>
         <Input placeholder={message} />
@@ -10,4 +9,4 @@ const InputRut = () => {
   )
 }
 
-export default InputRut
+export default InputText
