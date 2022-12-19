@@ -1,7 +1,6 @@
 import React from 'react'
-import { Stack, Image, Grid, GridItem } from '@chakra-ui/react'
-import { Menu, MenuButton, MenuList, MenuItem, IconButton } from '@chakra-ui/react'
-import Setting from '../components/Setting'
+import { Center, Image, Grid, GridItem, Text, SimpleGrid } from '@chakra-ui/react'
+
 
 export default function Home() {
   return (
@@ -17,12 +16,19 @@ export default function Home() {
       fontWeight='bold'
     >
       <GridItem pl='2' bg='orange.300' area={'header'}>
-        <Image
-          borderRadius='full'
-          boxSize='80px'
-          src='/icon.png'
-          alt='Dan Abramov'
-        />
+        <SimpleGrid columns={2}>
+          <Image
+            borderRadius='full'
+            width='80px'
+            height='80px'
+            boxSize='80px'
+            src='/icon.png'
+            alt='Dan Abramov'
+          />
+          <Text fontSize='4xl'>
+            I'm using a custom font-size value for this text
+          </Text>
+        </SimpleGrid>
       </GridItem>
       <GridItem pl='2' bg='pink.300' area={'nav'}>
         Nav
@@ -33,6 +39,6 @@ export default function Home() {
       <GridItem pl='2' bg='blue.300' area={'footer'}>
         Footer
       </GridItem>
-    </Grid>
+    </Grid >
   )
 }
