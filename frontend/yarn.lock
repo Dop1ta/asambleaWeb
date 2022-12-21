@@ -304,7 +304,7 @@
     "@chakra-ui/breakpoint-utils" "2.0.5"
     "@chakra-ui/react-env" "2.0.11"
 
-"@chakra-ui/menu@2.1.5":
+"@chakra-ui/menu@2.1.5", "@chakra-ui/menu@^2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@chakra-ui/menu/-/menu-2.1.5.tgz#73b6db93d6dec9d04ab7c2630a7984e3180fd769"
   integrity sha512-2UusrQtxHcqcO9n/0YobNN3RJC8yAZU6oJbRPuvsQ9IL89scEWCTIxXEYrnIjeh/5zikcSEDGo9zM9Udg/XcsA==
