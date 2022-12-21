@@ -19,7 +19,7 @@ function MenuButtonIcon() {
         </MenuButton>
         <MenuList>
           <MenuItem>Profile</MenuItem>
-          <MenuItem>ConfigUser</MenuItem>
+          <MenuItem>Config User</MenuItem>
           <MenuItem>Log off</MenuItem>
         </MenuList>
       </Menu>
