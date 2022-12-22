@@ -1,11 +1,14 @@
-import {Button } from '@chakra-ui/react'
-import Alerts_votingActivity from './Alerts';
+import { Button, useDisclosure, useToast} from '@chakra-ui/react';
 
-function ButtonAlertVoting (){
-    return(<div><Button colorScheme="blue">Votar por Diego</Button>
-    <Alerts_votingActivity s = "true"></Alerts_votingActivity>
-    </div>
-    )
+function ButtonAlertVoting() {
+     const toast = useToast();
+  return (
+    <>
+      <Button colorScheme="blue" onClick={() => toast({ title: "Has votado correctamente" })}>
+  Votar por Diego
+    </Button>
+    </>
+  );
 }
 
 export default ButtonAlertVoting;

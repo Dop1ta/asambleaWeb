@@ -11,7 +11,7 @@ function Tab_votingActivity() {
           <Tab>Visualizar el conteo de votos</Tab>
         </TabList>
         <TabPanels>
-          <TabPanel><ButtonAlertVoting typeof='sumbit'></ButtonAlertVoting>
+          <TabPanel><ButtonAlertVoting></ButtonAlertVoting>
           <div><Button colorScheme="blue" >Votar por Dopa</Button></div>
           <div><Button colorScheme="blue">Votar por Manu</Button></div>
           <div><Button colorScheme="blue">Votar por Nancu</Button></div></TabPanel>
