@@ -1,19 +1,37 @@
 const programMeeting = require("../models/program_meeting");
 const user = require("../models/users");
-const transporter = require("../controllers/mailerController");
+const sendmail = require("../controllers/mailerProgram");
+
+const useRegex = require("../utils/regex");
+const verify = require("../middlewares/verify");
 
 const createMeeting = (req, res) => {
   const { name, time, hour, place, description } = req.body;
   const { id } = req.params;
 
+  if (!useRegex(name) || !useRegex(description) || !useRegex(place)) {
+    return res.status(400).send({
+      message: "El nombre, lugar y descripcion solo puede contener letras.",
+    });
+  }
+
+  if (name == null || time == null || hour == null || place == null || description == null) {
+    return res.status(400).send({
+      message: "Un parametro no fue ingresado.",
+    });
+  }
   if (!name || !time || !hour || !place || !description) {
     return res.status(400).json({
       message: "Un parametro no fue ingresado.",
     });
   }
-
+  if (name === "" || time === "" || hour === "" || place === "" || description === "") {
+    return res.status(400).send({
+      message: "Un parametro no fue ingresado.",
+    });
+  }
   if (Date.parse(time) < Date.now()) {
-    return res.status(400).json({
+    return res.status(400).send({
       message: "La fecha no puede ser menor a la actual.",
     });
   }
@@ -39,26 +57,7 @@ const createMeeting = (req, res) => {
           return res.status(400).send({ message: "Error creando reunión." });
         }
         try {
-          user.find({}, (error, person) => {
-            let directory = person.map((person) => person.email);
-            const mailOptions = {
-              from: `Administrador`,
-              to: directory,
-              subject: "Nueva reuinon agendada",
-              text: `Hola, se ha realizado de forma correcta el envio de los correos`,
-              html: `
-                    <h2>Hola estimados vecinos, se a agendado una reunion </h2>
-                    <p>Dia: ${meeting.time}, Hora: ${meeting.hour}, lugar: ${meeting.place}</p>
-                    <a href="http://146.83.198.35:1203/api/getMeetings/search/${meeting._id}"> Para mas informacion </a>
-                `,
-            };
-            transporter.sendMail(mailOptions, (err, info) => {
-              if (err) {
-                return res.status(400).send({ message: "Error al enviar el correo" });
-              }
-              return res.status(200).send({ message: "Mensaje enviado" });
-            });
-          });
+          sendmail(meeting);
           return res.status(201).send(meeting);
         } catch (error) {
           return res.status(400).send({ message: "Error enviando correo." });
@@ -84,6 +83,19 @@ const getMeetings = (req, res) => {
 
 const updateMeeting = (req, res) => {
   const { id, idadmin } = req.params;
+  const { name, time, place, description } = req.body;
+
+  if (!useRegex(name) || !useRegex(description) || !useRegex(place)) {
+    return res.status(400).send({
+      message: "El nombre, lugar y descripcion solo puede contener letras.",
+    });
+  }
+  if (Date.parse(time) < Date.now()) {
+    return res.status(400).send({
+      message: "La fecha no puede ser menor a la actual.",
+    });
+  }
+
   user.findById(idadmin, (error, person) => {
     if (error) {
       return res.status(400).send({ message: "Error al buscar el usuario." });
@@ -101,6 +113,7 @@ const updateMeeting = (req, res) => {
         if (!meeting) {
           return res.status(404).send({ message: "Reunión no encontrada." });
         }
+        sendmail(meeting);
         return res.status(200).send({ message: "Reunión actualizada." });
       });
     } else {
