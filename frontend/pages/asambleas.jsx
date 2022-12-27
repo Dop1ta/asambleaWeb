@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Stack, Accordion, AccordionItem, AccordionButton, AccordionIcon, AccordionPanel, Box } from '@chakra-ui/react'
+import { Stack, SimpleGrid, Card, CardBody, Text, CardHeader, Heading } from '@chakra-ui/react'
 import NavTab from '../components/NavTab'
 import axios from 'axios'
 
@@ -19,29 +19,24 @@ const Asambleas = () => {
   const showAsambleas = () => {
     return asamblea.map(asambleas => {
       return (
-        <Accordion allowToggle key={asambleas._id}>
-          <AccordionItem>
-            <h2>
-              <AccordionButton>
-                <Box as="span" flex='1' textAlign='left'>
-                  {asambleas.name}
-                </Box>
-                <AccordionIcon />
-              </AccordionButton>
-            </h2>
-            <AccordionPanel pb={4}>
-              {asambleas.description}
-            </AccordionPanel>
-          </AccordionItem>
-        </Accordion>
+        <Card key={asambleas._id} boxShadow='lg' marginLeft={30} marginTop={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
+          <CardHeader textAlign={'center'}>
+            <Heading size='md'>{asambleas.name}</Heading>
+            <Text>Dia: {asambleas.time}</Text>
+            <Text>Hora: {asambleas.hour}</Text>
+            <Text>{asambleas.description}</Text>
+          </CardHeader>
+        </Card >
       )
-    })
+    }).reverse()
   }
 
   return (
-    <Stack>
+    <Stack alignItems={"center"} backgroundColor={"rgb(244,247,254)"}>
       <NavTab />
-      {showAsambleas()}
+      <SimpleGrid columns={3}>
+        {showAsambleas()}
+      </SimpleGrid >
     </Stack>
   )
 }
