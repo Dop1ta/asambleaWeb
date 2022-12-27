@@ -1,26 +1,54 @@
-import React from 'react'
-import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react'
-import MenuButton from './MenuButton'
+import {
+  Stack,
+  Center,
+  Image,
+  Heading,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink
+} from '@chakra-ui/react'
 
-const NavTab = ({ Tittle1, Tittle2 }) => {
+const NavTab = () => {
+
   return (
-    <Tabs size='md' variant='enclosed'>
-      <TabList >
-        <Tab>Inicio</Tab>
-        <Tab>Actividades</Tab>
-        <Tab>Foro</Tab>
-        <Tab>Consultas</Tab>
-        <MenuButton />
-      </TabList>
-      <TabPanels>
-        <TabPanel>
-          <p></p>
-        </TabPanel>
-        <TabPanel>
-          <p>two!</p>
-        </TabPanel>
-      </TabPanels>
-    </Tabs >
+    <Stack bg='blackAlpha.50'>
+      <Center >
+        <Image
+          borderRadius='full'
+          width='80px'
+          height='80px'
+          boxSize='80px'
+          src='/icon.png'
+          alt='Dan Abramov'
+        />
+        <Heading mb={4}>
+          Junta de vecinos "Rodrigo Beltran anashe Josefinasons"
+        </Heading >
+      </Center>
+      <Center>
+        <Breadcrumb separator='-'>
+          <BreadcrumbItem>
+            <BreadcrumbLink href='http://localhost:3000'>Inicio</BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <BreadcrumbLink href='http://localhost:3000/asambleas'>Asambleas</BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem isCurrentPage>
+            <BreadcrumbLink href='#'>Contact</BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem isCurrentPage>
+            <BreadcrumbLink href='#'>Contact</BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem isCurrentPage>
+            <BreadcrumbLink href='#'>Contact</BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
+      </Center>
+    </Stack>
   )
 }
 
