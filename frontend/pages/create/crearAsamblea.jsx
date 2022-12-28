@@ -26,12 +26,12 @@ export default function CrearA() {
 
   const router = useRouter()
 
+  const backAsambleas = () => {
+    router.push('/asambleas')
+  }
+
   const onSubmit = async (e) => {
     e.preventDefault()
-
-    console.log(values)
-
-
     try {
       const [time, hour] = values.time.split('T')
       values.time = time
@@ -74,7 +74,7 @@ export default function CrearA() {
   }
 
   return (
-    <Stack alignItems={'center'} textAlign={'center'}>
+    <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"} h="100hv">
       <NavTab />
       <Container>
         <FormControl isRequired marginTop={4}>
@@ -100,10 +100,10 @@ export default function CrearA() {
           <Textarea placeholder='Ejemplo: La reunion sera de ayuda a los perritos' type={"text"} onChange={onChange} name={"description"} />
         </FormControl>
         <ButtonGroup variant='outline' spacing='6' marginTop={4}>
-          <Button colorScheme='blue' onClick={onSubmit} type="submit">Save</Button>
-          <Button>Cancel</Button>
+          <Button colorScheme='blue' onClick={onSubmit} type="submit">Guardar</Button>
+          <Button colorScheme='red' onClick={backAsambleas} type="submit">Cancel</Button>
         </ButtonGroup>
-      </Container >
-    </Stack >
+      </Container>
+    </Stack>
   )
 }

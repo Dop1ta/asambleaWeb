@@ -3,7 +3,7 @@ import { ChakraProvider } from "@chakra-ui/react"
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider>
+    <ChakraProvider backgroundColor={"rgb(244,247,254)"} >
       <Component {...pageProps} />
     </ChakraProvider>
   )

@@ -1,7 +1,10 @@
 import NavTab from '../components/NavTab'
+import { Stack } from '@chakra-ui/react'
 
 export default function Home() {
   return (
-    <NavTab></NavTab>
+    <Stack>
+      <NavTab></NavTab>
+    </Stack>
   )
 }
