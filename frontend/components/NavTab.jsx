@@ -50,7 +50,7 @@ const NavTab = () => {
             <BreadcrumbLink href='#'>Contact</BreadcrumbLink>
           </BreadcrumbItem>
 
-          <BreadcrumbItem isCurrentPage>
+          <BreadcrumbItem>
             <BreadcrumbLink href='http://localhost:3000/create_voting_activity'>Actividad de votación</BreadcrumbLink>
           </BreadcrumbItem>
 
