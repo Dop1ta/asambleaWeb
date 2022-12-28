@@ -1,4 +1,4 @@
-import { Button, useDisclosure, useToast} from '@chakra-ui/react';
+import { Button, useToast} from '@chakra-ui/react';
 
 function ButtonAlertVoting() {
      const toast = useToast();

@@ -32,6 +32,10 @@ const userSchema = new schema({
     minLength: 1,
     maxLength: 200,
   },
+  votos: {
+    type: Number,
+    required: false,
+  }
 });
 
 module.exports = mongoose.model("user", userSchema);
