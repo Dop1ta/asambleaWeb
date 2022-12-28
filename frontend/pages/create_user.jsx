@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
-import { Button, Container, FormControl, FormLabel, Heading, HStack, Input, InputGroup, InputLeftAddon, Radio, RadioGroup, Stack, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import { useState } from 'react'
+import { Button, Container, FormControl, FormLabel, Heading, HStack, Input, InputGroup, InputLeftAddon, Radio, RadioGroup, Stack } from '@chakra-ui/react'
 import axios from 'axios'
 import NavTab from '../components/NavTab'
-
+import Swal from 'sweetalert2'
 
 const create_user = () => {
 
@@ -12,12 +12,39 @@ const create_user = () => {
         rol: '',
         email: '',
         number: '',
-        address: ''
+        address: '',
+        votos: ''
     })
 
     const onSubmit = async (e) => {
         e.preventDefault()
         console.log(values)
+        try {
+            const response = await axios.post(`${process.env.API_URL}/createUser/639a48dffe299c865e0ea1f9`, values)
+            console.log(response)
+            if(response.status === 201) {
+                Swal.fire({
+                    title: 'Usuario creado',
+                    text: 'El usuario se a creado correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                })
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Ha ocurrido un error',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                })
+            }
+        } catch (err) {
+            Swal.fire({
+                title: 'Error',
+                text: 'Ha ocurrido un error',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
+        }
     }
 
     const onChange = (e) => {
@@ -31,11 +58,11 @@ const create_user = () => {
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
             <NavTab/>
             <Container maxW="container.md" centerContent>
-                <Heading textAlign={"center"} my={4}>Agregar Vecino</Heading>
+                <Heading textAlign={"center"} my={4}>Agregar Usuario</Heading>
                 <Stack my={4}>
                     <FormControl>
                         <FormLabel>Nombre</FormLabel>
-                        <Input placeholder='Ej: Pedro Martinez' type={"text"} maxLength={100} onChange={onChange} name={"name"}/>
+                        <Input placeholder='Ej: Pedro Martinez' maxLength={100} onChange={onChange} name={"name"}/>
                     </FormControl><FormControl>
                         <FormLabel>Rut</FormLabel>
                         <Input placeholder='Ej: 9.999.999-k' maxLength={12} onChange={onChange} name={"rut"}/>
@@ -60,7 +87,7 @@ const create_user = () => {
                         <FormLabel>Numero de telefono</FormLabel>
                         <InputGroup>
                             <InputLeftAddon children='+56'/>
-                            <Input placeholder='Ej: 912341234' type='tel' maxLength={9} onChange={onChange} name={"number"}/>
+                            <Input placeholder='Ej: 912341234' maxLength={9} onChange={onChange} name={"number"}/>
                         </InputGroup>
                     </FormControl>
                     <FormControl>
