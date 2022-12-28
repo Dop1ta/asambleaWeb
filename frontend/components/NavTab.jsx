@@ -46,8 +46,8 @@ const NavTab = () => {
             <BreadcrumbLink href='http://localhost:3000/asambleas'>Asambleas</BreadcrumbLink>
           </BreadcrumbItem>
 
-          <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink href='#'>Contact</BreadcrumbLink>
+          <BreadcrumbItem>
+            <BreadcrumbLink href='http://localhost:3000/user'>Lista de vecinos</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>

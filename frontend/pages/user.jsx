@@ -1,14 +1,52 @@
-import React from 'react'
-import { Stack } from '@chakra-ui/react'
-import InputText from '../components/InputText'
+import { useEffect, useState } from 'react'
+import { Container, Heading, Input, Stack, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
+import axios from 'axios'
+import NavTab from '../components/NavTab'
 
 
 const user = () => {
-  return (
-    <Stack >
-        <InputText message = "Ej: Dopa"/>
-    </Stack>
-  )
+
+    const [users, setUsers] = useState([])
+
+    const getUsers = async () => {
+        const response = await axios.get(`${process.env.API_URL}/getUsersAll`)
+        setUsers(response.data)
+    }
+
+    const showUsers = () => {
+        return users.map(user => {
+            return (
+                <Tr key={user._id}>
+                    <Td>{user.name}</Td>
+                </Tr>
+            )
+        })
+    }
+
+    useEffect(() => {
+        getUsers()
+    }, [])
+
+    return (
+        <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
+            <NavTab/>
+            <Container maxW="container.md">
+                <Heading textAlign={"center"} my={4}>Vecinos</Heading>
+                <TableContainer>
+                    <Table variant='simple'>
+                        <Thead>
+                            <Tr>
+                                <Th>Nombre</Th>
+                            </Tr>
+                        </Thead>
+                        <Tbody>
+                            {showUsers()}
+                        </Tbody>
+                    </Table>
+                </TableContainer>
+            </Container>
+        </Stack>
+    )
 }
 
 export default user
