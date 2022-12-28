@@ -3,6 +3,7 @@ import { Button, Container, FormControl, FormLabel, Heading, HStack, Input, Inpu
 import axios from 'axios'
 import NavTab from '../components/NavTab'
 import Swal from 'sweetalert2'
+import { useRouter } from 'next/router'
 
 const create_user = () => {
 
@@ -15,6 +16,12 @@ const create_user = () => {
         address: '',
         votos: ''
     })
+
+    const router = useRouter()
+
+    const userRouter = () => {
+        router.push('/userview')
+    }
 
     const onSubmit = async (e) => {
         e.preventDefault()
@@ -94,7 +101,10 @@ const create_user = () => {
                         <FormLabel>Direccion</FormLabel>
                         <Input placeholder='Ej: Los Carrera #123' maxLength={200} onChange={onChange} name={"address"}/>
                     </FormControl>
-                    <Button onClick={onSubmit}>Agregar</Button>
+                    <Stack>
+                        <Button colorScheme={'blue'} onClick={onSubmit}>Agregar</Button>
+                        <Button colorScheme={'red'} onClick={userRouter}>Cancelar</Button>
+                    </Stack>
                 </Stack>
             </Container>
         </Stack>
