@@ -1,7 +1,7 @@
 const user = require("../models/users");
 
 const createUser = (req, res) => {
-  const { name, rut, rol, email, address } = req.body;
+  const { name, rut, rol, email, number, address, votos } = req.body;
   const { id } = req.params;
 
   user.findById(id, (error, person) => {
@@ -17,7 +17,9 @@ const createUser = (req, res) => {
         rut,
         rol,
         email,
+        number,
         address,
+        votos,
       });
       newUser.save((error, person) => {
         if (error) {

@@ -3,7 +3,7 @@ const user = require("../models/users");
 const sendmail = require("../controllers/mailerProgram");
 
 const useRegex = require("../utils/regex");
-const verify = require("../middlewares/verify");
+//const verify = require("../middlewares/verify");
 
 const createMeeting = (req, res) => {
   const { name, time, hour, place, description } = req.body;
