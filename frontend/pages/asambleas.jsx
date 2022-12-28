@@ -76,17 +76,15 @@ const Asambleas = () => {
     } else {
       return asamblea.map(asambleas => {
         return (
-          <SimpleGrid columns={3} key={asambleas._id} >
-            <Card boxShadow='lg' marginLeft={30} marginTop={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
-              <CardHeader textAlign={'center'}>
-                <Heading size='md'>{asambleas.name}</Heading>
-                <Text>Dia: {asambleas.time}</Text>
-                <Text>Hora: {asambleas.hour}</Text>
-                <Text>{asambleas.description}</Text>
-                <Button leftIcon={<TrashIcon />} colorScheme='red' variant='solid' marginTop={3} onClick={() => deleteId(asambleas._id)} >Eliminar</Button>
-              </CardHeader>
-            </Card >
-          </SimpleGrid>
+          <Card key={asambleas._id} boxShadow='lg' marginLeft={30} marginTop={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
+            <CardHeader textAlign={'center'}>
+              <Heading size='md'>{asambleas.name}</Heading>
+              <Text>Dia: {asambleas.time}</Text>
+              <Text>Hora: {asambleas.hour}</Text>
+              <Text>{asambleas.description}</Text>
+              <Button leftIcon={<TrashIcon />} colorScheme='red' variant='solid' marginTop={3} onClick={() => deleteId(asambleas._id)} >Eliminar</Button>
+            </CardHeader>
+          </Card >
         )
       }).reverse()
     }
@@ -95,7 +93,9 @@ const Asambleas = () => {
   return (
     <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
       <NavTab />
-      {showAsambleas()}
+      <SimpleGrid columns={3}>
+        {showAsambleas()}
+      </SimpleGrid>
     </Stack>
   )
 }
