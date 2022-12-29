@@ -6,7 +6,7 @@ import { TrashIcon } from 'chakra-ui-ionicons'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
 
-import { EditIcon } from '@chakra-ui/icons'
+import { EditIcon, AddIcon } from '@chakra-ui/icons'
 
 const AsambleaAdmin = () => {
 
@@ -47,10 +47,6 @@ const AsambleaAdmin = () => {
     })
   }
 
-  const registrarA = () => {
-    router.push('/create/crearAsamblea')
-  }
-
   useEffect(() => {
     getAsambleas()
   }, [])
@@ -66,7 +62,7 @@ const AsambleaAdmin = () => {
             <Text>Lamentablemente no se encontro ninguna asamblea agendada</Text>
           </CardBody>
           <CardFooter>
-            <Button onClick={registrarA}>Crear una asamblea</Button>
+            <Button onClick={() => router.push('/create/crearAsamblea')}>Crear una asamblea</Button>
           </CardFooter>
         </Card>
       )
@@ -91,6 +87,9 @@ const AsambleaAdmin = () => {
   return (
     <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
       <NavTabAdmin />
+      <Stack my={4}>
+        <Button leftIcon={<AddIcon />} onClick={() => router.push('/create/crearAsamblea')}>Crear Asamblea</Button>
+      </Stack>
       <SimpleGrid columns={3}>
         {showAsambleas()}
       </SimpleGrid>
