@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button, Container, FormControl, FormLabel, Heading, HStack, Input, InputGroup, InputLeftAddon, Radio, RadioGroup, Stack } from '@chakra-ui/react'
 import axios from 'axios'
-import NavTab from '../components/NavTab'
+import NavTab from '../../components/NavTab'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
 
@@ -39,7 +39,7 @@ const create_user = () => {
             } else {
                 Swal.fire({
                     title: 'Error',
-                    text: 'Ha ocurrido un error',
+                    text: 'Error al ingresar los parametros',
                     icon: 'error',
                     confirmButtonText: 'Ok'
                 })
@@ -47,7 +47,7 @@ const create_user = () => {
         } catch (err) {
             Swal.fire({
                 title: 'Error',
-                text: 'Ha ocurrido un error',
+                text: 'No se ha podido crear el usuario',
                 icon: 'error',
                 confirmButtonText: 'Ok'
             })
@@ -70,7 +70,8 @@ const create_user = () => {
                     <FormControl>
                         <FormLabel>Nombre</FormLabel>
                         <Input placeholder='Ej: Pedro Martinez' maxLength={100} onChange={onChange} name={"name"}/>
-                    </FormControl><FormControl>
+                    </FormControl>
+                    <FormControl>
                         <FormLabel>Rut</FormLabel>
                         <Input placeholder='Ej: 9.999.999-k' maxLength={12} onChange={onChange} name={"rut"}/>
                     </FormControl>
