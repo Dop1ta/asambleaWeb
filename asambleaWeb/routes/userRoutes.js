@@ -9,6 +9,7 @@ api.get("/getUsersAll", userController.getUsersAll);
 api.put("/getUsers/update/:id/:userid", userController.updateUser);
 api.delete("/getUsers/delete/:id/:userid", userController.deleteUser);
 api.get("/getUsers/search/:id/:userid", userController.getUserById);
+api.post("/getUsers/rut/:id", userController.getUserByRut);
 api.get("/getEmails", userController.getUsersEmail);
 api.get("/getUsers/email/:id/:userid", userController.getUserEmailById);
 
