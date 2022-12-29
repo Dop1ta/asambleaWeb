@@ -17,13 +17,13 @@ const userview = () => {
     }
 
     const createRouter = () => {
-        router.push('/create_user')
+        router.push('/create/create_user')
     }
 
     const showUsers = () => {
         return users.map(user => {
             return (
-                <Card key={user._id} maxW='sm'>
+                <Card key={user._id} maxW='sm'   backgroundColor={'white'}>
                     <CardHeader>
                         <Heading size='md'>{user.name}</Heading>
                     </CardHeader>
