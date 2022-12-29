@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Menu,
   MenuButton,
@@ -8,28 +8,44 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
+import { useEffect } from 'react'
 
 function MenuButtonIcon() {
+
+  let [ name, setName ] = useState('')
 
   const router = useRouter()
 
   const loginRouter = () => {
-    router.push('/login')
+    if(Cookies.get('logged') === 'true') {
+      Cookies.set('logged', 'false')
+      Cookies.set('rut', '')
+      setName('Iniciar Sesion')
+      router.push('/')
+    } else {
+      router.push('/login')
+    }
   }
 
-  const onLogOut = () => {
-    Cookies.set('logged', 'false')
-    Cookies.set('rut', '')
-    router.push('/')
+  const checkLogin = () => {
+    if(Cookies.get('logged') === 'true') {
+      setName('Cerrar Sesion')
+    } else {
+      setName('Iniciar Sesion')
+    }
   }
-  
+
+  useEffect(() => {
+    checkLogin()
+}, [])
+
   return (
     <Menu>
       <MenuButton as={IconButton} colorScheme="blue">
         ‡
       </MenuButton>
       <MenuList>
-        {Cookies.get('logged') === 'true' ? <MenuItem onClick={onLogOut}>Cerrar sesion</MenuItem> : <MenuItem onClick={loginRouter}>Iniciar sesion</MenuItem>}
+        <MenuItem onClick={loginRouter}>{name}</MenuItem>
       </MenuList>
     </Menu>
   )

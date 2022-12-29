@@ -5,7 +5,7 @@ import { Stack } from '@chakra-ui/react'
 const viewAdmin = () => {
   return (
     <Stack>
-      <NavTabAdmin></NavTabAdmin >
+      <NavTabAdmin/>
     </Stack>
   )
 }

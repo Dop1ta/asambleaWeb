@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { Box, Card, CardBody, CardHeader, Container, Heading, Stack, Text, StackDivider, SimpleGrid, CardFooter, Button } from '@chakra-ui/react'
-import { TrashIcon, AddIcon, EllipseIcon, AddCircle, AddCircleIcon } from 'chakra-ui-ionicons'
+import { TrashIcon, AddIcon, EllipseIcon } from 'chakra-ui-ionicons'
 import axios from 'axios'
-import NavTab from '../components/NavTab'
+import NavTabAdmin from '../components/NavTabAdmin'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 
