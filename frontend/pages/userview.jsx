@@ -22,6 +22,10 @@ const userview = () => {
         router.push('/create/create_user')
     }
 
+    const updateRouter = () => {
+        router.push('/update/updateuser')
+    }
+
     const showUsers = () => {
         return users.map(user => {
             return (
@@ -56,7 +60,7 @@ const userview = () => {
                     </CardBody>
                     <CardFooter>
                         <Stack direction={'row'}>
-                            <Button onClick={router.push('/update/updateuser')} colorScheme={'teal'} leftIcon={<EditIcon/>}>Editar</Button>
+                            <Button colorScheme={'teal'} leftIcon={<EditIcon/>} onClick={updateRouter}>Editar</Button>
                             <Button colorScheme={'red'} leftIcon={<TrashIcon/>}>Eliminar</Button>
                         </Stack>
                     </CardFooter>

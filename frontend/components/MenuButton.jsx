@@ -9,6 +9,7 @@ import {
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 import { useEffect } from 'react'
+import { HamburgerIcon } from '@chakra-ui/icons'
 
 function MenuButtonIcon() {
 
@@ -42,7 +43,7 @@ function MenuButtonIcon() {
   return (
     <Menu>
       <MenuButton as={IconButton} colorScheme="blue">
-        ‡
+        <HamburgerIcon/>
       </MenuButton>
       <MenuList>
         <MenuItem onClick={loginRouter}>{name}</MenuItem>
