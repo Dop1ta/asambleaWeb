@@ -1,17 +1,13 @@
-import { Container, FormControl, FormLabel, Heading, Stack, Radio, RadioGroup, Input, Button, useToast, Link} from '@chakra-ui/react'
-import React from 'react'
-import MenuButtonIcon from '../components/MenuButton'
-import Tab_votingActivity from '../components/Tab_votingActivity';
-
+import {Button, Container, FormControl, FormLabel, Heading, Stack, Radio, RadioGroup, Input, useToast, Link} from '@chakra-ui/react'
+import Tab_votingActivity from '../../components/Tab_votingActivity';
 
 const create_voting_activity = () => {
-    //const toast = useToast();
+    const toast = useToast();
     return (
+        <Stack alignItems={"center"} backgroundColor={"rgb(244,247,254)"}>
         <Tab_votingActivity/>
-        /*<Container maxW="container.md">
+        <Container maxW="container.md"  >
             <Heading textAlign={"center"} my={10}>Crear Votación</Heading>
-            <div><Link href='http://localhost:3000'>Inicio</Link></div>
-            <div align='right'><MenuButtonIcon /></div>
             <Stack>
                 <FormControl isRequired>
                     <FormLabel textAlign={'center'}>Cargo:</FormLabel>
@@ -30,11 +26,11 @@ const create_voting_activity = () => {
                 </FormControl>
                 <FormControl isRequired>
                     <FormLabel>Fecha de Inicio</FormLabel>
-                    <Input placeholder="Select Date and Time" size="md" type="datetime-local" onChange={onChange} name={"time"}/>
+                    <Input placeholder="Select Date and Time" size="md" type="datetime-local" /*onChange={onChange}*/ name={"time"}/>
                 </FormControl>
                 <FormControl isRequired>
                     <FormLabel>Fecha de Termino</FormLabel>
-                    <Input placeholder="Select Date and Time" size="md" type="datetime-local" onChange={onChange}* name={"time"}/>
+                    <Input placeholder="Select Date and Time" size="md" type="datetime-local" /*onChange={onChange}*/ name={"time"}/>
                 </FormControl>
                 <FormControl isRequired>
                     <FormLabel>Candidato 1 (Ingresar Rut)</FormLabel>
@@ -55,7 +51,7 @@ const create_voting_activity = () => {
             </Stack>
             <Button colorScheme="blue" size="md" my="5" type="sumbit" onClick={() => toast({ title: "Has agendado la votación correctamente" })}>Guardar</Button>
         </Container>
-        */
+        </Stack>
     )
 }
 
