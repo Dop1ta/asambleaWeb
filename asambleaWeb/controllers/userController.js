@@ -4,33 +4,45 @@ const createUser = (req, res) => {
   const { name, rut, rol, email, number, address, votos } = req.body;
   const { id } = req.params;
 
-  user.findById(id, (error, person) => {
-    if(error) {
-      return res.status(400).send({ message: "Error al buscar el usuario." });
+  user.findOne({ rut }, (err, personr) => {
+    if(err) {
+      return res.status(400).send({ message: 'Error al buscar rut.' });
     }
-    if(!person) {
-      return res.status(404).send({ message: "Usuario no encontrado." });
-    }
-    if(person.rol === "administrador") {
-      const newUser = new user({
-        name,
-        rut,
-        rol,
-        email,
-        number,
-        address,
-        votos,
-      });
-      newUser.save((error, person) => {
-        if (error) {
-          return res.status(400).send({ message: "Error al crear un usuario." });
+    if(!personr) {
+      user.findById(id, (error, person) => {
+        if(error) {
+          return res.status(400).send({ message: "Error al buscar el usuario." });
         }
-        return res.status(201).send(person);
+        if(!person) {
+          return res.status(404).send({ message: "Usuario no encontrado." });
+        }
+        if(person.rol === "administrador") {
+          const newUser = new user({
+            name,
+            rut,
+            rol,
+            email,
+            number,
+            address,
+            votos,
+          });
+          newUser.save((error, person) => {
+            if (error) {
+              return res.status(400).send({ message: "Error al crear un usuario." });
+            }
+            return res.status(201).send(person);
+          });
+        } else {
+          return res.status(404).send({ message: "Usuario no permitido." })
+        }
       });
-    } else {
-      return res.status(404).send({ message: "Usuario no permitido." })
+    }
+    if(personr.rut === rut) {
+      return res.status(400).send({ message: 'No se puede ingresar usuarios con el mismo rut.' });
     }
   });
+
+  
 };
 
 const login = async (req, res) => {
@@ -162,6 +174,33 @@ const getUserById = (req, res) => {
   });
 };
 
+const getUserByRut = (req, res) => {
+  const { id } = req.params;
+  const { rut } = req.body;
+
+  user.findById(id, (error, person) => {
+    if(error) {
+      return res.status(400).send({ message: "Error al buscar el usuario." });
+    }
+    if(!person) {
+      return res.status(404).send({ message: "Usuario no encontrado." });
+    }
+    if(person.rol === "administrador") {
+      user.findOne({rut}, (error, person) => {
+        if(error) {
+          return res.status(400).send({ message: "Error al buscar el usuario." });
+        }
+        if(!person) {
+          return res.status(404).send({ message: "Usuario no encontrado." });
+        }
+        return res.status(200).send(person);
+      });
+    } else {
+      return res.status(404).send({ message: "Usuario no permitido."})
+    }
+  });
+};
+
 const getUsersEmail = (req, res) => {
   user.find({}, (error, person) => {
     if(error) {
@@ -208,6 +247,7 @@ module.exports = {
   updateUser,
   deleteUser,
   getUserById,
+  getUserByRut,
   getUsersEmail,
   getUserEmailById,
 };

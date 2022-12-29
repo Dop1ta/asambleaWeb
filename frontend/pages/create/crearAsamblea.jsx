@@ -76,7 +76,7 @@ export default function CrearA() {
   return (
     <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"} h="100hv">
       <NavTabAdmin />
-      <Container>
+      <Container backgroundColor={'white'} borderRadius={10} boxShadow={'xl'}>
         <FormControl isRequired marginTop={4}>
           <FormLabel>Nombre de la asamblea</FormLabel>
           <Input placeholder='Ejemplo: Asamblea para perritos' type="text" onChange={onChange} name={"name"} />
@@ -99,7 +99,7 @@ export default function CrearA() {
           <FormLabel>Descipcion</FormLabel>
           <Textarea placeholder='Ejemplo: La reunion sera de ayuda a los perritos' type={"text"} onChange={onChange} name={"description"} />
         </FormControl>
-        <ButtonGroup variant='outline' spacing='6' marginTop={4}>
+        <ButtonGroup variant='outline' spacing='6' marginTop={4} marginBottom={4}>
           <Button colorScheme='blue' onClick={onSubmit} type="submit">Guardar</Button>
           <Button colorScheme='red' onClick={backAsambleas} type="submit">Cancel</Button>
         </ButtonGroup>
