@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios'
-import NavTab from '../../components/NavTab'
+import NavTabAdmin from '../../components/NavTabAdmin'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
 import {
@@ -75,7 +75,7 @@ export default function CrearA() {
 
   return (
     <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"} h="100hv">
-      <NavTab />
+      <NavTabAdmin />
       <Container>
         <FormControl isRequired marginTop={4}>
           <FormLabel>Nombre de la asamblea</FormLabel>
