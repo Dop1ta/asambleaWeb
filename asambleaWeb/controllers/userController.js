@@ -42,7 +42,7 @@ const login = async (req, res) => {
     if(!person) {
       return res.status(404).send({ message: 'Usuario no encontrado' });
     }
-    return res.status(201).send({ message: 'Se ha iniciado sesion', person });
+    return res.status(201).send({ message: 'Se ha iniciado sesion', person:rut });
   })
 }
 
