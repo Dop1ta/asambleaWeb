@@ -1,10 +1,10 @@
-import { Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Box, Card, CardBody, CardHeader, Container, Heading, Stack, Text, StackDivider, SimpleGrid, CardFooter, Button } from '@chakra-ui/react'
-import { TrashIcon, AddIcon, EllipseIcon } from 'chakra-ui-ionicons'
+import { TrashIcon, AddIcon } from 'chakra-ui-ionicons'
 import axios from 'axios'
 import NavTabAdmin from '../components/NavTabAdmin'
 import { useRouter } from 'next/router'
-import Cookies from 'js-cookie'
+import { EditIcon } from '@chakra-ui/icons'
 
 const userview = () => {
 
@@ -14,6 +14,7 @@ const userview = () => {
 
     const getUsers = async () => {
         const response = await axios.get(`${process.env.API_URL}/getUsers/639a48dffe299c865e0ea1f9`)
+        console.log(response.data)
         setUsers(response.data)
     }
 
@@ -55,7 +56,7 @@ const userview = () => {
                     </CardBody>
                     <CardFooter>
                         <Stack direction={'row'}>
-                            <Button colorScheme={'teal'} leftIcon={<EllipseIcon/>}>Editar</Button>
+                            <Button onClick={router.push('/update/updateuser')} colorScheme={'teal'} leftIcon={<EditIcon/>}>Editar</Button>
                             <Button colorScheme={'red'} leftIcon={<TrashIcon/>}>Eliminar</Button>
                         </Stack>
                     </CardFooter>
