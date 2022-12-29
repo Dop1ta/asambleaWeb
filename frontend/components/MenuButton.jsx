@@ -7,6 +7,7 @@ import {
   IconButton
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
 
 function MenuButtonIcon() {
 
@@ -16,13 +17,19 @@ function MenuButtonIcon() {
     router.push('/login')
   }
 
+  const onLogOut = () => {
+    Cookies.set('logged', 'false')
+    Cookies.set('rut', '')
+    router.push('/')
+  }
+  
   return (
     <Menu>
       <MenuButton as={IconButton} colorScheme="blue">
         ‡
       </MenuButton>
       <MenuList>
-        <MenuItem onClick={loginRouter}>Iniciar sesion</MenuItem>
+        {Cookies.get('logged') === 'true' ? <MenuItem onClick={onLogOut}>Cerrar sesion</MenuItem> : <MenuItem onClick={loginRouter}>Iniciar sesion</MenuItem>}
       </MenuList>
     </Menu>
   )

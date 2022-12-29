@@ -4,6 +4,7 @@ import { TrashIcon, AddIcon, EllipseIcon, AddCircle, AddCircleIcon } from 'chakr
 import axios from 'axios'
 import NavTab from '../components/NavTab'
 import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
 
 const userview = () => {
 
@@ -69,7 +70,7 @@ const userview = () => {
 
     return (
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
-            <NavTab/>
+            <NavTabAdmin/>
             <Container maxW="container.md" my={4}>
                 <Heading textAlign={"center"} my={4}>Administrar Usuarios</Heading>
                 <Stack my={4}>

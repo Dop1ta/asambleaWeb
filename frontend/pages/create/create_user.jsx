@@ -4,6 +4,8 @@ import axios from 'axios'
 import NavTab from '../../components/NavTab'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
+import NavTabAdmin from '../../components/NavTabAdmin'
+import Cookies from 'js-cookie'
 
 const create_user = () => {
 
@@ -63,7 +65,7 @@ const create_user = () => {
 
     return (
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
-            <NavTab/>
+            <NavTabAdmin/>
             <Container maxW="container.md" centerContent>
                 <Heading textAlign={"center"} my={4}>Agregar Usuario</Heading>
                 <Stack my={4}>

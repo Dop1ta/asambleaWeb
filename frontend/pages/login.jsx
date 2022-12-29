@@ -3,6 +3,7 @@ import { Button, Container, FormControl, FormLabel, Heading,Input, Stack } from 
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
 
 const login = () => {
 
@@ -12,7 +13,7 @@ const login = () => {
 
     const router = useRouter()
 
-    const indexRouter = () => {
+    const mainRouter = () => {
         router.push('/')
     }
 
@@ -21,7 +22,8 @@ const login = () => {
         console.log(values)
         try {
             const response = await axios.post(`${process.env.API_URL}/login`, values)
-            localStorage.setItem('rut', response.data.person)
+            Cookies.set('rut', response.data.person)
+            Cookies.set('logged', 'true')
             console.log(response)
             if(response.status === 201) {
                 Swal.fire({
@@ -31,7 +33,11 @@ const login = () => {
                     confirmButtonText: 'Ok'
                 }).then((result) => {
                     if(result.isConfirmed) {
-                        indexRouter()
+                        if(Cookies.get('rut') === "0.000.000-0") {
+                            router.push('/viewAdmin')
+                        } else {
+                            router.push('/')
+                        }
                     }
                 })
             } else {
@@ -43,6 +49,7 @@ const login = () => {
                 })
             }
         } catch (err) {
+            Cookies.set('logged', 'false')
             Swal.fire({
                 title: 'Error',
                 text: 'Error al iniciar sesion',
@@ -70,7 +77,7 @@ const login = () => {
                     </FormControl>
                     <Stack>
                         <Button colorScheme={'blue'} onClick={onSubmit}>Iniciar Sesion</Button>
-                        <Button colorScheme={'red'} onClick={indexRouter}>Cancelar</Button>
+                        <Button colorScheme={'red'} onClick={mainRouter}>Cancelar</Button>
                     </Stack>
                 </Stack>
             </Container>

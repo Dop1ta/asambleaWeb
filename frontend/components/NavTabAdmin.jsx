@@ -43,11 +43,7 @@ const NavTabAdmin = () => {
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href='/'>Usuarios</BreadcrumbLink>
-          </BreadcrumbItem>
-
-          <BreadcrumbItem>
-            <BreadcrumbLink href='http://localhost:3000/user'>Lista de vecinos</BreadcrumbLink>
+            <BreadcrumbLink href='http://localhost:3000/userview'>Usuarios</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
