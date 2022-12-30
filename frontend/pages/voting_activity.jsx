@@ -9,7 +9,7 @@ const voting_activity = () => {
     return (
         <Stack alignItems={"center"} backgroundColor={"rgb(244,247,254)"} >
         <Tab_votingActivity/>
-        <Container >
+        <Container maxW={"container.md"}>
               <Text as='b' fontSize='3xl'>Votar</Text>
               <Accordion allowToggle size={"xl"}>
                 <AccordionItem>
@@ -20,7 +20,7 @@ const voting_activity = () => {
                     </AccordionButton>
                   </h2>
                   <AccordionPanel pb={4}>
-                  <RadioGroup>
+                  <RadioGroup alignItems>
                         <Stack direction='row'>
                             <Radio value='1'>Persona 1</Radio>
                             <Radio value='2'>Persona 2</Radio>
