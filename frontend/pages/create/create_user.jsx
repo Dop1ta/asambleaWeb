@@ -37,6 +37,10 @@ const create_user = () => {
                     text: 'El usuario se a creado correctamente',
                     icon: 'success',
                     confirmButtonText: 'Ok'
+                }).then((result) => {
+                    if(result.isConfirmed) {
+                        router.push('/userview')
+                    }
                 })
             } else {
                 Swal.fire({

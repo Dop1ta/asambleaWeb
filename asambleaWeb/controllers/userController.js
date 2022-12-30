@@ -4,45 +4,37 @@ const createUser = (req, res) => {
   const { name, rut, rol, email, number, address, votos } = req.body;
   const { id } = req.params;
 
-  user.findOne({ rut }, (err, personr) => {
-    if(err) {
-      return res.status(400).send({ message: 'Error al buscar rut.' });
+  if(getUserByRut(rut) === rut) {
+    return res.status(403).send({ message: 'El rut que desea ingresar ya existe' });
+  }
+
+  user.findById(id, (error, person) => {
+    if(error) {
+      return res.status(400).send({ message: "Error al buscar el usuario." });
     }
-    if(!personr) {
-      user.findById(id, (error, person) => {
-        if(error) {
-          return res.status(400).send({ message: "Error al buscar el usuario." });
-        }
-        if(!person) {
-          return res.status(404).send({ message: "Usuario no encontrado." });
-        }
-        if(person.rol === "administrador") {
-          const newUser = new user({
-            name,
-            rut,
-            rol,
-            email,
-            number,
-            address,
-            votos,
-          });
-          newUser.save((error, person) => {
-            if (error) {
-              return res.status(400).send({ message: "Error al crear un usuario." });
-            }
-            return res.status(201).send(person);
-          });
-        } else {
-          return res.status(404).send({ message: "Usuario no permitido." })
-        }
+    if(!person) {
+      return res.status(404).send({ message: "Usuario no encontrado." });
+    }
+    if(person.rol === "administrador") {
+      const newUser = new user({
+        name,
+        rut,
+        rol,
+        email,
+        number,
+        address,
+        votos,
       });
-    }
-    if(personr.rut === rut) {
-      return res.status(400).send({ message: 'No se puede ingresar usuarios con el mismo rut.' });
+      newUser.save((error, person) => {
+        if (error) {
+          return res.status(400).send({ message: "Error al crear un usuario." });
+        }
+        return res.status(201).send(person);
+      });
+    } else {
+      return res.status(404).send({ message: "Usuario no permitido." })
     }
   });
-
-  
 };
 
 const login = async (req, res) => {
@@ -133,14 +125,14 @@ const deleteUser = (req, res) => {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
     if(person.rol === "administrador") {
-      user.findByIdAndDelete(userid, (error, person) => {
+      user.findByIdAndDelete(userid, (error, userd) => {
         if(error) {
           return res.status(400).send({ message: "Error al eliminar el usuario." });
         }
-        if(!person) {
+        if(!userd) {
           return res.status(404).send({ message: "Usuario no encontrado." });
         }
-        return res.status(200).send({ message: "Usuario eliminado." });
+        return res.status(201).send({ message: "Usuario eliminado." });
       });
     } else {
       return res.status(404).send({ message: "Usuario no permitido." })
@@ -166,7 +158,7 @@ const getUserById = (req, res) => {
         if(!person) {
           return res.status(404).send({ message: "Usuario no encontrado." });
         }
-        return res.status(200).send(person);
+        return res.status(201).send(person);
       });
     } else {
       return res.status(404).send({ message: "Usuario no permitido." })
@@ -174,30 +166,16 @@ const getUserById = (req, res) => {
   });
 };
 
-const getUserByRut = (req, res) => {
-  const { id } = req.params;
-  const { rut } = req.body;
+const getUserByRut = (rut) => {
 
-  user.findById(id, (error, person) => {
+  user.findOne({rut}, (error, person) => {
     if(error) {
-      return res.status(400).send({ message: "Error al buscar el usuario." });
+      return false;
     }
     if(!person) {
-      return res.status(404).send({ message: "Usuario no encontrado." });
+      return false;
     }
-    if(person.rol === "administrador") {
-      user.findOne({rut}, (error, person) => {
-        if(error) {
-          return res.status(400).send({ message: "Error al buscar el usuario." });
-        }
-        if(!person) {
-          return res.status(404).send({ message: "Usuario no encontrado." });
-        }
-        return res.status(200).send(person);
-      });
-    } else {
-      return res.status(404).send({ message: "Usuario no permitido."})
-    }
+    return person.rut;
   });
 };
 
@@ -209,7 +187,7 @@ const getUsersEmail = (req, res) => {
     if(person.length === 0) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    return res.status(200).send(person);
+    return res.status(201).send(person);
   }).select("email -_id");
 };
 
@@ -231,7 +209,7 @@ const getUserEmailById = (req, res) => {
         if(!person) {
           return res.status(404).send({ message: "Usuario no encontrado." });
         }
-        return res.status(200).send(person.email);
+        return res.status(201).send(person.email);
       });
     } else {
       return res.status(404).send({ message: "Usuario no permitido." })
@@ -247,7 +225,6 @@ module.exports = {
   updateUser,
   deleteUser,
   getUserById,
-  getUserByRut,
   getUsersEmail,
   getUserEmailById,
 };
