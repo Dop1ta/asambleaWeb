@@ -4,19 +4,26 @@ const createUser = (req, res) => {
   const { name, rut, rol, email, number, address, votos } = req.body;
   const { id } = req.params;
 
-  user.findOne(rut, (error, person) => {
-    if(error) {
+  user.findOne({ rut: rut }, (error, person) => {
+
+    if (error) {
       return res.status(400).send({ message: 'Error al buscar rut.' });
     }
-    if(!person) {
+    try {
+      if (rut === person.rut) {
+        return res.status(400).send({ message: 'El rut no se puede repetir.' })
+      }
+    } catch (error) {
+    }
+    if (!person) {
       user.findById(id, (error, person) => {
-        if(error) {
+        if (error) {
           return res.status(400).send({ message: "Error al buscar el usuario." });
         }
-        if(!person) {
+        if (!person) {
           return res.status(404).send({ message: "Usuario no encontrado." });
         }
-        if(person.rol === "administrador") {
+        if (person.rol === "administrador") {
           const newUser = new user({
             name,
             rut,
@@ -24,36 +31,39 @@ const createUser = (req, res) => {
             email,
             number,
             address,
-            votos,
+            votos: 0,
           });
-          newUser.save((error, person) => {
+          newUser.save((error, Newperson) => {
             if (error) {
               return res.status(400).send({ message: "Error al crear un usuario." });
             }
-            return res.status(201).send(person);
+            try {
+              return res.status(201).send(Newperson);
+            } catch (error) {
+              console.log(error)
+            }
           });
         } else {
           return res.status(404).send({ message: "Usuario no permitido." })
         }
       });
     }
-    return res.status(400).send({ message: 'El rut no se puede repetir.' })
   })
 
-  
+
 
 };
 
 const login = async (req, res) => {
   const { rut } = req.body;
   user.findOne({ rut }, (err, person) => {
-    if(err) {
+    if (err) {
       return res.status(400).send({ message: 'Error al iniciar sesion' });
     }
-    if(!person) {
+    if (!person) {
       return res.status(404).send({ message: 'Usuario no encontrado' });
     }
-    return res.status(201).send({ message: 'Se ha iniciado sesion', person:rut });
+    return res.status(201).send({ message: 'Se ha iniciado sesion', person: rut });
   })
 }
 
@@ -61,18 +71,18 @@ const getUsers = (req, res) => {
   const { id } = req.params;
 
   user.findById(id, (error, person) => {
-    if(error) {
+    if (error) {
       return res.status(400).send({ message: "Error al buscar el usuario." });
     }
-    if(!person) {
+    if (!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if(person.rol === "administrador") {
+    if (person.rol === "administrador") {
       user.find({}, (error, person) => {
-        if(error) {
+        if (error) {
           return res.status(400).send({ message: "Error al buscar usuario." });
         }
-        if(person.length === 0) {
+        if (person.length === 0) {
           return res.status(404).send({ message: "Usuario no encontrado." });
         }
         return res.status(201).send(person);
@@ -85,10 +95,10 @@ const getUsers = (req, res) => {
 
 const getUsersAll = (req, res) => {
   user.find({}, (error, person) => {
-    if(error) {
+    if (error) {
       return res.status(400).send({ message: "Error al buscar el usuario." });
     }
-    if(person.length === 0) {
+    if (person.length === 0) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
     return res.status(201).send(person);
@@ -99,18 +109,18 @@ const updateUser = (req, res) => {
   const { id, userid } = req.params;
 
   user.findById(id, (error, person) => {
-    if(error) {
+    if (error) {
       return res.status(400).send({ message: "Error al buscar el usuario." });
     }
-    if(!person) {
+    if (!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if(person.rol === "administrador") {
+    if (person.rol === "administrador") {
       user.findByIdAndUpdate(userid, req.body, (error, person) => {
-        if(error) {
+        if (error) {
           return res.status(400).send({ message: "Error al actualizar el usuario." });
         }
-        if(!person) {
+        if (!person) {
           return res.status(404).send({ message: "Usuario no encontrado." });
         }
         return res.status(201).send({ message: "Usuario actualizado." });
@@ -125,18 +135,18 @@ const deleteUser = (req, res) => {
   const { id, userid } = req.params;
 
   user.findById(id, (error, person) => {
-    if(error) {
+    if (error) {
       return res.status(400).send({ message: "Error al buscar el usuario." });
     }
-    if(!person) {
+    if (!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if(person.rol === "administrador") {
+    if (person.rol === "administrador") {
       user.findByIdAndDelete(userid, (error, userd) => {
-        if(error) {
+        if (error) {
           return res.status(400).send({ message: "Error al eliminar el usuario." });
         }
-        if(!userd) {
+        if (!userd) {
           return res.status(404).send({ message: "Usuario no encontrado." });
         }
         return res.status(201).send({ message: "Usuario eliminado." });
@@ -151,18 +161,18 @@ const getUserById = (req, res) => {
   const { id, userid } = req.params;
 
   user.findById(id, (error, person) => {
-    if(error) {
+    if (error) {
       return res.status(400).send({ message: "Error al buscar el usuario." });
     }
-    if(!person) {
+    if (!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if(person.rol === "administrador") {
+    if (person.rol === "administrador") {
       user.findById(userid, (error, person) => {
-        if(error) {
+        if (error) {
           return res.status(400).send({ message: "Error al buscar el usuario." });
         }
-        if(!person) {
+        if (!person) {
           return res.status(404).send({ message: "Usuario no encontrado." });
         }
         return res.status(201).send(person);
@@ -175,11 +185,11 @@ const getUserById = (req, res) => {
 
 const getUserByRut = (rut) => {
   console.log('checking rut')
-  user.findOne({rut}, (error, person) => {
-    if(error) {
+  user.findOne({ rut }, (error, person) => {
+    if (error) {
       return false;
     }
-    if(!person) {
+    if (!person) {
       return false;
     }
     console.log(rut)
@@ -190,10 +200,10 @@ const getUserByRut = (rut) => {
 
 const getUsersEmail = (req, res) => {
   user.find({}, (error, person) => {
-    if(error) {
+    if (error) {
       return res.status(400).send({ message: "Error al buscar usuario." });
     }
-    if(person.length === 0) {
+    if (person.length === 0) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
     return res.status(201).send(person);
@@ -204,18 +214,18 @@ const getUserEmailById = (req, res) => {
   const { id, userid } = req.params;
 
   user.findById(id, (error, person) => {
-    if(error) {
+    if (error) {
       return res.status(400).send({ message: "Error al buscar el usuario." });
     }
-    if(!person) {
+    if (!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if(person.rol === "administrador") {
+    if (person.rol === "administrador") {
       user.findById(userid, (error, person) => {
-        if(error) {
+        if (error) {
           return res.status(400).send({ message: "Error al buscar el correo del usuario." });
         }
-        if(!person) {
+        if (!person) {
           return res.status(404).send({ message: "Usuario no encontrado." });
         }
         return res.status(201).send(person.email);
