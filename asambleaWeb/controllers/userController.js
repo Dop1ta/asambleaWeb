@@ -4,37 +4,44 @@ const createUser = (req, res) => {
   const { name, rut, rol, email, number, address, votos } = req.body;
   const { id } = req.params;
 
-  if(getUserByRut(rut) === rut) {
-    return res.status(403).send({ message: 'El rut que desea ingresar ya existe' });
-  }
-
-  user.findById(id, (error, person) => {
+  user.findOne(rut, (error, person) => {
     if(error) {
-      return res.status(400).send({ message: "Error al buscar el usuario." });
+      return res.status(400).send({ message: 'Error al buscar rut.' });
     }
     if(!person) {
-      return res.status(404).send({ message: "Usuario no encontrado." });
-    }
-    if(person.rol === "administrador") {
-      const newUser = new user({
-        name,
-        rut,
-        rol,
-        email,
-        number,
-        address,
-        votos,
-      });
-      newUser.save((error, person) => {
-        if (error) {
-          return res.status(400).send({ message: "Error al crear un usuario." });
+      user.findById(id, (error, person) => {
+        if(error) {
+          return res.status(400).send({ message: "Error al buscar el usuario." });
         }
-        return res.status(201).send(person);
+        if(!person) {
+          return res.status(404).send({ message: "Usuario no encontrado." });
+        }
+        if(person.rol === "administrador") {
+          const newUser = new user({
+            name,
+            rut,
+            rol,
+            email,
+            number,
+            address,
+            votos,
+          });
+          newUser.save((error, person) => {
+            if (error) {
+              return res.status(400).send({ message: "Error al crear un usuario." });
+            }
+            return res.status(201).send(person);
+          });
+        } else {
+          return res.status(404).send({ message: "Usuario no permitido." })
+        }
       });
-    } else {
-      return res.status(404).send({ message: "Usuario no permitido." })
     }
-  });
+    return res.status(400).send({ message: 'El rut no se puede repetir.' })
+  })
+
+  
+
 };
 
 const login = async (req, res) => {
@@ -167,7 +174,7 @@ const getUserById = (req, res) => {
 };
 
 const getUserByRut = (rut) => {
-
+  console.log('checking rut')
   user.findOne({rut}, (error, person) => {
     if(error) {
       return false;
@@ -175,7 +182,9 @@ const getUserByRut = (rut) => {
     if(!person) {
       return false;
     }
-    return person.rut;
+    console.log(rut)
+    console.log(person.rut)
+    return true;
   });
 };
 
