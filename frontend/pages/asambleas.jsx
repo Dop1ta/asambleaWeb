@@ -1,16 +1,11 @@
 import { useState, useEffect } from 'react'
-import { Stack, SimpleGrid, Card, Button, Text, CardHeader, Heading, CardBody, CardFooter } from '@chakra-ui/react'
+import { Stack, SimpleGrid, Card, Text, CardHeader, Heading, CardBody } from '@chakra-ui/react'
 import NavTab from '../components/NavTab'
 import axios from 'axios'
-import { TrashIcon } from 'chakra-ui-ionicons'
-import Swal from 'sweetalert2'
-import { useRouter } from 'next/router'
 
 const Asambleas = () => {
 
   const [asamblea, setAsambleas] = useState([])
-
-  const router = useRouter()
 
   const getAsambleas = async () => {
     try {

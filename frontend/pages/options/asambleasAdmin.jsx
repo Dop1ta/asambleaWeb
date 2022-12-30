@@ -87,8 +87,8 @@ const AsambleaAdmin = () => {
   return (
     <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
       <NavTabAdmin />
-      <Stack my={4}>
-        <Button leftIcon={<AddIcon />} onClick={() => router.push('/create/crearAsamblea')}>Crear Asamblea</Button>
+      <Stack my={4} >
+        <Button backgroundColor={'white'} leftIcon={<AddIcon />} onClick={() => router.push('/create/crearAsamblea')}>Crear Asamblea</Button>
       </Stack>
       <SimpleGrid columns={3}>
         {showAsambleas()}

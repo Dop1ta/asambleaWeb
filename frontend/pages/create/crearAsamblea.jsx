@@ -27,7 +27,7 @@ export default function CrearA() {
   const router = useRouter()
 
   const backAsambleas = () => {
-    router.push('/asambleas')
+    router.push('/options/asambleasAdmin')
   }
 
   const onSubmit = async (e) => {
@@ -45,7 +45,7 @@ export default function CrearA() {
           confirmButtonText: 'Ok'
         }).then((result) => {
           if (result.isConfirmed) {
-            router.push('/asambleas')
+            router.push('/options/asambleasAdmin')
           }
         })
       } else {
