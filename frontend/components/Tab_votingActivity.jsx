@@ -23,18 +23,8 @@ const Tab_votingActivity = () => {
           alt='Dan Abramov'
           marginRight={"20px"}
         />
-        <Heading textAlign={"center"} my={8} textColor={"#180B67"} fontSize={"50"}>
-          Plataforma de Vecinos
-        </Heading >
-        <Image
-          borderRadius='full'
-          width='60px'
-          height='60px'
-          boxSize='60px'
-          src='/icon.png'
-          alt='Dan Abramov'
-          marginLeft={"20px"}
-        />
+        <Heading textAlign={"center"} my={8} textColor={"#180B67"} fontSize={"50"}>Plataforma de Votación de Vecinos</Heading >
+        <Image borderRadius='full' width='60px' height='60px' boxSize='60px' src='/icon.png' alt='Dan Abramov' marginLeft={"20px"}/>
       </Center>
       <Center>
         <Breadcrumb separator='-'>
@@ -43,15 +33,15 @@ const Tab_votingActivity = () => {
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href='http://localhost:3000/voting_activity'>Votaciones</BreadcrumbLink>
+            <BreadcrumbLink href='http://localhost:3000/voting_activity'>Votaciones en Curso</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem >
             <BreadcrumbLink href='http://localhost:3000/create/create_voting_activity'>Crear Votación</BreadcrumbLink>
           </BreadcrumbItem>
 
-          <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink href='#'>Contact</BreadcrumbLink>
+          <BreadcrumbItem>
+            <BreadcrumbLink href='http://localhost:3000/view_voting'>Resultados de Votación</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem isCurrentPage>
