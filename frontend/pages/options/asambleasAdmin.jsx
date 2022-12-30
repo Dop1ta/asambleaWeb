@@ -19,7 +19,6 @@ const AsambleaAdmin = () => {
       const response = await axios.get(`${process.env.API_URL}/getMeetings`)
       setAsambleas(response.data)
     } catch (error) {
-      console.log(error)
     }
   }
 
@@ -52,37 +51,22 @@ const AsambleaAdmin = () => {
   }, [])
 
   const showAsambleas = () => {
-    if (asamblea.length === 0) {
+    return asamblea.map(asambleas => {
       return (
-        <Card boxShadow='lg' marginLeft={30} marginTop={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
-          <CardHeader>
-            <Heading size='md'>Sin Asambleas</Heading>
+        <Card key={asambleas._id} boxShadow='lg' marginLeft={30} marginTop={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
+          <CardHeader textAlign={'center'}>
+            <Heading size='md'>{asambleas.name}</Heading>
+            <Text>Dia: {asambleas.time}</Text>
+            <Text>Hora: {asambleas.hour}</Text>
+            <Text>{asambleas.description}</Text>
+            <Button leftIcon={<EditIcon />} colorScheme='blue' variant='solid' margin={4} onClick={() => router.push(`/updateAsamblea/${asambleas._id}`)} >Editar</Button>
+            <Button leftIcon={<TrashIcon />} colorScheme='red' variant='solid' margin={4} onClick={() => deleteId(asambleas._id)} >Eliminar</Button>
           </CardHeader>
-          <CardBody>
-            <Text>Lamentablemente no se encontro ninguna asamblea agendada</Text>
-          </CardBody>
-          <CardFooter>
-            <Button onClick={() => router.push('/create/crearAsamblea')}>Crear una asamblea</Button>
-          </CardFooter>
-        </Card>
+        </Card >
       )
-    } else {
-      return asamblea.map(asambleas => {
-        return (
-          <Card key={asambleas._id} boxShadow='lg' marginLeft={30} marginTop={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
-            <CardHeader textAlign={'center'}>
-              <Heading size='md'>{asambleas.name}</Heading>
-              <Text>Dia: {asambleas.time}</Text>
-              <Text>Hora: {asambleas.hour}</Text>
-              <Text>{asambleas.description}</Text>
-              <Button leftIcon={<EditIcon />} colorScheme='blue' variant='solid' margin={4} onClick={() => router.push(`/updateAsamblea/${asambleas._id}`)} >Editar</Button>
-              <Button leftIcon={<TrashIcon />} colorScheme='red' variant='solid' margin={4} onClick={() => deleteId(asambleas._id)} >Eliminar</Button>
-            </CardHeader>
-          </Card >
-        )
-      }).reverse()
-    }
+    }).reverse()
   }
+
 
   return (
     <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>

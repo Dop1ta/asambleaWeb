@@ -12,7 +12,6 @@ const Asambleas = () => {
       const response = await axios.get(`${process.env.API_URL}/getMeetings`)
       setAsambleas(response.data)
     } catch (error) {
-      console.log(error)
     }
   }
 
@@ -21,9 +20,10 @@ const Asambleas = () => {
   }, [])
 
   const showAsambleas = () => {
+
     if (asamblea.length === 0) {
       return (
-        <Card boxShadow='lg' marginLeft={30} marginTop={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
+        <Card boxShadow='lg' marginLeft={30} marginTop={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"} width={'400px'}>
           <CardHeader>
             <Heading size='md'>Sin Asambleas</Heading>
           </CardHeader>

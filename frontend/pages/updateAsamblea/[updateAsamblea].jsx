@@ -59,8 +59,8 @@ const Update = (data) => {
       const response = await axios.put(`${process.env.API_URL}/getMeetings/update/${Asamblea._id}/639a48dffe299c865e0ea1f9`, values)
       if (response.status === 200) {
         Swal.fire({
-          title: 'Producto creado',
-          text: 'El producto se ha creado correctamente',
+          title: 'Asamblea modificada',
+          text: 'La asamblea se ha modificado correctamente',
           icon: 'success',
           confirmButtonText: 'Ok'
         }).then((result) => {

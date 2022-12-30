@@ -113,7 +113,7 @@ const updateMeeting = (req, res) => {
         if (!meeting) {
           return res.status(404).send({ message: "Reunión no encontrada." });
         }
-        sendmail(meeting);
+        sendmail(req.body);
         return res.status(200).send({ message: "Reunión actualizada." });
       });
     } else {
