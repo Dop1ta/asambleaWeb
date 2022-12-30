@@ -76,7 +76,7 @@ const getUsers = (req, res) => {
         if(person.length === 0) {
           return res.status(404).send({ message: "Usuario no encontrado." });
         }
-        return res.status(200).send(person);
+        return res.status(201).send(person);
       });
     } else {
       return res.status(404).send({ message: "Usuario no permitido." })
@@ -92,7 +92,7 @@ const getUsersAll = (req, res) => {
     if(person.length === 0) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    return res.status(200).send(person);
+    return res.status(201).send(person);
   }).select("name -_id");
 };
 
@@ -114,7 +114,7 @@ const updateUser = (req, res) => {
         if(!person) {
           return res.status(404).send({ message: "Usuario no encontrado." });
         }
-        return res.status(200).send({ message: "Usuario actualizado." });
+        return res.status(201).send({ message: "Usuario actualizado." });
       });
     } else {
       return res.status(404).send({ message: "Usuario no permitido." })

@@ -27,21 +27,12 @@ const updateuser = (data) => {
 
     const router = useRouter()
 
-    const [values, setValues] = useState({
-        name: '',
-        rut: '',
-        rol: '',
-        email: '',
-        number: '',
-        address: ''
-    })
-
     const [user, setUser] = useState({
-        name: '',
-        rol: '',
-        email: '',
-        number: '',
-        address: ''
+        name: data.data.name,
+        rol: data.data.rol,
+        email: data.data.email,
+        number: data.data.number,
+        address: data.data.address
     })
 
     const userRouter = () => {
@@ -50,16 +41,20 @@ const updateuser = (data) => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        console.log(values)
+        console.log(user)
         try {
-            const response = await axios.post(`${process.env.API_URL}/getUsers/update/639a48dffe299c865e0ea1f9/${id}`, values)
+            const response = await axios.put(`${process.env.API_URL}/getUsers/update/639a48dffe299c865e0ea1f9/${data.data._id}`, user)
             console.log(response)
             if(response.status === 201) {
                 Swal.fire({
-                    title: 'Usuario creado',
+                    title: 'Usuario Actualizado',
                     text: 'El usuario se a actualizado correctamente',
                     icon: 'success',
                     confirmButtonText: 'Ok'
+                }).then((result) => {
+                    if(result.isConfirmed) {
+                        router.push('/userview')
+                    }
                 })
             } else {
                 Swal.fire({
@@ -86,8 +81,13 @@ const updateuser = (data) => {
         })
     }
 
+    const fillUser = () => {
+        console.log(user)
+    }
+
     useEffect(() => {
-        console.log(data)
+        fillUser()
+        console.log(data.data)
     }, [])
 
     return (
@@ -98,11 +98,11 @@ const updateuser = (data) => {
                 <Stack my={4}>
                     <FormControl>
                         <FormLabel>Nombre</FormLabel>
-                        <Input placeholder='Ej: Pedro Martinez' maxLength={100} onChange={onChange} name={"name"} value={data.data.name}/>
+                        <Input placeholder='Ej: Pedro Martinez' maxLength={100} onChange={onChange} name={"name"} defaultValue={data.data.name}/>
                     </FormControl>
                     <FormControl as='fieldset'>
                         <FormLabel as='legend'>Rol</FormLabel>
-                        <RadioGroup value={data.data.rol}>
+                        <RadioGroup defaultValue={data.data.rol}>
                             <HStack spacing='24px'>
                                 <Radio value='Vecino' name={"rol"} onChange={onChange}>Vecino</Radio>
                                 <Radio value='Presidente' name={"rol"} onChange={onChange}>Presidente</Radio>
@@ -114,18 +114,18 @@ const updateuser = (data) => {
                     </FormControl>
                     <FormControl>
                         <FormLabel>Email</FormLabel>
-                        <Input placeholder='Ej: pedro.martinez@gmail.com' type='email' maxLength={100} onChange={onChange} name={"email"} value={data.data.email}/>
+                        <Input placeholder='Ej: pedro.martinez@gmail.com' type='email' maxLength={100} onChange={onChange} name={"email"} defaultValue={data.data.email}/>
                     </FormControl>
                     <FormControl>
                         <FormLabel>Numero de telefono</FormLabel>
                         <InputGroup>
                             <InputLeftAddon children='+56'/>
-                            <Input placeholder='Ej: 912341234' maxLength={9} onChange={onChange} name={"number"} value={data.data.number}/>
+                            <Input placeholder='Ej: 912341234' maxLength={9} onChange={onChange} name={"number"} defaultValue={data.data.number}/>
                         </InputGroup>
                     </FormControl>
                     <FormControl>
                         <FormLabel>Direccion</FormLabel>
-                        <Input placeholder='Ej: Los Carrera #123' maxLength={200} onChange={onChange} name={"address"} value={data.data.address}/>
+                        <Input placeholder='Ej: Los Carrera #123' maxLength={200} onChange={onChange} name={"address"} defaultValue={data.data.address}/>
                     </FormControl>
                     <Stack>
                         <Button colorScheme={'blue'} onClick={onSubmit}>Actualizar</Button>
