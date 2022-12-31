@@ -43,6 +43,11 @@ const Acta = () => {
             })
         }
     }
+
+    const download = async () => {
+        const down = await axios.get(`${process.env.API_URL}/getSFiles/`)
+    }
+
     return (
         <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
             <NavTab/>
