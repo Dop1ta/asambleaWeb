@@ -4,6 +4,7 @@ import axios from 'axios'
 import NavTab from '../../components/NavTab'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
+import files_upload from '../../components/files_upload'
 
 const create_Acta = () => {
 
@@ -73,8 +74,9 @@ const create_Acta = () => {
                     </FormControl>
                     <FormControl>
                         <FormLabel>Fecha</FormLabel>
-                        <Input placeholder="Seleccione fecha" size="md" type="date-local" onChange={onChange} name={"date"} />
+                        <Input placeholder="Seleccione fecha" size="md" type="Date" onChange={onChange} name={"date"} />
                     </FormControl>
+                    <files_upload />
                     <Stack>
                         <ButtonGroup variant='outline' spacing='6'>
                             <Button colorScheme={'blue'} onClick={onSubmit}>Crear</Button>
