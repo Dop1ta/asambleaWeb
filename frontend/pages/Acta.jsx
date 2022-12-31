@@ -1,24 +1,17 @@
 import { useState, useEffect } from 'react'
-import { Stack, Button, Text, Card, CardHeader, Heading, CardBody, SimpleGrid} from '@chakra-ui/react'
+import { Stack, Text, Card, CardHeader, Heading, CardBody, SimpleGrid} from '@chakra-ui/react'
 import axios from 'axios'
-import { AiOutlinePlus } from "react-icons/md"
-import { useRouter } from 'next/router'
-import NavTabAdmin from '../components/NavTabAdmin'
+import NavTab from '../components/NavTab'
 
 const Acta = () => {
 
     const [Actas, setActas] = useState([])
-
-    const router = useRouter()
 
     const getActa = async () => {
         const response = await axios.get(`${process.env.API_URL}/getActa/639a48dffe299c865e0ea1f9`)
         setActas(response.data)
     }
 
-    const createActa = () => {
-        router.push('/create/create_Acta')
-    }
 
     useEffect(() => {
         getActa()
@@ -52,11 +45,7 @@ const Acta = () => {
     }
     return (
         <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
-            <NavTabAdmin/>
-            <Heading textAlign={'center'} ml={30} my={4}>Actas</Heading>
-            <Stack ml={30} my={4}>
-                <Button lefticon={<AiOutlinePlus/>} onClick={createActa} size='md'>Crear Acta</Button>
-            </Stack>
+            <NavTab/>
             <SimpleGrid>
                 {showActas()}
             </SimpleGrid>

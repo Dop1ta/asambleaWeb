@@ -73,7 +73,7 @@ const create_Acta = () => {
                     </FormControl>
                     <FormControl>
                         <FormLabel>Fecha</FormLabel>
-                        <Input placeholder="Seleccione fecha" size="md" type="date-local" onChange={onChange} name={"date"} />
+                        <Input placeholder="Seleccione fecha" size="md" type="Date" onChange={onChange} name={"date"} />
                     </FormControl>
                     <Stack>
                         <ButtonGroup variant='outline' spacing='6'>
