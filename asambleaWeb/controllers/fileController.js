@@ -41,9 +41,16 @@ const getSFiles = (req, res) =>{
 }
 
 const deleteFiles = async (req, res) =>{
-  await uploadToRemoteBucket(req.file.path)
-  await unlikAsync(req.file.path)
-  res.end("Eliminada")
+  const {id} = req.params
+  fileUpload.findById(id, (error, meeting) => {
+    if(error) {
+      return res.status(400).send({message: "Error."})
+    }
+    if (!file) {
+      return res.status(404).send({message: "Archvio no encontrado."})
+    }
+    return res.status(200).send(file)
+  });
 }
 
 module.exports = {
