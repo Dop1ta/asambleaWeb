@@ -11,11 +11,11 @@ const create_voting_activity = () => {
         name: '',
         startDate_vote: '',
         endDate_vote: '',
+        rut1: '',
+        rut2: '',
+        rut3: '',
+        rut4: '',
       })
-    
-    let [rut, setRuts] = useState({
-      idVotingAct: '',
-    })
     
       const router = useRouter()
     
@@ -36,7 +36,7 @@ const create_voting_activity = () => {
               confirmButtonText: 'Ok'
             }).then((result) => {
               if (result.isConfirmed) {
-                router.push('/options/asambleasAdmin')
+                router.push('/voting_activity')
               }
             })
           } else {
@@ -63,12 +63,6 @@ const create_voting_activity = () => {
           [e.target.name]: e.target.value,
         })
       }
-      const onChange2 = (e) => {
-        setRuts({
-          ...values,
-          [e.target.name]: e.target.value,
-        })
-      }
 
     return (
         <Stack alignItems={"center"} backgroundColor={"rgb(244,247,254)"}>
@@ -90,19 +84,19 @@ const create_voting_activity = () => {
                 </FormControl>
                 <FormControl isRequired>
                     <FormLabel>Candidato 1 (Ingresar Rut)</FormLabel>
-                    <Input placeholder="00.000.000-0" onChange={onChange2} name={"idVotingAct"}/>
+                    <Input placeholder="00.000.000-0" onChange={onChange} name={"rut1"}/>
                 </FormControl>
-                <FormControl isDisabled>
+                <FormControl isRequired>
                     <FormLabel>Candidato 2 (Ingresar Rut)</FormLabel>
-                    <Input placeholder="00.000.000-0"  name={"idVotingAct"}/>
+                    <Input placeholder="00.000.000-0" onChange={onChange} name={"rut2"}/>
                 </FormControl>
-                <FormControl isDisabled>
+                <FormControl isRequired>
                     <FormLabel>Candidato 3 (Ingresar Rut)</FormLabel>
-                    <Input placeholder="00.000.000-0"  name={"ridVotingAct"}/>
+                    <Input placeholder="00.000.000-0" onChange={onChange} name={"rut3"}/>
                 </FormControl>
-                <FormControl isDisabled>
+                <FormControl isRequired>
                     <FormLabel>Candidato 4 (Ingresar Rut)</FormLabel>
-                    <Input placeholder="00.000.000-0"  name={"idVotingAct"}/>
+                    <Input placeholder="00.000.000-0" onChange={onChange} name={"rut4"}/>
                 </FormControl>
             </Stack>
             <Button colorScheme="blue" size="md" my="5" type="sumbit" onClick={onSubmit} >Guardar</Button>

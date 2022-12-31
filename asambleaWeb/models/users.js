@@ -41,10 +41,6 @@ const userSchema = new schema({
   votos: {
     type: Number,
     required: false,
-  },
-  idVotingAct: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'votingActivity',
   }
 });
 
