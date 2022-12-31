@@ -4,6 +4,7 @@ import axios from 'axios'
 import { Button, Container, FormControl, FormLabel, Card, CardBody, Text, Textarea, Input, ButtonGroup, Stack } from '@chakra-ui/react'
 import NavTabAdmin from '../../components/NavTabAdmin'
 import Swal from 'sweetalert2'
+import Head from 'next/head'
 
 export async function getServerSideProps(context) {
   try {
@@ -97,6 +98,9 @@ const Update = (data) => {
 
   return (
     <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
+      <Head>
+        <title>Modificar Asamblea</title>
+      </Head>
       <NavTabAdmin />
       <Card backgroundColor={'white'} borderRadius={10} boxShadow={'md'} >
         <CardBody>

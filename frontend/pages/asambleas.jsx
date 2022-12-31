@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Stack, SimpleGrid, Card, Text, CardHeader, Heading, CardBody } from '@chakra-ui/react'
 import NavTab from '../components/NavTab'
 import axios from 'axios'
+import Head from 'next/head'
 
 const Asambleas = () => {
 
@@ -50,6 +51,9 @@ const Asambleas = () => {
 
   return (
     <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
+      <Head>
+        <title>Asambleas</title>
+      </Head>
       <NavTab />
       <SimpleGrid columns={3}>
         {showAsambleas()}

@@ -11,7 +11,7 @@ const sendmail = (meeting, res) => {
     port: 587,
     auth: {
       user: "gabriel.ruiz1901@alumnos.ubiobio.cl",
-      pass: 'zlfvvezkbdjoiexi',
+      pass: 'cufpdcfaqupmbnae',
     },
   });
 
