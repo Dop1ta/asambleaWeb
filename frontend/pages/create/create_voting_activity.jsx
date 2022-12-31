@@ -7,12 +7,14 @@ import Tab_votingActivity from '../../components/Tab_votingActivity';
 
 const create_voting_activity = () => {
 
-    let [values, setAsamblea] = useState({
+    let [values, setVotingAct ] = useState({
         name: '',
         startDate_vote: '',
         endDate_vote: '',
-        ganador: '',
-        votos_ganador: '',
+        rut1: '',
+        rut2: '',
+        rut3: '',
+        rut4: '',
       })
     
       const router = useRouter()
@@ -24,9 +26,7 @@ const create_voting_activity = () => {
       const onSubmit = async (e) => {
         e.preventDefault()
         try {
-          const [startDate_vote, endDate_vote] = values.startDate_vote.split('T')
-          values.startDate_vote = startDate_vote
-          values.endDate_vote = endDate_vote
+          console.log(values)
           const response = await axios.post(`${process.env.API_URL}/createVotingActivity/639a48dffe299c865e0ea1f9`, values)
           if (response.status === 201) {
             Swal.fire({
@@ -36,7 +36,7 @@ const create_voting_activity = () => {
               confirmButtonText: 'Ok'
             }).then((result) => {
               if (result.isConfirmed) {
-                router.push('/options/asambleasAdmin')
+                router.push('/voting_activity')
               }
             })
           } else {
@@ -56,14 +56,13 @@ const create_voting_activity = () => {
           })
         }
       }
-    
+
       const onChange = (e) => {
-        setAsamblea({
+        setVotingAct({
           ...values,
           [e.target.name]: e.target.value,
         })
       }
-
 
     return (
         <Stack alignItems={"center"} backgroundColor={"rgb(244,247,254)"}>
@@ -73,42 +72,31 @@ const create_voting_activity = () => {
             <Stack>
                 <FormControl isRequired>
                     <FormLabel textAlign={'center'}>Cargo:</FormLabel>
-                    <RadioGroup onChange={onChange}>
-                        <Stack direction='row'>
-                            <Radio value='1'>Presidente</Radio>
-                            <Radio value='2'>Bicepresidente</Radio>
-                            <Radio value='3'>Secretario</Radio>
-                            <Radio value='4'>Tesorero</Radio>
-                            <Stack direction='row'>
-                                <Radio value= '5'>Otro</Radio>
-                                <Input placeholder='Ejemplo: Secretario 2.'/>
-                            </Stack>
-                        </Stack>
-                    </RadioGroup>
+                    <Input placeholder='Ejemplo: Presidente' type={"text"} onChange={onChange} name={"name"} />
                 </FormControl>
                 <FormControl isRequired>
                     <FormLabel>Fecha de Inicio</FormLabel>
-                    <Input placeholder="Select Date and Time" size="md" type="datetime-local" onChange={onChange} name={"time"}/>
+                    <Input placeholder="Select Date and Time" size="md" type="datetime-local" onChange={onChange} name={"startDate_vote"}/>
                 </FormControl>
                 <FormControl isRequired>
                     <FormLabel>Fecha de Termino</FormLabel>
-                    <Input placeholder="Select Date and Time" size="md" type="datetime-local" onChange={onChange} name={"time"}/>
+                    <Input placeholder="Select Date and Time" size="md" type="datetime-local" onChange={onChange} name={"endDate_vote"}/>
                 </FormControl>
                 <FormControl isRequired>
                     <FormLabel>Candidato 1 (Ingresar Rut)</FormLabel>
-                    <Input placeholder="00.000.000-0" onChange={onChange}/>
+                    <Input placeholder="00.000.000-0" onChange={onChange} name={"rut1"}/>
                 </FormControl>
                 <FormControl isRequired>
                     <FormLabel>Candidato 2 (Ingresar Rut)</FormLabel>
-                    <Input placeholder="00.000.000-0" onChange={onChange}/>
+                    <Input placeholder="00.000.000-0" onChange={onChange} name={"rut2"}/>
                 </FormControl>
                 <FormControl isRequired>
                     <FormLabel>Candidato 3 (Ingresar Rut)</FormLabel>
-                    <Input placeholder="00.000.000-0" onChange={onChange}/>
+                    <Input placeholder="00.000.000-0" onChange={onChange} name={"rut3"}/>
                 </FormControl>
                 <FormControl isRequired>
                     <FormLabel>Candidato 4 (Ingresar Rut)</FormLabel>
-                    <Input placeholder="00.000.000-0" onChange={onChange}/>
+                    <Input placeholder="00.000.000-0" onChange={onChange} name={"rut4"}/>
                 </FormControl>
             </Stack>
             <Button colorScheme="blue" size="md" my="5" type="sumbit" onClick={onSubmit} >Guardar</Button>

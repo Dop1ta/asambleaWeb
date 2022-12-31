@@ -25,6 +25,30 @@ const votingActivitySchema = new schema({
   votos_ganador: {
     type: Number,
     required: false,
+  },
+  rut1:{
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 12,
+  },
+  rut2:{
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 12,
+  },
+  rut3:{
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 12,
+  },
+  rut4:{
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 12,
   }
 });
 

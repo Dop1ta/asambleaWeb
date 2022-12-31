@@ -3,7 +3,7 @@ const user = require("../models/users");
 const transporter = require("../controllers/mailerController");
 
 const createVotingActivity = (req, res) => {
-  const { name, startDate_vote, endDate_vote } = req.body;
+  const { name, startDate_vote, endDate_vote, rut1, rut2, rut3, rut4} = req.body;
   const { id } = req.params;
 
   user.findById(id, (error, person) => {
@@ -18,6 +18,10 @@ const createVotingActivity = (req, res) => {
       name,
       startDate_vote,
       endDate_vote,
+      rut1,
+      rut2,
+      rut3,
+      rut4,
       });
 
       newVotingActivity.save((error, vote) => {
@@ -132,10 +136,18 @@ const getVotingActivity = (req, res) => {
     });
   };
 
+
+  const modificarPorRut = (req, res) =>{
+    const {rut} = req.body;
+    user.findOneAndUpdate({ rut: rut }, (error, person) => {
+      })
+  }
+
 module.exports = {
   createVotingActivity,
   getVotingActivity,
   deleteVotingActivity,
   updateVotingActivity,
   getVotingActivityById,
+  modificarPorRut,
 };

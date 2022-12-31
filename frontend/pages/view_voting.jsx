@@ -40,7 +40,10 @@ const [votingAct, setVotingAct] = useState([])
               <Heading size='md'>{votingActs.name}</Heading>
               <Text>Fecha de Inicio: {votingActs.startDate_vote}</Text>
               <Text>Fecha de Finalización: {votingActs.endDate_vote}</Text>
-              <Text>{votingActs.description}</Text>
+              <Text>Persona 1{votingActs.rut1}</Text>
+              <Text>Persona 2{votingActs.rut2}</Text>
+              <Text>Persona 3{votingActs.rut3}</Text>
+              <Text>Persona 4{votingActs.rut4}</Text>
             </CardHeader>
           </Card >
         )
