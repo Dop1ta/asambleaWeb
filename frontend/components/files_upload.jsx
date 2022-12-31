@@ -18,7 +18,10 @@ const file_upload = () => {
     }
 
     const onChange = async () => {
-        
+        setUpload({
+            ...up,
+            [e.target.url]: e.target.value
+        })
     }
 
         return (
