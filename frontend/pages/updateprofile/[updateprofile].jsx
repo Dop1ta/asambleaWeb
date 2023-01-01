@@ -3,7 +3,7 @@ import { Button, Container, FormControl, FormLabel, Heading, HStack, Input, Inpu
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
-import NavTabAdmin from '../../components/NavTabAdmin'
+import NavTab from '../../components/NavTab'
 
 export async function getServerSideProps(context) {
     try {
@@ -92,7 +92,7 @@ const updateprofile = (data) => {
 
     return (
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
-            <NavTabAdmin/>
+            <NavTab/>
             <Container maxW="container.md" centerContent>
                 <Heading textAlign={"center"} my={4}>Actualizar Perfil</Heading>
                 <Stack my={4}>
