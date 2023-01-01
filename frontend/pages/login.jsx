@@ -34,7 +34,7 @@ const login = () => {
                 }).then((result) => {
                     if(result.isConfirmed) {
                         if(Cookies.get('rut') === "0.000.000-0") {
-                            router.push('/viewAdmin')
+                            router.push('/options/asambleasAdmin')
                         } else {
                             router.push('/')
                         }

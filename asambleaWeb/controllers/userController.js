@@ -183,19 +183,18 @@ const getUserById = (req, res) => {
   });
 };
 
-const getUserByRut = (rut) => {
-  console.log('checking rut')
-  user.findOne({ rut }, (error, person) => {
-    if (error) {
-      return false;
+const getUserByRut = (req, res) => {
+  const { rut } = req.params;
+
+  user.find({ rut }, (err, person) => {
+    if (err) {
+      return res.status(400).send({ message: 'Error al buscar rut' });
     }
     if (!person) {
-      return false;
+      return res.status(404).send({ message: 'Usuario no encontrado' });
     }
-    console.log(rut)
-    console.log(person.rut)
-    return true;
-  });
+    return res.status(201).send(person);
+  })
 };
 
 const getUsersEmail = (req, res) => {
@@ -245,6 +244,7 @@ module.exports = {
   updateUser,
   deleteUser,
   getUserById,
+  getUserByRut,
   getUsersEmail,
   getUserEmailById,
 };

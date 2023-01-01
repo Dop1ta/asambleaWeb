@@ -20,6 +20,12 @@ const foroSchema = new schema({
     minLength: 1,
     maxLength: 100,
   },
+  activityid: {
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 100,
+  }
 });
 
 module.exports = mongoose.model("foro", foroSchema);
