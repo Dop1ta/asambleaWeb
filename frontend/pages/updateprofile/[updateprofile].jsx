@@ -4,6 +4,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
 import NavTab from '../../components/NavTab'
+import Head from 'next/head'
 
 export async function getServerSideProps(context) {
     try {
@@ -92,6 +93,9 @@ const updateprofile = (data) => {
 
     return (
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
+            <Head>
+                <title>Actualizar perfil</title>
+            </Head>
             <NavTab/>
             <Container maxW="container.md" centerContent>
                 <Heading textAlign={"center"} my={4}>Actualizar Perfil</Heading>

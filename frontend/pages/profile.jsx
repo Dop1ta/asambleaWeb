@@ -5,6 +5,7 @@ import NavTab from '../components/NavTab'
 import { useRouter } from 'next/router'
 import { EditIcon } from '@chakra-ui/icons'
 import Cookies from 'js-cookie'
+import Head from 'next/head'
 
 const profile = () => {
 
@@ -66,6 +67,9 @@ const profile = () => {
 
     return (
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
+            <Head>
+                <title>Perfil</title>
+            </Head>
             <NavTab/>
             <Container maxW="container.md" my={4}>
                 <Heading textAlign={"center"} my={4}>Perfil</Heading>

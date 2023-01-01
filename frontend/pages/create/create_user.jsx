@@ -6,6 +6,7 @@ import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
 import NavTabAdmin from '../../components/NavTabAdmin'
 import Cookies from 'js-cookie'
+import Head from 'next/head'
 
 const create_user = () => {
 
@@ -16,7 +17,8 @@ const create_user = () => {
         email: '',
         number: '',
         address: '',
-        votos: ''
+        votos: '',
+        admin: '0'
     })
 
     const router = useRouter()
@@ -69,6 +71,9 @@ const create_user = () => {
 
     return (
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
+            <Head>
+                <title>Creación de usuario</title>
+            </Head>
             <NavTabAdmin/>
             <Container maxW="container.md" centerContent>
                 <Heading textAlign={"center"} my={4}>Agregar Usuario</Heading>

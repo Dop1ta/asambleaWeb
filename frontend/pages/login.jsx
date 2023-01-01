@@ -4,6 +4,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
+import Head from 'next/head'
 
 const login = () => {
 
@@ -28,7 +29,7 @@ const login = () => {
             if(response.status === 201) {
                 Swal.fire({
                     title: 'Inicio de sesion',
-                    text: 'Se ha iniciado sesion correctamente',
+                    text: 'Se ha iniciado sesión correctamente',
                     icon: 'success',
                     confirmButtonText: 'Ok'
                 }).then((result) => {
@@ -43,7 +44,7 @@ const login = () => {
             } else {
                 Swal.fire({
                     title: 'Error',
-                    text: 'Error al iniciar sesion',
+                    text: 'Error al iniciar sesión',
                     icon: 'error',
                     confirmButtonText: 'Ok'
                 })
@@ -52,7 +53,7 @@ const login = () => {
             Cookies.set('logged', 'false')
             Swal.fire({
                 title: 'Error',
-                text: 'Error al iniciar sesion',
+                text: 'Error al iniciar sesión',
                 icon: 'error',
                 confirmButtonText: 'Ok'
             })
@@ -68,15 +69,18 @@ const login = () => {
 
     return (
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"} my={10}>
+            <Head>
+                <title>Inicio de sesión</title>
+            </Head>
             <Container maxW="container.md" centerContent>
-                <Heading textAlign={"center"} my={4}>Iniciar Sesion</Heading>
+                <Heading textAlign={"center"} my={4}>Iniciar Sesión</Heading>
                 <Stack my={4}>
                     <FormControl>
                         <FormLabel>RUT</FormLabel>
                         <Input placeholder='Ej: 9.999.999-k' maxLength={12} onChange={onChange} name={"rut"}/>
                     </FormControl>
                     <Stack>
-                        <Button colorScheme={'blue'} onClick={onSubmit}>Iniciar Sesion</Button>
+                        <Button colorScheme={'blue'} onClick={onSubmit}>Iniciar Sesión</Button>
                         <Button colorScheme={'red'} onClick={mainRouter}>Cancelar</Button>
                     </Stack>
                 </Stack>

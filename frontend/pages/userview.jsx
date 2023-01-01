@@ -6,6 +6,7 @@ import NavTabAdmin from '../components/NavTabAdmin'
 import { useRouter } from 'next/router'
 import { EditIcon } from '@chakra-ui/icons'
 import Swal from 'sweetalert2'
+import Head from 'next/head'
 
 const userview = () => {
 
@@ -115,6 +116,9 @@ const userview = () => {
 
     return (
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
+            <Head>
+                <title>Usuarios</title>
+            </Head>
             <NavTabAdmin/>
             <Container maxW="container.md" my={4}>
                 <Heading textAlign={"center"} my={4}>Administrar Usuarios</Heading>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Container, Heading, Input, Stack, Table, TableContainer, Tbody, Td, Text, Th, Thead, Tr } from '@chakra-ui/react'
 import axios from 'axios'
 import NavTab from '../components/NavTab'
+import Head from 'next/head'
 
 
 const user = () => {
@@ -33,6 +34,9 @@ const user = () => {
 
     return (
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
+            <Head>
+                <title>Lista de usuarios</title>
+            </Head>
             <NavTab/>
             <Container maxW="container.md">
                 <Heading textAlign={"center"} my={4}>Vecinos</Heading>

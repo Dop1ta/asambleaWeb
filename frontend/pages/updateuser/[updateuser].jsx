@@ -4,6 +4,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
 import NavTabAdmin from '../../components/NavTabAdmin'
+import Head from 'next/head'
 
 export async function getServerSideProps(context) {
     try {
@@ -32,7 +33,8 @@ const updateuser = (data) => {
         rol: data.data.rol,
         email: data.data.email,
         number: data.data.number,
-        address: data.data.address
+        address: data.data.address,
+        admin: '0'
     })
 
     const userRouter = () => {
@@ -92,6 +94,9 @@ const updateuser = (data) => {
 
     return (
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
+            <Head>
+                <title>Actualizar usuario</title>
+            </Head>
             <NavTabAdmin/>
             <Container maxW="container.md" centerContent>
                 <Heading textAlign={"center"} my={4}>Actualizar Usuario</Heading>

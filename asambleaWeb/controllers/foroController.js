@@ -3,7 +3,7 @@ const user = require("../models/users");
 
 const createForo = (req, res) => {
     const { comment } = req.body;
-    const { id } = req.params;
+    const { id, aid } = req.params;
 
     user.findById(id, (error, person) => {
         if(error) {
@@ -16,6 +16,7 @@ const createForo = (req, res) => {
             username: person.name,
             comment,
             userid: id,
+            activityid: aid
         });
         newForo.save((error, foro) => {
             if(error) {
