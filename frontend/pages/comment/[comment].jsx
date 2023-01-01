@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Box, Card, CardBody, CardHeader, Container, Heading, Stack, Text, StackDivider, SimpleGrid, CardFooter, Button } from '@chakra-ui/react'
+import { Box, Card, CardBody, CardHeader, Container, Heading, Stack, Text, StackDivider, SimpleGrid, CardFooter, Button, Textarea } from '@chakra-ui/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 
@@ -27,15 +27,34 @@ const comment = () => {
 
     const router = useRouter()
 
-    return (
-        <Card>
-            <CardHeader>
-                <Heading>{foro.name}</Heading>
-            </CardHeader>
-            <CardBody>
+    const addComment = () => {
+        
+    }
 
-            </CardBody>
-        </Card>
+    const showComments = () => {
+        return comment.map(comments => {
+            return (
+                <Card>
+                    <CardBody>
+                        <Heading>{comments.username}</Heading>
+                        <Text>{comments.comment}</Text>
+                    </CardBody>
+                </Card>
+            )
+        })
+    }
+
+    return (
+        <Stack my={4}>
+            <Textarea placeholder='Agregar un comentario'/>
+            <Stack direction={'row'}>
+                <Button onClick={addComment}>Comentar</Button>
+                <Button onClick={() => router.reload()}>Cancelar</Button>
+            </Stack>
+            <SimpleGrid>
+                {showComments()}
+            </SimpleGrid>
+        </Stack>
     )
 }
 

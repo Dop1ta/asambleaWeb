@@ -33,7 +33,7 @@ const userview = () => {
                 if(response.status === 201) {
                     Swal.fire({
                         title: 'Usuario Eliminado',
-                        text: 'El usuario se a liminado correctamente',
+                        text: 'El usuario se ha eliminado correctamente',
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
@@ -44,7 +44,7 @@ const userview = () => {
                 } else {
                     Swal.fire({
                         title: 'Usuario Eliminado',
-                        text: 'El usuario se a liminado correctamente',
+                        text: 'El usuario se ha eliminado correctamente',
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
@@ -122,7 +122,7 @@ const userview = () => {
                     <Button leftIcon={<AddIcon/>} onClick={createRouter}>Crear Usuario</Button>
                 </Stack>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(250px, 1fr))'>
-                {showUsers()}
+                    {showUsers()}
                 </SimpleGrid>
             </Container>
         </Stack>

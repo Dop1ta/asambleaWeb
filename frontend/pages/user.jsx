@@ -15,11 +15,15 @@ const user = () => {
 
     const showUsers = () => {
         return users.map(user => {
-            return (
-                <Tr key={user._id}>
-                    <Td>{user.name}</Td>
-                </Tr>
-            )
+            if(user.rut === '0.000.000-0') {
+                return null
+            } else {
+                return (
+                    <Tr key={user._id}>
+                        <Td>{user.name}</Td>
+                    </Tr>
+                )
+            }
         })
     }
 
