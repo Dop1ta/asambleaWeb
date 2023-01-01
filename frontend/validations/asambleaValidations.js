@@ -1,8 +1,6 @@
 import * as yup from 'yup';
 
 const asambleaValidations = yup.object({
-
-
   name: yup.string()
     .required('El nombre es requerido')
     .matches(/^[aA-zZ\s]+$/, 'El nombre solo puede contener letras, números y espacios'),
@@ -16,9 +14,3 @@ const asambleaValidations = yup.object({
 
 
 export default asambleaValidations;
-
-// name: '',
-//   time: '',
-//     hour: '',
-//       place: '',
-//         description: '',
