@@ -6,6 +6,7 @@ import NavTabAdmin from '../components/NavTabAdmin'
 import { useRouter } from 'next/router'
 import { EditIcon } from '@chakra-ui/icons'
 import Swal from 'sweetalert2'
+import Head from 'next/head'
 
 const userview = () => {
 
@@ -33,7 +34,7 @@ const userview = () => {
                 if(response.status === 201) {
                     Swal.fire({
                         title: 'Usuario Eliminado',
-                        text: 'El usuario se a liminado correctamente',
+                        text: 'El usuario se ha eliminado correctamente',
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
@@ -44,7 +45,7 @@ const userview = () => {
                 } else {
                     Swal.fire({
                         title: 'Usuario Eliminado',
-                        text: 'El usuario se a liminado correctamente',
+                        text: 'El usuario se ha eliminado correctamente',
                         icon: 'success',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
@@ -115,6 +116,9 @@ const userview = () => {
 
     return (
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
+            <Head>
+                <title>Usuarios</title>
+            </Head>
             <NavTabAdmin/>
             <Container maxW="container.md" my={4}>
                 <Heading textAlign={"center"} my={4}>Administrar Usuarios</Heading>
@@ -122,7 +126,7 @@ const userview = () => {
                     <Button leftIcon={<AddIcon/>} onClick={createRouter}>Crear Usuario</Button>
                 </Stack>
                 <SimpleGrid spacing={4} templateColumns='repeat(auto-fill, minmax(250px, 1fr))'>
-                {showUsers()}
+                    {showUsers()}
                 </SimpleGrid>
             </Container>
         </Stack>

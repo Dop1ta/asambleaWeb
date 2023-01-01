@@ -1,7 +1,7 @@
 const user = require("../models/users");
 
 const createUser = (req, res) => {
-  const { name, rut, rol, email, number, address, votos } = req.body;
+  const { name, rut, rol, email, number, address, votos, admin } = req.body;
   const { id } = req.params;
 
   user.findOne({ rut: rut }, (error, person) => {
@@ -32,6 +32,7 @@ const createUser = (req, res) => {
             number,
             address,
             votos: 0,
+            admin: 0,
           });
           newUser.save((error, Newperson) => {
             if (error) {
@@ -94,7 +95,9 @@ const getUsers = (req, res) => {
 };
 
 const getUsersAll = (req, res) => {
-  user.find({}, (error, person) => {
+  const admin = '0'
+
+  user.find({ admin }, (error, person) => {
     if (error) {
       return res.status(400).send({ message: "Error al buscar el usuario." });
     }
@@ -183,19 +186,18 @@ const getUserById = (req, res) => {
   });
 };
 
-const getUserByRut = (rut) => {
-  console.log('checking rut')
-  user.findOne({ rut }, (error, person) => {
-    if (error) {
-      return false;
+const getUserByRut = (req, res) => {
+  const { rut } = req.params;
+
+  user.find({ rut }, (err, person) => {
+    if (err) {
+      return res.status(400).send({ message: 'Error al buscar rut' });
     }
     if (!person) {
-      return false;
+      return res.status(404).send({ message: 'Usuario no encontrado' });
     }
-    console.log(rut)
-    console.log(person.rut)
-    return true;
-  });
+    return res.status(201).send(person);
+  })
 };
 
 const getUsersEmail = (req, res) => {
@@ -245,6 +247,7 @@ module.exports = {
   updateUser,
   deleteUser,
   getUserById,
+  getUserByRut,
   getUsersEmail,
   getUserEmailById,
 };

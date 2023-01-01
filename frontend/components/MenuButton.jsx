@@ -28,6 +28,14 @@ function MenuButtonIcon() {
     }
   }
 
+  const profileRouter = () => {
+    if(Cookies.get('logged') === 'true') {
+      router.push('/profile')
+    } else {
+      router.push('/login')
+    }
+  }
+
   const checkLogin = () => {
     if(Cookies.get('logged') === 'true') {
       setName('Cerrar Sesion')
@@ -38,7 +46,7 @@ function MenuButtonIcon() {
 
   useEffect(() => {
     checkLogin()
-}, [])
+  }, [])
 
   return (
     <Menu>
@@ -46,6 +54,7 @@ function MenuButtonIcon() {
         <HamburgerIcon/>
       </MenuButton>
       <MenuList>
+        <MenuItem onClick={profileRouter}>Perfil</MenuItem>
         <MenuItem onClick={loginRouter}>{name}</MenuItem>
       </MenuList>
     </Menu>
