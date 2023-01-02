@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 import Swal from 'sweetalert2'
+import { TrashIcon } from 'chakra-ui-ionicons'
 
 const comment = (cid) => {
 
@@ -12,33 +13,32 @@ const comment = (cid) => {
     const getUser = async () => {
         const response = await axios.get(`${process.env.API_URL}/getUsers/rut/${Cookies.get('rut')}`)
         setUser(response.data)
-
     }
 
-    const [ comment, setComment ] = useState({
+    const [comment, setComment] = useState({
         username: user.name,
         comment: '',
         userid: user._id,
-        activityid: cid,
+        activityid: cid.cid,
     })
 
-    const [ comments, setComments ] = useState([])
+    const [comments, setComments] = useState([])
 
     const router = useRouter()
 
     const addComment = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post(`${process.env.API_URL}/createForo/${user._id}/${cid}`, comment)
+            const response = await axios.post(`${process.env.API_URL}/createForo/${user._id}/${cid.cid}`, comment)
             console.log(response)
-            if(response.status === 201) {
+            if (response.status === 201) {
                 Swal.fire({
                     title: 'Comentario',
                     text: 'Se ha comentado correctamente',
                     icon: 'success',
                     confirmButtonText: 'Continuar'
                 }).then((result) => {
-                    if(result.isConfirmed) {
+                    if (result.isConfirmed) {
                         router.reload()
                     }
                 })
@@ -62,7 +62,7 @@ const comment = (cid) => {
     }
 
     const getComments = async () => {
-        const response = await axios.get(`${process.env.API_URL}/getForo/${cid}`)
+        const response = await axios.get(`${process.env.API_URL}/getForo/${cid.cid}`)
         setComments(response.data)
     }
 
@@ -75,28 +75,19 @@ const comment = (cid) => {
             showCancelButton: true,
             cancelButtonText: 'Cancelar'
         }).then((result) => {
-            if(result.isConfirmed) {
+            if (result.isConfirmed) {
                 const response = axios.delete(`${process.env.API_URL}/getForo/deleteUser/${user._id}/${id}`)
                 console.log(response.status)
-                if(response.status === 201) {
-                    Swal.fire({
-                        title: 'Comentario Eliminado',
-                        text: 'El comentario se ha eliminado correctamente',
-                        icon: 'success',
-                        confirmButtonText: 'Ok'
-                    }).then((result) => {
-                        if(result.isConfirmed) {
-                            router.reload()
-                        }
-                    })
-                } else {
-                    Swal.fire({
-                        title: 'Error',
-                        text: 'No se ha podido eliminar el comentario',
-                        icon: 'error',
-                        confirmButtonText: 'Ok'
-                    })
-                }
+                Swal.fire({
+                    title: 'Comentario Eliminado',
+                    text: 'El comentario se ha eliminado correctamente',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        router.reload()
+                    }
+                })
             }
         }).catch(e => {
             console.log(e)
@@ -104,20 +95,20 @@ const comment = (cid) => {
     }
 
     const showDelete = (idc, id) => {
-        if(user._id !== idc) {
+        if (user._id !== idc) {
             return null
         } else {
-            <Button colorScheme={'red'} leftIcon={<TrashIcon/>} onClick={() => deleteComment(id)}>Eliminar</Button>
+            return <Button colorScheme={'red'} onClick={() => deleteComment(id)}>Eliminar</Button>
         }
     }
 
     const showComments = () => {
         return comments.map(comments => {
-            if(Cookies.get('logged') === 'false') {
+            if (Cookies.get('logged') === 'false') {
                 return null
             } else {
                 return (
-                    <Card>
+                    <Card key={comments._id} alignItems={'center'}>
                         <CardBody>
                             <Heading>{comments.username}</Heading>
                             <Text>{comments.comment}</Text>
@@ -139,7 +130,7 @@ const comment = (cid) => {
     }
 
     useEffect(() => {
-        if(Cookies.get('logged') === 'true') {
+        if (Cookies.get('logged') === 'true') {
             getComments()
             getUser()
         }
@@ -147,7 +138,7 @@ const comment = (cid) => {
 
     return (
         <Stack my={4}>
-            <Textarea placeholder='Agregar un comentario' name='comment' onChange={onChange}/>
+            <Textarea placeholder='Agregar un comentario' name='comment' onChange={onChange} />
             <Stack direction={'row'}>
                 <Button onClick={addComment}>Comentar</Button>
                 <Button onClick={() => router.reload()}>Cancelar</Button>
