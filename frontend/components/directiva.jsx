@@ -7,8 +7,12 @@ const directiva = () => {
     const [users, setUsers] = useState([])
 
     const getUsers = async () => {
-        const response = await axios.get(`${process.env.API_URL}/getUsersAll`)
-        setUsers(response.data)
+        try {
+            const response = await axios.get(`${process.env.API_URL}/getUsersAll`)
+            setUsers(response.data)
+        } catch (err) {
+            console.log('ta malo')
+        }
     }
 
     const showUsers = () => {

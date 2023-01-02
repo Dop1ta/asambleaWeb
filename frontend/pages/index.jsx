@@ -1,6 +1,7 @@
 import NavTab from '../components/NavTab'
 import { Stack } from '@chakra-ui/react'
 import Head from 'next/head'
+import directiva from '../components/directiva'
 
 // export async function getServerSideProps() {
 //   try {
@@ -26,8 +27,11 @@ export default function Home(data) {
       <Head>
         <title>Inicio</title>
       </Head>
-      <NavTab></NavTab>
+      <NavTab/>
+      <Stack direction={'row'} my={4}>
 
+        {directiva()}
+      </Stack>
     </Stack>
   )
 }
