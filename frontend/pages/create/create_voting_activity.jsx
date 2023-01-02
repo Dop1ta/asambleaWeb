@@ -71,8 +71,15 @@ const create_voting_activity = () => {
             <Heading textAlign={"center"} my={10}>Crear Votación</Heading>
             <Stack>
                 <FormControl isRequired>
-                    <FormLabel textAlign={'center'}>Cargo:</FormLabel>
-                    <Input placeholder='Ejemplo: Presidente' type={"text"} onChange={onChange} name={"name"} />
+                    <FormLabel>Cargo:</FormLabel>
+                    <RadioGroup>
+                            <Stack direction='row'>
+                                <Radio value='Presidente' name={"name"} onChange={onChange}>Presidente</Radio>
+                                <Radio value='Vicepresidente' name={"name"} onChange={onChange}>Vicepresidente</Radio>
+                                <Radio value='Secretario' name={"name"} onChange={onChange}>Secretario/a</Radio>
+                                <Radio value='Tesorero' name={"name"} onChange={onChange}>Tesorero/a</Radio>
+                            </Stack>
+                        </RadioGroup>
                 </FormControl>
                 <FormControl isRequired>
                     <FormLabel>Fecha de Inicio</FormLabel>

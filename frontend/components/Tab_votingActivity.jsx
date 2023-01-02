@@ -29,19 +29,19 @@ const Tab_votingActivity = () => {
       <Center>
         <Breadcrumb separator='-'>
           <BreadcrumbItem>
-            <BreadcrumbLink href='http://localhost:3000/viewAdmin'>Inicio</BreadcrumbLink>
+            <BreadcrumbLink href='/viewAdmin'>Inicio</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href='http://localhost:3000/voting_activity'>Votaciones en Curso</BreadcrumbLink>
+            <BreadcrumbLink href='/voting_activity'>Votaciones en Curso</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem >
-            <BreadcrumbLink href='http://localhost:3000/create/create_voting_activity'>Crear Votación</BreadcrumbLink>
+            <BreadcrumbLink href='/create/create_voting_activity'>Crear Votación</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href='http://localhost:3000/view_voting'>Resultados de Votación</BreadcrumbLink>
+            <BreadcrumbLink href='view_voting'>Resultados de Votación</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem isCurrentPage>

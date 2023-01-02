@@ -29,14 +29,14 @@ import {
         <Center>
           <Breadcrumb separator='-'>
             <BreadcrumbItem>
-              <BreadcrumbLink href='http://localhost:3000/'>Inicio</BreadcrumbLink>
+              <BreadcrumbLink href='/userview'>Inicio</BreadcrumbLink>
             </BreadcrumbItem>
   
             <BreadcrumbItem>
-              <BreadcrumbLink href='http://localhost:3000/voting_activity_basic'>Votaciones en Curso</BreadcrumbLink>
+              <BreadcrumbLink href='voting_activity_basic'>Votaciones en Curso</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbItem>
-              <BreadcrumbLink href='http://localhost:3000/view_voting_basic'>Resultados de Votación</BreadcrumbLink>
+              <BreadcrumbLink href='view_voting_basic'>Resultados de Votación</BreadcrumbLink>
             </BreadcrumbItem>
   
             <BreadcrumbItem isCurrentPage>
