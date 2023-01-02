@@ -1,5 +1,5 @@
 const { application } = require("express");
-const { Acta } = require("../models/acta_meeting");
+const Acta = require("../models/acta_meeting");
 const fileUpload = require("../models/file");
 
 const uploadfile = (req, res) => {
@@ -17,7 +17,7 @@ const uploadfile = (req, res) => {
         url: file.path,
         name: file.originalname,
         mimeType: file.mimetype,
-        idacta: id
+        idacta: actaf._id
       });
       newFile.save((err, fileSaved) => {
         if (err) {
@@ -25,8 +25,8 @@ const uploadfile = (req, res) => {
         }
         return newFile;
       });
-      return res.status(201).send(aux);
     });
+    return res.status(201).send(aux);
   })
 }
 
@@ -40,8 +40,8 @@ const getFiles = (req, res) => {
 }
 
 const getFilesByActaId = (req, res) => {
-  const {idacta} = req.params
-  fileUpload.find({idacta}, (error, file) => {
+  const { idacta } = req.params
+  fileUpload.find({ idacta }, (error, file) => {
     if (error) {
       return res.status(400).send({ message: "Error al obtener los archivos" });
     }
