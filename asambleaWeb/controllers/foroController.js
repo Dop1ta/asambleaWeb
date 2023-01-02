@@ -28,9 +28,9 @@ const createForo = (req, res) => {
 };
 
 const getForo = (req, res) => {
-    const { id } = req.params;
+    const { activityid } = req.params;
 
-    foro.find({ id }, (error, foro) => {
+    foro.find({ activityid }, (error, foro) => {
         if(error) {
             return res.status(400).send({ message: "Error al buscar foro." });
         }

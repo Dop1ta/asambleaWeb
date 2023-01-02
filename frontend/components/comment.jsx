@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
-import { Card, CardBody, Heading, Stack, Text, SimpleGrid, Button, Textarea } from '@chakra-ui/react'
+import { Card, CardBody, Heading, Stack, Text, SimpleGrid, Button, Textarea, CardFooter } from '@chakra-ui/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
+import Swal from 'sweetalert2'
 
 const comment = (cid) => {
 
@@ -11,6 +12,7 @@ const comment = (cid) => {
     const getUser = async () => {
         const response = await axios.get(`${process.env.API_URL}/getUsers/rut/${Cookies.get('rut')}`)
         setUser(response.data)
+
     }
 
     const [ comment, setComment ] = useState({
@@ -27,7 +29,7 @@ const comment = (cid) => {
     const addComment = async (e) => {
         e.preventDefault()
         try {
-            const response = await axios.post(`${process.env.API_URL}/createForo/${user._id}/${cid}`)
+            const response = await axios.post(`${process.env.API_URL}/createForo/${user._id}/${cid}`, comment)
             console.log(response)
             if(response.status === 201) {
                 Swal.fire({
@@ -134,12 +136,13 @@ const comment = (cid) => {
             ...comment,
             [e.target.name]: e.target.value
         })
-        console.log(comment.comment)
     }
 
     useEffect(() => {
-        getComments()
-        getUser()
+        if(Cookies.get('logged') === 'true') {
+            getComments()
+            getUser()
+        }
     }, [])
 
     return (
