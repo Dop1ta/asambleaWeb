@@ -1,43 +1,42 @@
-import { useState,  } from 'react';
+import { useState, } from 'react';
 import axios from 'axios';
+import { Input } from '@chakra-ui/react';
 
 const file_upload = () => {
 
-    let [up, setUpload] = useState({
-        url: '',
-        name: '',
-        mimeType: ''
-    })
+    let files = null;
 
-    const upload = async () => {
-        try{
-            const response = await axios.post(`${process.env.API_URL}/uploadfile`)
-            setUpload(response.data)
-        }catch (error){
+    const upload = async (e) => {
+        e.preventDefault()
+        try {
+            const formData = new FormData();
+            formData.append("archivos", files)
+            axios.post(`${process.env.API_URL}/file/:archivo`, formData).then(response => {
+                console.log(response.data);
+            });
+        } catch (error) {
         }
     }
 
-    const onChange = async () => {
-        setUpload({
-            ...up,
-            [e.target.url]: e.target.value
-        })
+    const handleFileChange = (event) => {
+        files = event.target.files[0];
+
     }
 
-        return (
-            <div className="container">
-                <div className="row">
-                    <form onSubmit={upload}>
-                        <div className="form-group">
-                            <input type="file" onChange={onChange} />
-                        </div>
-                        <div className="form-group">
-                            <button className="btn btn-primary" type="submit">Subir Archivo</button>
-                        </div>
-                    </form>
-                </div>
+    return (
+        <div className="container">
+            <div className="row">
+                <form onSubmit={upload}>
+                    <div className="form-group">
+                        <Input type="file" onChange={handleFileChange} name={'files'} />
+                    </div>
+                    <div className="form-group">
+                        <button className="btn btn-primary" type="submit">Subir Archivo</button>
+                    </div>
+                </form>
             </div>
-        )
+        </div>
+    )
 }
 
 export default file_upload

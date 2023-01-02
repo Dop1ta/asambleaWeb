@@ -4,7 +4,7 @@ import axios from 'axios'
 import NavTab from '../../components/NavTab'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
-import files_upload from '../../components/files_upload'
+import Files_upload from '../../components/files_upload'
 
 const create_Acta = () => {
 
@@ -26,14 +26,14 @@ const create_Acta = () => {
         try {
             const response = await axios.post(`${process.env.API_URL}/createActa/639a48dffe299c865e0ea1f9`, values)
             console.log(response)
-            if(response.status === 201) {
+            if (response.status === 201) {
                 Swal.fire({
                     title: 'Acta Creada',
                     text: 'Acta creada correctamente',
                     icon: 'success',
                     confirmButtontext: 'ok'
                 })
-            }else{
+            } else {
                 Swal.fire({
                     title: 'Error',
                     text: 'Error al ingresar parametros',
@@ -41,7 +41,7 @@ const create_Acta = () => {
                     confirmButtontext: 'ok'
                 })
             }
-        }catch (err) {
+        } catch (err) {
             Swal.fire({
                 title: 'Error',
                 text: 'La acta no se ha podido crear',
@@ -58,9 +58,9 @@ const create_Acta = () => {
         })
     }
 
-    return(
+    return (
         <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
-            <NavTab/>
+            <NavTab />
             <Container maxW="container.md" centerContent>
                 <Heading textAlign={"center"} my={4}>Creacion de Acta</Heading>
                 <Stack my={4}>
@@ -76,7 +76,7 @@ const create_Acta = () => {
                         <FormLabel>Fecha</FormLabel>
                         <Input placeholder="Seleccione fecha" size="md" type="Date" onChange={onChange} name={"date"} />
                     </FormControl>
-                    <files_upload />
+                    <Files_upload />
                     <Stack>
                         <ButtonGroup variant='outline' spacing='6'>
                             <Button colorScheme={'blue'} onClick={onSubmit}>Crear</Button>
