@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Stack, Title, Card, Text, CardHeader, Heading, CardBody, Box, Container } from '@chakra-ui/react'
 import Comment from './comment'
+import Cookies from 'js-cookie'
 
 const showA = () => {
 
@@ -40,7 +41,7 @@ const showA = () => {
             <Text>{objetFinal.description}</Text>
           </CardHeader>
           <Box>
-            <Comment cid={objetFinal._id} />
+            {Cookies.get('logged') === 'true' ? <Comment cid={objetFinal._id} /> : null}
           </Box>
         </Card >
       )

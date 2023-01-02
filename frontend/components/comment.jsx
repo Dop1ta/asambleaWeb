@@ -137,10 +137,10 @@ const comment = (cid) => {
     }, [])
 
     return (
-        <Container my={4}>
+        <Container my={4} centerContent>
             <Textarea placeholder='Agregar un comentario' name='comment' onChange={onChange} />
-            <Stack direction={'row'}>
-                <Button onClick={addComment}>Comentar</Button>
+            <Stack direction={'row'} my={4}>
+                <Button colorScheme={'blue'} onClick={addComment}>Comentar</Button>
                 <Button onClick={() => router.reload()}>Cancelar</Button>
             </Stack>
             <SimpleGrid>
