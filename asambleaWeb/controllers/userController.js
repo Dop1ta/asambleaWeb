@@ -188,8 +188,8 @@ const getUserById = (req, res) => {
 
 const getUserByRut = (req, res) => {
   const { rut } = req.params;
-
-  user.find({ rut }, (err, person) => {
+  console.log(rut)
+  user.findOne({ rut: rut }, (err, person) => {
     if (err) {
       return res.status(400).send({ message: 'Error al buscar rut' });
     }
@@ -239,9 +239,9 @@ const getUserEmailById = (req, res) => {
 };
 
 const updateUserVote = (req, res) => {
-  const {userid } = req.params;
-  const {rut} = req.body;
-  user.findOne({rut: rut}, (error, person) => {
+  const { userid } = req.params;
+  const { rut } = req.body;
+  user.findOne({ rut: rut }, (error, person) => {
     if (error) {
       return res.status(400).send({ message: "Error al buscar el usuario." });
     }
