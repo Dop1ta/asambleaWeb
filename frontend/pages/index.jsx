@@ -32,11 +32,6 @@ export default function Home() {
           {showA()}
         </VStack>
       </GridItem>
-      <GridItem pl='2' margin={4} bg='blue.100' area={'footer'}>
-        <Box as="footer" margin={4} p={4} bg="gray.700" color="white">
-          CONTACTO: 0000000 | EMAIL: JEFATURA@GMAIL.COM | DIRECCIÓN: CALLE 0000 N° 0000 | HORARIO DE ATENCIÓN: LUNES A VIERNES DE 8:00 A 12:00 Y DE 14:00 A 18:00
-        </Box>
-      </GridItem>
     </Stack>
   )
 }
