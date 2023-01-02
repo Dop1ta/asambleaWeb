@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Stack, Text, Card, CardHeader, Heading, CardBody, SimpleGrid} from '@chakra-ui/react'
+import { Stack, Text, Card, CardHeader, Heading, CardBody, SimpleGrid } from '@chakra-ui/react'
 import axios from 'axios'
 import NavTab from '../components/NavTab'
 import ArrowDownIcon from '@chakra-ui/icons'
@@ -30,10 +30,10 @@ const Acta = () => {
                     </CardBody>
                 </Card>
             )
-        }else{
+        } else {
             return Actas.map(Actap => {
-                return dow.map(dowa =>{
-                    return(
+                return dow.map(dowa => {
+                    return (
                         <Card key={Actap._id} boxShadow='lg' ml={30} my={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
                             <CardHeader>
                                 <Heading size='md'>{Actap.name}</Heading>
@@ -57,7 +57,7 @@ const Acta = () => {
 
     return (
         <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
-            <NavTab/>
+            <NavTab />
             <SimpleGrid>
                 {showActas()}
             </SimpleGrid>

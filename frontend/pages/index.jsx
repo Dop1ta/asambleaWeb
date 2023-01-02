@@ -1,37 +1,39 @@
 import NavTab from '../components/NavTab'
-import { Stack } from '@chakra-ui/react'
+import { Stack, Grid, GridItem, Box } from '@chakra-ui/react'
 import Head from 'next/head'
 import directiva from '../components/directiva'
+import showA from '../components/showA'
 
-// export async function getServerSideProps() {
-//   try {
-//     const res = await axios.get(`${process.env.API_URL}/getMeetings/recently/`)
-//     return {
-//       props: {
-//         data: res.data
-//       }
-//     }
-//   } catch (error) {
-//     return {
-//       redirect: {
-//         destination: '/asambleas',
-//         permanent: false
-//       }
-//     }
-//   }
-// }
-
-export default function Home(data) {
+export default function Home() {
   return (
-    <Stack>
+    <Stack bg={'rgb(244, 247, 254)'}>
       <Head>
         <title>Inicio</title>
       </Head>
-      <NavTab/>
-      <Stack direction={'row'} my={4}>
-
-        {directiva()}
-      </Stack>
+      <NavTab />
+      <Grid
+        templateAreas={`
+                  "nav main"
+                  "nav footer"`}
+        gridTemplateRows={'350px 1fr 30px'}
+        gridTemplateColumns={'300px 1fr'}
+        h='200px'
+        gap='1'
+        color='blackAlpha.700'
+        fontWeight='bold'
+      >
+        <GridItem pl='2' area={'nav'} margin={4} >
+          {directiva()}
+        </GridItem>
+        <GridItem pl='2' boxShadow={'xl'} bg={'white'} margin={4} area={'main'}>
+          {showA()}
+        </GridItem>
+        <GridItem pl='2' margin={4} bg='blue.300' area={'footer'}>
+          <Box as="footer" margin={4} p={4} bg="gray.700" color="white">
+            CONTACTO: 0000000 | EMAIL: JEFATURA@GMAIL.COM | DIRECCIÓN: CALLE 0000 N° 0000 | HORARIO DE ATENCIÓN: LUNES A VIERNES DE 8:00 A 12:00 Y DE 14:00 A 18:00
+          </Box>
+        </GridItem>
+      </Grid>
     </Stack>
   )
 }

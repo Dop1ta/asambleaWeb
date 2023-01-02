@@ -158,26 +158,10 @@ const getMeetingById = (req, res) => {
   });
 };
 
-const getRecently = (req, res) => {
-  programMeeting.find({}, (error, meetings) => {
-    if (error) {
-      return res.status(400).send({ message: "Error encontrando reuniones." });
-    }
-    if (meetings.length === 0) {
-      return res.status(404).send({ message: "Reunión no encontrada." });
-    }
-    const recently = meetings.filter(
-      (meeting) => Date.parse(meeting.time) > Date.now()
-    );
-    return res.status(200).send(recently);
-  });
-}
-
 module.exports = {
   createMeeting,
   getMeetings,
   deleteMeeting,
   updateMeeting,
   getMeetingById,
-  getRecently
 };

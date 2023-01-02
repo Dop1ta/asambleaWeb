@@ -1,15 +1,16 @@
 const { application } = require("express");
-const { Acta } = require("../../frontend/pages/Acta");
+const { Acta } = require("../models/acta_meeting");
 const fileUpload = require("../models/file");
+
 const uploadfile = (req, res) => {
   const { files } = req
   const { id } = req.params
-  Acta.findById(id , (err, actaf) => {
+  Acta.findById(id, (err, actaf) => {
     if (err) {
-      return res.status(400).send({ message: "Error al subir archivo"});
+      return res.status(400).send({ message: "Error al subir archivo" });
     }
     if (!actaf) {
-      return res.status(400).send({ message: "No hay actas para subir archivo"});
+      return res.status(400).send({ message: "No hay actas para subir archivo" });
     }
     let aux = files.map((file) => {
       const newFile = new fileUpload({
@@ -53,15 +54,15 @@ const getSFiles = (req, res) => {
 
 const deleteFiles = async (req, res) => {
   const { idacta } = req.params
-    fileUpload.findByIdAndDelete(idacta, (error, meeting) => {
-      if (error) {
-        return res.status(400).send({ message: "Error." })
-      }
-      if (!file) {
-        return res.status(404).send({ message: "Archvio no encontrado." })
-      }
-      return res.status(200).send(file)
-    });
+  fileUpload.findByIdAndDelete(idacta, (error, meeting) => {
+    if (error) {
+      return res.status(400).send({ message: "Error." })
+    }
+    if (!file) {
+      return res.status(404).send({ message: "Archvio no encontrado." })
+    }
+    return res.status(200).send(file)
+  });
 }
 
 module.exports = {

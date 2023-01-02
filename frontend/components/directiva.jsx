@@ -17,7 +17,7 @@ const directiva = () => {
 
     const showUsers = () => {
         return users.map(user => {
-            if(user.rol === 'Vecino') {
+            if (user.rol === 'Vecino') {
                 return null
             } else {
                 return (
@@ -35,9 +35,9 @@ const directiva = () => {
     }, [])
 
     return (
-        <Card>
+        <Card backgroundColor={'white'} marginLeft={4} boxShadow={'xl'}>
             <CardHeader>
-                <Heading size='md'>Directiva</Heading>
+                <Heading size='md'>Directiva Actual</Heading>
             </CardHeader>
 
             <CardBody>
