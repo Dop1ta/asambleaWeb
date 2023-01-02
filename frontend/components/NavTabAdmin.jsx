@@ -47,6 +47,10 @@ const NavTabAdmin = () => {
           </BreadcrumbItem>
 
           <BreadcrumbItem>
+            <BreadcrumbLink href='/options/ActaAdmin'>Actas</BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
             <BreadcrumbLink href='/voting_activity'>Actividad de votación</BreadcrumbLink>
           </BreadcrumbItem>
 
