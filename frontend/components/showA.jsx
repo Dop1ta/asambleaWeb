@@ -20,7 +20,7 @@ const showA = () => {
     console.log('=============================', asambleaget.length)
     if (asambleaget.length === 0) {
       return (
-        <Card boxShadow='lg' margin={30} alignItems='center' borderRadius={20} backgroundColor={"white"}>
+        <Card boxShadow='lg' margin={30} alignItems='center' width={'400px'} borderRadius={20} backgroundColor={"white"}>
           <CardHeader>
             <Heading size='md'>Sin Asambleas</Heading>
           </CardHeader>
@@ -30,18 +30,18 @@ const showA = () => {
         </Card>
       )
     } else {
-      return asambleaget.map(asambleas => {
-        return (
-          <Card key={asambleas._id} boxShadow='lg' margin={30} alignItems='center' borderRadius={10} backgroundColor={"white"}>
-            <CardHeader textAlign={'center'}>
-              <Heading size='md'>{asambleas.name}</Heading>
-              <Text>Dia: {asambleas.time}</Text>
-              <Text>Hora: {asambleas.hour}</Text>
-              <Text>{asambleas.description}</Text>
-            </CardHeader>
-          </Card >
-        )
-      }).reverse()
+
+      const objetFinal = asambleaget[asambleaget.length - 1]
+      return (
+        <Card boxShadow='lg' margin={30} alignItems='center' width={'400px'} borderRadius={10} backgroundColor={"white"}>
+          <CardHeader textAlign={'center'}>
+            <Heading size='md'>{objetFinal.name}</Heading>
+            <Text>Dia: {objetFinal.time}</Text>
+            <Text>Hora: {objetFinal.hour}</Text>
+            <Text>{objetFinal.description}</Text>
+          </CardHeader>
+        </Card >
+      )
     }
   }
 

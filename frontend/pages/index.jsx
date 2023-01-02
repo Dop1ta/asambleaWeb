@@ -1,5 +1,5 @@
 import NavTab from '../components/NavTab'
-import { Stack, Grid, GridItem, Box } from '@chakra-ui/react'
+import { Stack, Grid, GridItem, Box, VStack, Heading } from '@chakra-ui/react'
 import Head from 'next/head'
 import directiva from '../components/directiva'
 import showA from '../components/showA'
@@ -15,7 +15,7 @@ export default function Home() {
         templateAreas={`
                   "nav main"
                   "nav footer"`}
-        gridTemplateRows={'350px 1fr 30px'}
+        gridTemplateRows={'650px 1fr 30px'}
         gridTemplateColumns={'300px 1fr'}
         h='200px'
         gap='1'
@@ -26,7 +26,10 @@ export default function Home() {
           {directiva()}
         </GridItem>
         <GridItem pl='2' boxShadow={'xl'} bg={'white'} margin={4} area={'main'}>
-          {showA()}
+          <VStack>
+            <Heading>Asamblea recientemente agregadas</Heading>
+            {showA()}
+          </VStack>
         </GridItem>
         <GridItem pl='2' margin={4} bg='blue.300' area={'footer'}>
           <Box as="footer" margin={4} p={4} bg="gray.700" color="white">
