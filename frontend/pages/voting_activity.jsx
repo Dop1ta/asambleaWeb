@@ -2,7 +2,7 @@ import { Stack, Radio, RadioGroup, Button, Text, Box, SimpleGrid, Card, CardHead
 import { useState, useEffect } from 'react'
 import Tab_votingActivity from '../components/Tab_votingActivity';
 import axios from 'axios'
-
+import Cookies from 'js-cookie';
 
 
 const voting_activity = () => {
@@ -35,15 +35,15 @@ const voting_activity = () => {
     }
   }
 
-  let [values, setTargetVote] = useState({
+  let [values, setValues] = useState({
+    rut: Cookies.get('rut'),
     rut_v: '',
-    name_v: ''
+    name_v: votingAct._id,
   })
 
   const onSumbit = async (e) => {
     e.preventDefault()
     try {
-      console.log(values)
       const response = await axios.post(`${process.env.API_URL}/createTargetVote/${User._id}`, values)
       if (response.status === 201) {
         Swal.fire({
@@ -75,10 +75,11 @@ const voting_activity = () => {
   }
 
   const onChange = (e) => {
-    setTargetVote({
-      ...values,
+    setValues(prevValues => ({
+      ...prevValues,
       [e.target.name]: e.target.value,
-    })
+    }));
+    
   }
   const showVotingActs = () => {
     if (votingAct.length === 0) {
