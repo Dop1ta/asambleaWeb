@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Stack, SimpleGrid, Card, Button, Text, CardHeader, Heading, CardBody, CardFooter } from '@chakra-ui/react'
+import { Stack, SimpleGrid, Card, Button, Text, CardHeader, Heading } from '@chakra-ui/react'
 import NavTabAdmin from '../../components/NavTabAdmin'
 import axios from 'axios'
 import { TrashIcon } from 'chakra-ui-ionicons'
