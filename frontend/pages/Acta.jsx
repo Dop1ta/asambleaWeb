@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react'
-import { Stack, Text, Card, CardHeader, Heading, CardBody, SimpleGrid } from '@chakra-ui/react'
+import { Stack, Text, Card, CardHeader, Heading, CardBody, SimpleGrid, Button, ButtonGroup } from '@chakra-ui/react'
 import axios from 'axios'
 import NavTab from '../components/NavTab'
-import ArrowDownIcon from '@chakra-ui/icons'
 
 const Acta = () => {
 
     const [Actas, setActas] = useState([])
 
     const getActa = async () => {
-        const response = await axios.get(`${process.env.API_URL}/getActa/639a48dffe299c865e0ea1f9`)
+        const response = await axios.get(`${process.env.API_URL}/getActas`)
+        console.log(response.data)
         setActas(response.data)
     }
 
@@ -19,7 +19,7 @@ const Acta = () => {
     }, [])
 
     const showActas = () => {
-        if (Acta.length === 0) {
+        if (Actas.length === 0) {
             return (
                 <Card boxShadow='md' ml={30} my={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
                     <CardHeader>
@@ -32,17 +32,19 @@ const Acta = () => {
             )
         } else {
             return Actas.map(Actap => {
-                    return (
-                        <Card key={Actap._id} boxShadow='lg' ml={30} my={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
-                            <CardHeader>
-                                <Heading size='md'>{Actap.name}</Heading>
-                                <Text>{Actap.description}</Text>
-                                <Text>{Acta.date}</Text>
-                                <Button leftIcon={<ArrowDownIcon />} colorScheme='blue' variant='solid' margin={4} onClick={() => router.push(`${process.env.API_URL}/file/download/${Actap._id}`)} >Descargar</Button>
-                            </CardHeader>
-                        </Card>
-                    )
-                })
+                return (
+                    <Card key={Actap._id} boxShadow='lg' ml={30} my={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
+                        <CardHeader>
+                            <Heading size='md'>{Actap.name}</Heading>
+                            <Text>{Actap.description}</Text>
+                            <Text>{Actap.date}</Text>
+                            <ButtonGroup>
+                                <Button colorScheme='blue' variant='solid' margin={4} >Descargar</Button>
+                            </ButtonGroup>
+                        </CardHeader>
+                    </Card>
+                )
+            })
         }
     }
 
