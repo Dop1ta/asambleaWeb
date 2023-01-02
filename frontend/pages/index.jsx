@@ -6,7 +6,7 @@ import showA from '../components/showA'
 
 export default function Home() {
   return (
-    <Stack bg={'rgb(244, 247, 254)'}>
+    <Stack bg={'rgb(244, 247, 254)'} textAlign={'center'}>
       <Head>
         <title>Inicio</title>
       </Head>
