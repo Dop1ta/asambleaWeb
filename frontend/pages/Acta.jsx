@@ -39,7 +39,7 @@ const Acta = () => {
                                 <Heading size='md'>{Actap.name}</Heading>
                                 <Text>{Actap.description}</Text>
                                 <Text>{Acta.date}</Text>
-                                <Button leftIcon={<ArrowDownIcon />} colorScheme='blue' variant='solid' margin={4} onClick={() => download(dowa._idacta)} >Descargar</Button>
+                                <Button leftIcon={<ArrowDownIcon />} colorScheme='blue' variant='solid' margin={4} onClick={() =>router.push(`${process.env.API_URL}/file/download/${Actap._id}`)} >Descargar</Button>
                             </CardHeader>
                         </Card>
                     )
