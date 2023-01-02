@@ -55,10 +55,6 @@ const NavTabAdmin = () => {
           </BreadcrumbItem>
 
           <BreadcrumbItem isCurrentPage>
-            <BreadcrumbLink href='#'>Contact</BreadcrumbLink>
-          </BreadcrumbItem>
-
-          <BreadcrumbItem isCurrentPage>
             <Menu />
           </BreadcrumbItem>
         </Breadcrumb>

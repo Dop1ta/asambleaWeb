@@ -72,6 +72,7 @@ const AsambleaAdmin = () => {
     <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
       <Head>
         <title>Asambleas vista administrador</title>
+        <link rel="icon" href="/icon.png" />
       </Head>
       <NavTabAdmin />
       <Stack my={4} >

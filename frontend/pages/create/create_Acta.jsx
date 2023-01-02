@@ -4,7 +4,7 @@ import axios from 'axios'
 import NavTabAdmin from '../../components/NavTabAdmin'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
-import Files_upload from '../../components/files_upload'
+import Files_upload from '../files_upload/[files_upload]'
 
 const create_Acta = () => {
 

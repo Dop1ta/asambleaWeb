@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Stack, SimpleGrid, Card, Text, CardHeader, Heading, CardBody } from '@chakra-ui/react'
+import { Stack, SimpleGrid, Card, Text, CardHeader, Heading, CardBody, GridItem, Box } from '@chakra-ui/react'
 import NavTab from '../components/NavTab'
 import axios from 'axios'
 import Head from 'next/head'
@@ -36,9 +36,9 @@ const Asambleas = () => {
     } else {
       return asamblea.map(asambleas => {
         return (
-          <Card key={asambleas._id} boxShadow='lg' marginLeft={30} marginTop={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
+          <Card key={asambleas._id} boxShadow='lg' marginLeft={30} marginTop={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"} width={'350px'}>
             <CardHeader textAlign={'center'}>
-              <Heading size='md'>{asambleas.name}</Heading>
+              <Heading size='md' margin={4}>{asambleas.name}</Heading>
               <Text>Dia: {asambleas.time}</Text>
               <Text>Hora: {asambleas.hour}</Text>
               <Text>{asambleas.description}</Text>
@@ -50,15 +50,17 @@ const Asambleas = () => {
   }
 
   return (
-    <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
+    <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"} >
       <Head>
+        <link rel="icon" href="/icon.png" />
         <title>Asambleas</title>
       </Head>
       <NavTab />
-      <SimpleGrid columns={3}>
+      <SimpleGrid columns={2} >
         {showAsambleas()}
       </SimpleGrid>
-    </Stack>
+
+    </Stack >
   )
 }
 

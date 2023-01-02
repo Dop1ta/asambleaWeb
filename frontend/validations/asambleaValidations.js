@@ -8,7 +8,9 @@ const asambleaValidations = yup.object({
     .required('El lugar es requerido')
     .matches(/^[aA-zZ\s]+$/, 'El lugar solo puede contener letras, números y espacios'),
   description: yup.string()
-    .required('La descripción es requerida')
+    .required('La descripción es requerida'),
+  time: yup.date()
+    .required('La hora es requerida')
 });
 
 

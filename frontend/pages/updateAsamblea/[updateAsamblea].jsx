@@ -53,9 +53,6 @@ const Update = (data) => {
         values.hour = hour
       }
     }
-
-    console.log(values)
-
     try {
       const response = await axios.put(`${process.env.API_URL}/getMeetings/update/${Asamblea._id}/639a48dffe299c865e0ea1f9`, values)
       if (response.status === 200) {
@@ -100,6 +97,7 @@ const Update = (data) => {
     <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
       <Head>
         <title>Modificar Asamblea</title>
+        <link rel="icon" href="/icon.png" />
       </Head>
       <NavTabAdmin />
       <Card backgroundColor={'white'} borderRadius={10} boxShadow={'md'} >

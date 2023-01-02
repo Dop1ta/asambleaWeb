@@ -86,6 +86,7 @@ const ActaAdmin = () => {
     return (
         <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
             <Head>
+                <link rel="icon" href="/icon.png" />
                 <title>Acta vista administrador</title>
             </Head>
             <NavTabAdmin />
