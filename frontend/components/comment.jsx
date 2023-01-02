@@ -73,7 +73,7 @@ const comment = (cid) => {
                     </CardBody>
                 </Card>
             )
-        })
+        }).reverse()
     }
 
     const onChange = (e) => {

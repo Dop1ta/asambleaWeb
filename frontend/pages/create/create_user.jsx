@@ -106,7 +106,7 @@ const create_user = () => {
                         <FormLabel>Numero de telefono</FormLabel>
                         <InputGroup>
                             <InputLeftAddon children='+56'/>
-                            <Input placeholder='Ej: 912341234' maxLength={9} onChange={onChange} name={"number"}/>
+                            <Input placeholder='Ej: 912341234' type={'number'} maxLength={9} onChange={onChange} name={"number"}/>
                         </InputGroup>
                     </FormControl>
                     <FormControl>
