@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Card, CardBody, Heading, Stack, Text, SimpleGrid, Button, Textarea } from '@chakra-ui/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
+import Cookies from 'js-cookie'
 
 const comment = (cid) => {
 
@@ -63,16 +64,68 @@ const comment = (cid) => {
         setComments(response.data)
     }
 
+    const deleteComment = (id) => {
+        Swal.fire({
+            title: 'Eliminar comentario',
+            text: '¿Estas seguro?, esta acción no se puede deshacer',
+            icon: 'warning',
+            confirmButtonText: 'Eliminar',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if(result.isConfirmed) {
+                const response = axios.delete(`${process.env.API_URL}/getForo/deleteUser/${user._id}/${id}`)
+                console.log(response.status)
+                if(response.status === 201) {
+                    Swal.fire({
+                        title: 'Comentario Eliminado',
+                        text: 'El comentario se ha eliminado correctamente',
+                        icon: 'success',
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if(result.isConfirmed) {
+                            router.reload()
+                        }
+                    })
+                } else {
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'No se ha podido eliminar el comentario',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    })
+                }
+            }
+        }).catch(e => {
+            console.log(e)
+        })
+    }
+
+    const showDelete = (idc, id) => {
+        if(user._id !== idc) {
+            return null
+        } else {
+            <Button colorScheme={'red'} leftIcon={<TrashIcon/>} onClick={() => deleteComment(id)}>Eliminar</Button>
+        }
+    }
+
     const showComments = () => {
         return comments.map(comments => {
-            return (
-                <Card>
-                    <CardBody>
-                        <Heading>{comments.username}</Heading>
-                        <Text>{comments.comment}</Text>
-                    </CardBody>
-                </Card>
-            )
+            if(Cookies.get('logged') === 'false') {
+                return null
+            } else {
+                return (
+                    <Card>
+                        <CardBody>
+                            <Heading>{comments.username}</Heading>
+                            <Text>{comments.comment}</Text>
+                        </CardBody>
+                        <CardFooter>
+                            {showDelete(comments.userid, comments._id)}
+                        </CardFooter>
+                    </Card>
+                )
+            }
         }).reverse()
     }
 
