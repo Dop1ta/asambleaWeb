@@ -39,7 +39,7 @@ const Acta = () => {
                                 <Heading size='md'>{Actap.name}</Heading>
                                 <Text>{Actap.description}</Text>
                                 <Text>{Acta.date}</Text>
-                                <Button leftIcon={<ArrowDownIcon />} colorScheme='blue' variant='solid' margin={4} onClick={() => download(dowa._id)} >Descargar Acta</Button>
+                                <Button leftIcon={<ArrowDownIcon />} colorScheme='blue' variant='solid' margin={4} onClick={() => download(dowa._idacta)} >Descargar</Button>
                             </CardHeader>
                         </Card>
                     )

@@ -3,6 +3,7 @@ const { Acta } = require("../../frontend/pages/Acta");
 const fileUpload = require("../models/file");
 const uploadfile = (req, res) => {
   const { files } = req
+  const { id } = req.params
   Acta.findById(id , (err, actaf) => {
     if (err) {
       return res.status(400).send({ message: "Error al subir archivo"});
@@ -14,7 +15,8 @@ const uploadfile = (req, res) => {
       const newFile = new fileUpload({
         url: file.path,
         name: file.originalname,
-        mimeType: file.mimetype
+        mimeType: file.mimetype,
+        idacta: id
       });
       newFile.save((err, fileSaved) => {
         if (err) {
@@ -28,8 +30,8 @@ const uploadfile = (req, res) => {
 }
 
 const getFiles = (req, res) => {
-  fileUpload.find({}, (err, file) => {
-    if (err) {
+  fileUpload.find({}, (error, file) => {
+    if (error) {
       return res.status(400).send({ message: "Error al obtener los archivos" });
     }
     return res.status(200).send(file);
@@ -37,9 +39,9 @@ const getFiles = (req, res) => {
 }
 
 const getSFiles = (req, res) => {
-  const { id } = req.params
-  fileUpload.findById(id, (err, file) => {
-    if (err) {
+  const { idacta } = req.params
+  fileUpload.findById(idacta, (error, file) => {
+    if (error) {
       return res.status(400).send({ message: "Error al obtener el archivo" })
     }
     if (!file) {
@@ -50,16 +52,16 @@ const getSFiles = (req, res) => {
 }
 
 const deleteFiles = async (req, res) => {
-  const { id } = req.params
-  fileUpload.findById(id, (error, meeting) => {
-    if (error) {
-      return res.status(400).send({ message: "Error." })
-    }
-    if (!file) {
-      return res.status(404).send({ message: "Archvio no encontrado." })
-    }
-    return res.status(200).send(file)
-  });
+  const { idacta } = req.params
+    fileUpload.findByIdAndDelete(idacta, (error, meeting) => {
+      if (error) {
+        return res.status(400).send({ message: "Error." })
+      }
+      if (!file) {
+        return res.status(404).send({ message: "Archvio no encontrado." })
+      }
+      return res.status(200).send(file)
+    });
 }
 
 module.exports = {
