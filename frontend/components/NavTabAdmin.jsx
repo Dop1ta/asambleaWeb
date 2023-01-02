@@ -47,7 +47,7 @@ const NavTabAdmin = () => {
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href='http://localhost:3000/voting_activity'>Actividad de votación</BreadcrumbLink>
+            <BreadcrumbLink href='/voting_activity'>Actividad de votación</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem isCurrentPage>

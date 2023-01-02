@@ -1,97 +1,14 @@
 import { Container, Stack, Radio, RadioGroup,Button, useToast, Text, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Box} from '@chakra-ui/react'
 import React from 'react'
-import Tab_votingActivity from '../components/Tab_votingActivity';
-
-export async function getServerSideProps(context){
-  try{
-      const res = await axios.get(`${process.env.API_URL}/getVotingActivityByState/search/1`)
-      return{
-          props: {
-              data: res.data
-          }
-      }
-  }catch (error){
-      return{
-          redirect: {
-              destination: '',
-              permanet: false
-          }
-      }
-  }
-}
-const voting_activity = (data) => {
-  const router = useRouter()
-
-  const [Asamblea] = useState(data.data)
-
-  let [values, setVotingAct] = useState({
-    votos: '',
-  })
-
-  const onSubmit = async (e) => {
-    e.preventDefault()
-
-    for (const key in values) {
-      if (values[key] === '') {
-        values[key] = Asamblea[key]
-      }
-    }
-    for (const key in values.time) {
-      if (values.time[key] === 'T') {
-        const [time, hour] = values.time.split('T')
-        values.time = time
-        values.hour = hour
-      }
-    }
-
-    console.log(values)
-
-    try {
-      const response = await axios.put(`${process.env.API_URL}/getMeetings/update/${Asamblea._id}/639a48dffe299c865e0ea1f9`, values)
-      if (response.status === 200) {
-        Swal.fire({
-          title: 'Voto emitido',
-          text: 'Tu voto ha sido guardado correctamente',
-          icon: 'success',
-          confirmButtonText: 'Ok'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            router.push('/view_voting')
-          }
-        })
-      } else {
-        Swal.fire({
-          title: 'Error',
-          text: 'Ha ocurrido un error',
-          icon: 'error',
-          confirmButtonText: 'Ok'
-        })
-      }
-    } catch (error) {
-      Swal.fire({
-        title: 'Error',
-        text: 'Ha ocurrido un error',
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      })
-    }
-
-  }
+import MenuButtonIcon from '../components/MenuButton'
+import Tab_votingActivity_basic from '../components/Tab_votingActivity_basic';
 
 
-  const onChange = (e) => {
-    setVotingAct({
-      ...values,
-      [e.target.name]: e.target.value,
-    })
-  }
-
-
-
+const voting_activity_basic = () => {
     const toast = useToast();
     return (
         <Stack alignItems={"center"} backgroundColor={"rgb(244,247,254)"} >
-        <Tab_votingActivity/>
+        <Tab_votingActivity_basic/>
         <Container maxW={"container.md"}>
               <Text as='b' fontSize='3xl'>Votar</Text>
               <Accordion allowToggle size={"xl"}>
@@ -139,4 +56,4 @@ const voting_activity = (data) => {
     )
 }
 
-export default voting_activity
+export default voting_activity_basic

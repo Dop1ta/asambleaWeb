@@ -22,6 +22,7 @@ const createVotingActivity = (req, res) => {
       rut2,
       rut3,
       rut4,
+      state: 1,
       });
 
       newVotingActivity.save((error, vote) => {
@@ -143,6 +144,19 @@ const getVotingActivity = (req, res) => {
       })
   }
 
+  const getVotingActivityByState = (req, res) => {
+    const { state } = req.params;
+    votingActivity.find({state: state}, (error, vote) => {
+      if (error) {
+        return res.status(400).send({ message: "Error." });
+      }
+      if (!vote) {
+        return res.status(404).send({ message: "Votación no encontrada." });
+      }
+      return res.status(200).send(vote);
+    });
+  };
+
 module.exports = {
   createVotingActivity,
   getVotingActivity,
@@ -150,4 +164,5 @@ module.exports = {
   updateVotingActivity,
   getVotingActivityById,
   modificarPorRut,
+  getVotingActivityByState,
 };

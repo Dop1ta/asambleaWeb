@@ -49,6 +49,10 @@ const votingActivitySchema = new schema({
     required: true,
     minLength: 1,
     maxLength: 12,
+  },
+  state:{
+    type: Boolean,
+    required: true,
   }
 });
 

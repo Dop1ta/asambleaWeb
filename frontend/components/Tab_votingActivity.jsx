@@ -29,7 +29,7 @@ const Tab_votingActivity = () => {
       <Center>
         <Breadcrumb separator='-'>
           <BreadcrumbItem>
-            <BreadcrumbLink href='http://localhost:3000/'>Inicio</BreadcrumbLink>
+            <BreadcrumbLink href='http://localhost:3000/viewAdmin'>Inicio</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>

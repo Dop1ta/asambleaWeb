@@ -3,7 +3,7 @@ import { Stack, SimpleGrid, Card, Text, CardHeader, Heading, CardBody } from '@c
 import Tab_votingActivity from '../components/Tab_votingActivity'
 import axios from 'axios'
 
-const view_voting = () => {
+const view_voting_basic = () => {
 
 const [votingAct, setVotingAct] = useState([])
 
@@ -60,4 +60,4 @@ const [votingAct, setVotingAct] = useState([])
   )
 }
 
-export default view_voting
+export default view_voting_basic

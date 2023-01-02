@@ -7,5 +7,6 @@ api.get("/getAllVotingActivity", votingActivityController.getVotingActivity);
 api.put("/updateVotingActivity/:id/:userid", votingActivityController.updateVotingActivity);
 api.delete("/deleteVotingActivity/:id/:userid", votingActivityController.deleteVotingActivity);
 api.get("/getVotingActivity/search/:id", votingActivityController.getVotingActivityById);
+api.get("/getVotingActivityByState/search/:state", votingActivityController.getVotingActivityByState);
 
 module.exports = api;
