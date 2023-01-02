@@ -4,7 +4,6 @@ import axios from 'axios'
 import NavTab from '../components/NavTab'
 import Head from 'next/head'
 
-
 const user = () => {
 
     const [users, setUsers] = useState([])
