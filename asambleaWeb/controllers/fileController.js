@@ -39,6 +39,16 @@ const getFiles = (req, res) => {
   });
 }
 
+const getFilesByActaId = (req, res) => {
+  const {idacta} = req.params
+  fileUpload.find({idacta}, (error, file) => {
+    if (error) {
+      return res.status(400).send({ message: "Error al obtener los archivos" });
+    }
+    return res.status(200).send(file);
+  });
+}
+
 const getSFiles = (req, res) => {
   const { idacta } = req.params
   fileUpload.findById(idacta, (error, file) => {
@@ -69,5 +79,6 @@ module.exports = {
   uploadfile,
   getFiles,
   getSFiles,
-  deleteFiles
+  deleteFiles,
+  getFilesByActaId
 };
