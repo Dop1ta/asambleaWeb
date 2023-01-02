@@ -81,6 +81,8 @@ const updateActa = (data) => {
         })
     }
 
+    const deletef = axios.put(`${process.env.API_URL}/file/delete/${Actau.idacta}`)
+
     return (
         <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254"}>
             <NavTabAdmin />
@@ -102,6 +104,9 @@ const updateActa = (data) => {
                     <FormControl>
                         <FormLabel>Fecha</FormLabel>
                         <Input type="Date" name={"date"} defaultValue={Actau.date} onChange={onChange} />
+                    </FormControl>
+                    <FormControl>
+                    <Button coloScheme={'red'} onClick={() => deletef()}>Eliminar</Button>
                     </FormControl>
                     <Stack>
                         <ButtonGroup variant='outline' spacing='6' my={4} mb={4}>

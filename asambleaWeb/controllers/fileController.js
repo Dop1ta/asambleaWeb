@@ -3,6 +3,7 @@ const { Acta } = require("../../frontend/pages/Acta");
 const fileUpload = require("../models/file");
 const uploadfile = (req, res) => {
   const { files } = req
+  const { id } = req.params
   Acta.findById(id , (err, actaf) => {
     if (err) {
       return res.status(400).send({ message: "Error al subir archivo"});
@@ -14,7 +15,8 @@ const uploadfile = (req, res) => {
       const newFile = new fileUpload({
         url: file.path,
         name: file.originalname,
-        mimeType: file.mimetype
+        mimeType: file.mimetype,
+        idacta: id
       });
       newFile.save((err, fileSaved) => {
         if (err) {
@@ -37,8 +39,8 @@ const getFiles = (req, res) => {
 }
 
 const getSFiles = (req, res) => {
-  const { id } = req.params
-  fileUpload.findById(id, (error, file) => {
+  const { idacta } = req.params
+  fileUpload.findById(idacta, (error, file) => {
     if (error) {
       return res.status(400).send({ message: "Error al obtener el archivo" })
     }
@@ -50,15 +52,8 @@ const getSFiles = (req, res) => {
 }
 
 const deleteFiles = async (req, res) => {
-  const { id, idfile } = req.params
-  Acta.findById (id, (error, actaip) => {
-    if (error){
-      return res.status(400).send({message: "Error al eliminar archivo."})
-    }
-    if (!actaip){
-      return res.status(400).send({message: "Error al encontrrar acta para eliminar archivo."})
-    }
-    fileUpload.findById(idfile, (error, meeting) => {
+  const { idacta } = req.params
+    fileUpload.findByIdAndDelete(idacta, (error, meeting) => {
       if (error) {
         return res.status(400).send({ message: "Error." })
       }
@@ -67,7 +62,6 @@ const deleteFiles = async (req, res) => {
       }
       return res.status(200).send(file)
     });
-  });
 }
 
 module.exports = {
