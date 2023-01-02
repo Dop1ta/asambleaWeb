@@ -28,8 +28,8 @@ const uploadfile = (req, res) => {
 }
 
 const getFiles = (req, res) => {
-  fileUpload.find({}, (err, file) => {
-    if (err) {
+  fileUpload.find({}, (error, file) => {
+    if (error) {
       return res.status(400).send({ message: "Error al obtener los archivos" });
     }
     return res.status(200).send(file);
@@ -38,8 +38,8 @@ const getFiles = (req, res) => {
 
 const getSFiles = (req, res) => {
   const { id } = req.params
-  fileUpload.findById(id, (err, file) => {
-    if (err) {
+  fileUpload.findById(id, (error, file) => {
+    if (error) {
       return res.status(400).send({ message: "Error al obtener el archivo" })
     }
     if (!file) {
@@ -50,15 +50,23 @@ const getSFiles = (req, res) => {
 }
 
 const deleteFiles = async (req, res) => {
-  const { id } = req.params
-  fileUpload.findById(id, (error, meeting) => {
-    if (error) {
-      return res.status(400).send({ message: "Error." })
+  const { id, idfile } = req.params
+  Acta.findById (id, (error, actaip) => {
+    if (error){
+      return res.status(400).send({message: "Error al eliminar archivo."})
     }
-    if (!file) {
-      return res.status(404).send({ message: "Archvio no encontrado." })
+    if (!actaip){
+      return res.status(400).send({message: "Error al encontrrar acta para eliminar archivo."})
     }
-    return res.status(200).send(file)
+    fileUpload.findById(idfile, (error, meeting) => {
+      if (error) {
+        return res.status(400).send({ message: "Error." })
+      }
+      if (!file) {
+        return res.status(404).send({ message: "Archvio no encontrado." })
+      }
+      return res.status(200).send(file)
+    });
   });
 }
 
