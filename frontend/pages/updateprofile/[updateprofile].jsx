@@ -3,12 +3,12 @@ import { Button, Container, FormControl, FormLabel, Heading, HStack, Input, Inpu
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
-import NavTabAdmin from '../../components/NavTabAdmin'
+import NavTab from '../../components/NavTab'
 import Head from 'next/head'
 
 export async function getServerSideProps(context) {
     try {
-        const res = await axios.get(`${process.env.API_URL}/getUsers/search/639a48dffe299c865e0ea1f9/${context.params.updateuser}`)
+        const res = await axios.get(`${process.env.API_URL}/getUsers/search/639a48dffe299c865e0ea1f9/${context.params.updateprofile}`)
         return {
         props: {
             data: res.data
@@ -24,7 +24,7 @@ export async function getServerSideProps(context) {
     }
 }
 
-const updateuser = (data) => {
+const updateprofile = (data) => {
 
     const router = useRouter()
 
@@ -33,12 +33,11 @@ const updateuser = (data) => {
         rol: data.data.rol,
         email: data.data.email,
         number: data.data.number,
-        address: data.data.address,
-        admin: '0'
+        address: data.data.address
     })
 
-    const userRouter = () => {
-        router.push('/userview')
+    const profileRouter = () => {
+        router.push('/profile')
     }
 
     const onSubmit = async (e) => {
@@ -50,12 +49,12 @@ const updateuser = (data) => {
             if(response.status === 201) {
                 Swal.fire({
                     title: 'Usuario Actualizado',
-                    text: 'El usuario se ha actualizado correctamente',
+                    text: 'El perfil se ha actualizado correctamente',
                     icon: 'success',
                     confirmButtonText: 'Ok'
                 }).then((result) => {
                     if(result.isConfirmed) {
-                        router.push('/userview')
+                        router.push('/profile')
                     }
                 })
             } else {
@@ -95,27 +94,15 @@ const updateuser = (data) => {
     return (
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
             <Head>
-                <title>Actualizar usuario</title>
+                <title>Actualizar perfil</title>
             </Head>
-            <NavTabAdmin/>
+            <NavTab/>
             <Container maxW="container.md" centerContent>
-                <Heading textAlign={"center"} my={4}>Actualizar Usuario</Heading>
+                <Heading textAlign={"center"} my={4}>Actualizar Perfil</Heading>
                 <Stack my={4}>
                     <FormControl>
                         <FormLabel>Nombre</FormLabel>
                         <Input placeholder='Ej: Pedro Martinez' maxLength={100} onChange={onChange} name={"name"} defaultValue={data.data.name}/>
-                    </FormControl>
-                    <FormControl as='fieldset'>
-                        <FormLabel as='legend'>Rol</FormLabel>
-                        <RadioGroup defaultValue={data.data.rol}>
-                            <HStack spacing='24px'>
-                                <Radio value='Vecino' name={"rol"} onChange={onChange}>Vecino</Radio>
-                                <Radio value='Presidente' name={"rol"} onChange={onChange}>Presidente</Radio>
-                                <Radio value='Vicepresidente' name={"rol"} onChange={onChange}>Vicepresidente</Radio>
-                                <Radio value='Secretario' name={"rol"} onChange={onChange}>Secretario/a</Radio>
-                                <Radio value='Tesorero' name={"rol"} onChange={onChange}>Tesorero/a</Radio>
-                            </HStack>
-                        </RadioGroup>
                     </FormControl>
                     <FormControl>
                         <FormLabel>Email</FormLabel>
@@ -134,7 +121,7 @@ const updateuser = (data) => {
                     </FormControl>
                     <Stack>
                         <Button colorScheme={'blue'} onClick={onSubmit}>Actualizar</Button>
-                        <Button colorScheme={'red'} onClick={userRouter}>Cancelar</Button>
+                        <Button colorScheme={'red'} onClick={profileRouter}>Cancelar</Button>
                     </Stack>
                 </Stack>
             </Container>
@@ -142,4 +129,4 @@ const updateuser = (data) => {
     )
 }
 
-export default updateuser
+export default updateprofile

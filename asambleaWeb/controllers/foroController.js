@@ -3,7 +3,7 @@ const user = require("../models/users");
 
 const createForo = (req, res) => {
     const { comment } = req.body;
-    const { id } = req.params;
+    const { id, aid } = req.params;
 
     user.findById(id, (error, person) => {
         if(error) {
@@ -16,6 +16,7 @@ const createForo = (req, res) => {
             username: person.name,
             comment,
             userid: id,
+            activityid: aid
         });
         newForo.save((error, foro) => {
             if(error) {
@@ -27,7 +28,9 @@ const createForo = (req, res) => {
 };
 
 const getForo = (req, res) => {
-    foro.find({}, (error, foro) => {
+    const { id } = req.params;
+
+    foro.find({ id }, (error, foro) => {
         if(error) {
             return res.status(400).send({ message: "Error al buscar foro." });
         }

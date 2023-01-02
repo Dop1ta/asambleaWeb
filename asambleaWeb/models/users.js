@@ -41,7 +41,13 @@ const userSchema = new schema({
   votos: {
     type: Number,
     required: false,
-  }
+  },
+  admin: {
+    type: String,
+    required: true,
+    minLength: 1,
+    maxLength: 2,
+  },
 });
 
 module.exports = mongoose.model("user", userSchema);

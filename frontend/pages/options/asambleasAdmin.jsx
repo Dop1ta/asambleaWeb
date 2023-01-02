@@ -5,7 +5,7 @@ import axios from 'axios'
 import { TrashIcon } from 'chakra-ui-ionicons'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
-
+import Head from 'next/head'
 import { EditIcon, AddIcon } from '@chakra-ui/icons'
 
 const AsambleaAdmin = () => {
@@ -70,6 +70,9 @@ const AsambleaAdmin = () => {
 
   return (
     <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
+      <Head>
+        <title>Asambleas vista administrador</title>
+      </Head>
       <NavTabAdmin />
       <Stack my={4} >
         <Button backgroundColor={'white'} leftIcon={<AddIcon />} onClick={() => router.push('/create/crearAsamblea')}>Crear Asamblea</Button>
