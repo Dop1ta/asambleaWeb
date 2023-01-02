@@ -9,7 +9,6 @@ const asambleaValidations = yup.object({
     .matches(/^[aA-zZ\s]+$/, 'El lugar solo puede contener letras, números y espacios'),
   description: yup.string()
     .required('La descripción es requerida')
-    .matches(/^[aA-zZ\s]+$/, 'La descripción solo puede contener letras, números y espacios'),
 });
 
 
