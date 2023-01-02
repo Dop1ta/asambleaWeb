@@ -39,7 +39,7 @@ const NavTab = () => {
       <Center>
         <Breadcrumb separator='-'>
           <BreadcrumbItem>
-            <BreadcrumbLink href='http://localhost:3000'>Inicio</BreadcrumbLink>
+            <BreadcrumbLink href='/'>Inicio</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
