@@ -19,21 +19,23 @@ export async function getServerSideProps(context){
       }
   }
 }
+
+
 const voting_activity = (data) => {
   const router = useRouter()
 
-  const [Asamblea] = useState(data.data)
+  const [User] = useState(data.data)
 
-  let [values, setVotingAct] = useState({
+  let [values, setUser] = useState({
     votos: '',
   })
 
-  const onSubmit = async (e) => {
+  const onSumbit = async (e) => {
     e.preventDefault()
 
     for (const key in values) {
       if (values[key] === '') {
-        values[key] = Asamblea[key]
+        values[key] = User[key]
       }
     }
     for (const key in values.time) {
@@ -47,7 +49,7 @@ const voting_activity = (data) => {
     console.log(values)
 
     try {
-      const response = await axios.put(`${process.env.API_URL}/getMeetings/update/${Asamblea._id}/639a48dffe299c865e0ea1f9`, values)
+      const response = await axios.put(`${process.env.API_URL}/updateUserVote/${User._id}/639a48dffe299c865e0ea1f9`, values)
       if (response.status === 200) {
         Swal.fire({
           title: 'Voto emitido',
@@ -80,7 +82,7 @@ const voting_activity = (data) => {
 
 
   const onChange = (e) => {
-    setVotingAct({
+    setUser({
       ...values,
       [e.target.name]: e.target.value,
     })
@@ -103,13 +105,13 @@ const voting_activity = (data) => {
                     </AccordionButton>
                   </h2>
                   <AccordionPanel pb={4}>
-                  <RadioGroup alignItems>
+                  <RadioGroup alignItems onChange={onChange}>
                         <Stack direction='row'>
-                            <Radio value='1'>Persona 1</Radio>
-                            <Radio value='2'>Persona 2</Radio>
-                            <Radio value='3'>Persona 3</Radio>
-                            <Radio value='4'>Persona 4</Radio>
-                            <Button colorScheme="blue" size="md"type="sumbit" onClick={() => toast({ title: "Has votado correctamente" })}>Guardar Voto</Button>
+                            <Radio value='1'>NombreRut(votingActs.rut1)</Radio>
+                            <Radio value='2'>{votingActs.rut2}</Radio>
+                            <Radio value='3'>{votingActs.rut3}</Radio>
+                            <Radio value='4'>{votingActs.rut4}</Radio>
+                            <Button colorScheme="blue" size="md"type="sumbit" onClick={onSumbit}>Guardar Voto</Button>
                         </Stack>
                     </RadioGroup>
                   </AccordionPanel>
@@ -124,10 +126,10 @@ const voting_activity = (data) => {
                   <AccordionPanel pb={4}>
                   <RadioGroup>
                         <Stack direction='row'>
-                            <Radio value='1'>Persona 1</Radio>
-                            <Radio value='2'>Persona 2</Radio>
-                            <Radio value='3'>Persona 3</Radio>
-                            <Radio value='4'>Persona 4</Radio>
+                            <Radio value='1'>{votingActs.rut1}</Radio>
+                            <Radio value='2'>{votingActs.rut2}</Radio>
+                            <Radio value='3'>{votingActs.rut3}</Radio>
+                            <Radio value='4'>{votingActs.rut4}</Radio>
                             <Button colorScheme="blue" size="md"type="sumbit" onClick={() => toast({ title: "Has votado correctamente" })}>Guardar Voto</Button>
                         </Stack>
                     </RadioGroup>
