@@ -1,6 +1,6 @@
 import {useState, useEffect} from 'react'
 import { Stack, SimpleGrid, Card, Text, CardHeader, Heading, CardBody } from '@chakra-ui/react'
-import Tab_votingActivity from '../components/Tab_votingActivity'
+import Tab_votingActivity_basic from '../components/Tab_votingActivity_basic'
 import axios from 'axios'
 
 const view_voting_basic = () => {
@@ -40,20 +40,17 @@ const [votingAct, setVotingAct] = useState([])
               <Heading size='md'>{votingActs.name}</Heading>
               <Text>Fecha de Inicio: {votingActs.startDate_vote}</Text>
               <Text>Fecha de Finalización: {votingActs.endDate_vote}</Text>
-              <Text>Persona 1{votingActs.rut1}</Text>
-              <Text>Persona 2{votingActs.rut2}</Text>
-              <Text>Persona 3{votingActs.rut3}</Text>
-              <Text>Persona 4{votingActs.rut4}</Text>
+              <Text>Ganador: {votingActs.ganador}</Text>
             </CardHeader>
           </Card >
         )
-      }).reverse()
+      })
     }
   }
   return (
     <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
-      <Tab_votingActivity />
-      <SimpleGrid columns={3}>
+      <Tab_votingActivity_basic/>
+      <SimpleGrid>
         {showVotingAct()}
       </SimpleGrid>
     </Stack>

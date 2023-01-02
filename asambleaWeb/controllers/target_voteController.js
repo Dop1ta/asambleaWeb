@@ -35,7 +35,6 @@ const createTargetVote = (req, res) => {
 };
 
 const getTargetVote = (req, res) => {
-    const { id} = req.params;
     TargetVote.find({}, (error, vote) => {
       if (error) {
         return res.status(400).send({ message: "Error al encontrar una actividad de votación." });
