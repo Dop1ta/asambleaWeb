@@ -32,7 +32,6 @@ const Acta = () => {
             )
         } else {
             return Actas.map(Actap => {
-                return dow.map(dowa => {
                     return (
                         <Card key={Actap._id} boxShadow='lg' ml={30} my={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
                             <CardHeader>
@@ -44,16 +43,15 @@ const Acta = () => {
                         </Card>
                     )
                 })
-            })
         }
     }
 
-    const [dow, setDown] = useState([])
+    //const [dow, setDown] = useState([])
 
-    const download = async () => {
+    /*const download = async () => {
         const down = await axios.get(`${process.env.API_URL}/file/download`)
         setDown(down.data)
-    }
+    }*/
 
     return (
         <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
