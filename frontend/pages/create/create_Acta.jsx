@@ -24,7 +24,7 @@ const create_Acta = () => {
         e.preventDefault()
         console.log(values)
         try {
-            const response = await axios.post(`${process.env.API_URL}/createActa/639a48dffe299c865e0ea1f9`, values)
+            const response = await axios.post(`${process.env.API_URL}/createActa`, values)
             console.log(response)
             if (response.status === 201) {
                 Swal.fire({
