@@ -118,6 +118,7 @@ const userview = () => {
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
             <Head>
                 <title>Usuarios</title>
+                <link rel="icon" href="/icon.png" />
             </Head>
             <NavTabAdmin/>
             <Container maxW="container.md" my={4}>

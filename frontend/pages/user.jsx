@@ -35,6 +35,7 @@ const user = () => {
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
             <Head>
                 <title>Lista de usuarios</title>
+                <link rel="icon" href="/icon.png" />
             </Head>
             <NavTab/>
             <Container maxW="container.md">
