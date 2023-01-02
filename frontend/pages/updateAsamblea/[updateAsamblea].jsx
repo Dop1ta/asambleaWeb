@@ -100,6 +100,7 @@ const Update = (data) => {
     <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
       <Head>
         <title>Modificar Asamblea</title>
+        <link rel="icon" href="/icon.png" />
       </Head>
       <NavTabAdmin />
       <Card backgroundColor={'white'} borderRadius={10} boxShadow={'md'} >

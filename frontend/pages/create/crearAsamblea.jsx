@@ -21,6 +21,7 @@ export default function CrearA() {
     <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"} h="100hv" >
       <Head>
         <title>Creacion de asambleas</title>
+        <link rel="icon" href="/icon.png" />
       </Head>
       <NavTabAdmin />
       <Formik
@@ -87,9 +88,12 @@ export default function CrearA() {
                   size="md"
                   type="datetime-local"
                   onChange={handleChange}
+                  onBlur={handleBlur}
                   name={"time"}
+                  value={values.time}
                 />
               </FormControl>
+              {touched.time && errors.time && <FormikError error={errors.time} />}
               <FormInput onChange={handleChange} placeholder='Ejemplo: Lota' label="Lugar donde se realiza" type={"text"} name={"place"} onBlur={handleBlur} value={values.place} />
               {touched.place && errors.place && <FormikError error={errors.place} />}
               <FormControl isRequired marginTop={4}>

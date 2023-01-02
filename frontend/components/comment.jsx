@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Card, CardBody, Heading, Stack, Text, SimpleGrid, Button, Textarea, CardFooter } from '@chakra-ui/react'
+import { Card, CardBody, Heading, Stack, Text, SimpleGrid, Button, Textarea, CardFooter, Container } from '@chakra-ui/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
@@ -137,7 +137,7 @@ const comment = (cid) => {
     }, [])
 
     return (
-        <Stack my={4}>
+        <Container my={4}>
             <Textarea placeholder='Agregar un comentario' name='comment' onChange={onChange} />
             <Stack direction={'row'}>
                 <Button onClick={addComment}>Comentar</Button>
@@ -146,7 +146,7 @@ const comment = (cid) => {
             <SimpleGrid>
                 {showComments()}
             </SimpleGrid>
-        </Stack>
+        </Container>
     )
 }
 

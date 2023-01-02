@@ -10,16 +10,16 @@ export async function getServerSideProps(context) {
     try {
         const res = await axios.get(`${process.env.API_URL}/getUsers/search/639a48dffe299c865e0ea1f9/${context.params.updateprofile}`)
         return {
-        props: {
-            data: res.data
-        }
+            props: {
+                data: res.data
+            }
         }
     } catch (error) {
         return {
-        redirect: {
-            destination: '/userview',
-            permanent: false
-        }
+            redirect: {
+                destination: '/userview',
+                permanent: false
+            }
         }
     }
 }
@@ -46,14 +46,14 @@ const updateprofile = (data) => {
         try {
             const response = await axios.put(`${process.env.API_URL}/getUsers/update/639a48dffe299c865e0ea1f9/${data.data._id}`, user)
             console.log(response)
-            if(response.status === 201) {
+            if (response.status === 201) {
                 Swal.fire({
                     title: 'Usuario Actualizado',
                     text: 'El perfil se ha actualizado correctamente',
                     icon: 'success',
                     confirmButtonText: 'Ok'
                 }).then((result) => {
-                    if(result.isConfirmed) {
+                    if (result.isConfirmed) {
                         router.push('/profile')
                     }
                 })
@@ -95,29 +95,30 @@ const updateprofile = (data) => {
         <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
             <Head>
                 <title>Actualizar perfil</title>
+                <link rel="icon" href="/icon.png" />
             </Head>
-            <NavTab/>
+            <NavTab />
             <Container maxW="container.md" centerContent>
                 <Heading textAlign={"center"} my={4}>Actualizar Perfil</Heading>
                 <Stack my={4}>
                     <FormControl>
                         <FormLabel>Nombre</FormLabel>
-                        <Input placeholder='Ej: Pedro Martinez' maxLength={100} onChange={onChange} name={"name"} defaultValue={data.data.name}/>
+                        <Input placeholder='Ej: Pedro Martinez' maxLength={100} onChange={onChange} name={"name"} defaultValue={data.data.name} />
                     </FormControl>
                     <FormControl>
                         <FormLabel>Email</FormLabel>
-                        <Input placeholder='Ej: pedro.martinez@gmail.com' type='email' maxLength={100} onChange={onChange} name={"email"} defaultValue={data.data.email}/>
+                        <Input placeholder='Ej: pedro.martinez@gmail.com' type='email' maxLength={100} onChange={onChange} name={"email"} defaultValue={data.data.email} />
                     </FormControl>
                     <FormControl>
                         <FormLabel>Numero de telefono</FormLabel>
                         <InputGroup>
-                            <InputLeftAddon children='+56'/>
-                            <Input placeholder='Ej: 912341234' maxLength={9} onChange={onChange} name={"number"} defaultValue={data.data.number}/>
+                            <InputLeftAddon children='+56' />
+                            <Input placeholder='Ej: 912341234' maxLength={9} onChange={onChange} name={"number"} defaultValue={data.data.number} />
                         </InputGroup>
                     </FormControl>
                     <FormControl>
                         <FormLabel>Direccion</FormLabel>
-                        <Input placeholder='Ej: Los Carrera #123' maxLength={200} onChange={onChange} name={"address"} defaultValue={data.data.address}/>
+                        <Input placeholder='Ej: Los Carrera #123' maxLength={200} onChange={onChange} name={"address"} defaultValue={data.data.address} />
                     </FormControl>
                     <FormControl>
                         <ButtonGroup spacing={'6'}>
