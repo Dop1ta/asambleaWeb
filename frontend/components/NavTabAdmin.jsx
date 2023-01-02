@@ -43,7 +43,11 @@ const NavTabAdmin = () => {
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href='http://localhost:3000/userview'>Usuarios</BreadcrumbLink>
+            <BreadcrumbLink href='/userview'>Usuarios</BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <BreadcrumbLink href='/options/ActaAdmin'>Actas</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
