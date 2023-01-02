@@ -13,6 +13,10 @@ const fileSchema = new Schema({
     type: String,
     requiere: true,
   },
+  idacta: {
+    type: String,
+    requiere: true,
+  },
 });
 
 module.exports = mongoose.model("file", fileSchema);

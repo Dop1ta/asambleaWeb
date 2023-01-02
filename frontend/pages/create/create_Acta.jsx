@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button, Container, FormControl, FormLabel, Heading, Textarea, Input, ButtonGroup, Stack } from '@chakra-ui/react'
 import axios from 'axios'
-import NavTab from '../../components/NavTab'
+import NavTabAdmin from '../../components/NavTabAdmin'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
 import Files_upload from '../../components/files_upload'
@@ -17,14 +17,14 @@ const create_Acta = () => {
     const router = useRouter()
 
     const actaRouter = () => {
-        router.push('/Acta')
+        router.push('/options/ActaAdmin')
     }
 
     const onSubmit = async (e) => {
         e.preventDefault()
         console.log(values)
         try {
-            const response = await axios.post(`${process.env.API_URL}/createActa/639a48dffe299c865e0ea1f9`, values)
+            const response = await axios.post(`${process.env.API_URL}/createActa`, values)
             console.log(response)
             if (response.status === 201) {
                 Swal.fire({
@@ -32,6 +32,10 @@ const create_Acta = () => {
                     text: 'Acta creada correctamente',
                     icon: 'success',
                     confirmButtontext: 'ok'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        actaRouter()
+                    }
                 })
             } else {
                 Swal.fire({
@@ -60,10 +64,10 @@ const create_Acta = () => {
 
     return (
         <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
-            <NavTab />
+            <NavTabAdmin />
             <Container maxW="container.md" centerContent>
                 <Heading textAlign={"center"} my={4}>Creacion de Acta</Heading>
-                <Stack my={4}>
+                <Stack my={4} alignItems={'center'} textAlign={'center'}>
                     <FormControl>
                         <FormLabel>Nombre Acta</FormLabel>
                         <Input placeholder='Ej: Acta Caridad Vecinos' type={"text"} onChange={onChange} name={"name"} />

@@ -22,4 +22,5 @@ const actaMeetingSchema = new schema({
   },
 });
 
+
 module.exports = mongoose.model("acta_meeting", actaMeetingSchema);

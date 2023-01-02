@@ -7,7 +7,7 @@ const api = express.Router();
 
 api.post("/file/:archivo", upload.array("archivos"), fileSize, fileController.uploadfile);
 api.get('/files', fileController.getFiles);
-api.get('/file/download/:id', fileController.getSFiles);
-api.post('/file/delete/:id', fileController.deleteFiles);
+api.get('/file/download/:idacta', fileController.getSFiles);
+api.delete('/file/delete/:idacta', fileController.deleteFiles);
 
 module.exports = api;

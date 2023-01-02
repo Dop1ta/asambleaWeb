@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button, Container, FormControl, FormLabel, Heading, HStack, Input, InputGroup, InputLeftAddon, Radio, RadioGroup, Stack } from '@chakra-ui/react'
+import { Button, ButtonGroup, Container, FormControl, FormLabel, Heading, HStack, Input, InputGroup, InputLeftAddon, Radio, RadioGroup, Stack } from '@chakra-ui/react'
 import axios from 'axios'
 import NavTab from '../../components/NavTab'
 import Swal from 'sweetalert2'
@@ -106,17 +106,19 @@ const create_user = () => {
                         <FormLabel>Numero de telefono</FormLabel>
                         <InputGroup>
                             <InputLeftAddon children='+56'/>
-                            <Input placeholder='Ej: 912341234' maxLength={9} onChange={onChange} name={"number"}/>
+                            <Input placeholder='Ej: 912341234' type={'number'} maxLength={9} onChange={onChange} name={"number"}/>
                         </InputGroup>
                     </FormControl>
                     <FormControl>
                         <FormLabel>Direccion</FormLabel>
                         <Input placeholder='Ej: Los Carrera #123' maxLength={200} onChange={onChange} name={"address"}/>
                     </FormControl>
-                    <Stack>
-                        <Button colorScheme={'blue'} onClick={onSubmit}>Agregar</Button>
-                        <Button colorScheme={'red'} onClick={userRouter}>Cancelar</Button>
-                    </Stack>
+                    <FormControl>
+                        <ButtonGroup spacing='6'>
+                            <Button colorScheme={'blue'} variant='outline' onClick={onSubmit}>Agregar</Button>
+                            <Button colorScheme={'red'} variant='outline' onClick={userRouter}>Cancelar</Button>
+                        </ButtonGroup>
+                    </FormControl>
                 </Stack>
             </Container>
         </Stack>

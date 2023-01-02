@@ -105,7 +105,7 @@ const getUsersAll = (req, res) => {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
     return res.status(201).send(person);
-  }).select("name -_id");
+  }).select("name rol");
 };
 
 const updateUser = (req, res) => {

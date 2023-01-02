@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Button, Container, FormControl, FormLabel, Heading, HStack, Input, InputGroup, InputLeftAddon, Radio, RadioGroup, Stack } from '@chakra-ui/react'
+import { Button, ButtonGroup, Container, FormControl, FormLabel, Heading, HStack, Input, InputGroup, InputLeftAddon, Radio, RadioGroup, Stack } from '@chakra-ui/react'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router'
@@ -132,10 +132,12 @@ const updateuser = (data) => {
                         <FormLabel>Direccion</FormLabel>
                         <Input placeholder='Ej: Los Carrera #123' maxLength={200} onChange={onChange} name={"address"} defaultValue={data.data.address}/>
                     </FormControl>
-                    <Stack>
-                        <Button colorScheme={'blue'} onClick={onSubmit}>Actualizar</Button>
-                        <Button colorScheme={'red'} onClick={userRouter}>Cancelar</Button>
-                    </Stack>
+                    <FormControl>
+                        <ButtonGroup spacing={'6'}>
+                            <Button colorScheme={'blue'} variant='outline' onClick={onSubmit}>Actualizar</Button>
+                            <Button colorScheme={'red'} variant='outline' onClick={userRouter}>Cancelar</Button>
+                        </ButtonGroup>
+                    </FormControl>
                 </Stack>
             </Container>
         </Stack>

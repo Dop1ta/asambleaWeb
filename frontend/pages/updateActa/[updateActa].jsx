@@ -1,20 +1,20 @@
-import {useState} from 'react'
-import {useRouter} from 'next/router'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
 import NavTabAdmin from '../../components/NavTabAdmin'
 import axios from 'axios'
-import {Button, Container, FormControl, Card, CardBody, Input, Stack, FormLabel, ButtonGroup} from '@chakra-ui/react'
+import { Button, Container, FormControl, Card, CardBody, Input, Stack, FormLabel, ButtonGroup, Text } from '@chakra-ui/react'
 import Swal from 'sweetalert2'
 
-export async function getServerSideProps(context){
-    try{
-        const res = await axios.get(`${process.env.API_URL}/getActa/search/${context.params.updateActa}`)
-        return{
+export async function getServerSideProps(context) {
+    try {
+        const res = await axios.get(`${process.env.API_URL}/getActas/search/${context.params.updateActa}`)
+        return {
             props: {
                 data: res.data
             }
         }
-    }catch (error){
-        return{
+    } catch (error) {
+        return {
             redirect: {
                 destination: '/create/create_Acta',
                 permanet: false
@@ -37,27 +37,27 @@ const updateActa = (data) => {
 
     const onSubmit = async (e) => {
         e.preventDefault()
-        conxole.log(values)
-        for(const key in values) {
+
+        for (const key in values) {
             if (values[key] === '') {
                 values[key] = Actau[key]
             }
         }
 
-        try{
-            const response = await axios.put(`${process.env.API_URL}/getActa/updateActa/${Actau._id}/639a48dffe299c865e0ea1f9`, values)
-            if (response.status === 201){
+        try {
+            const response = await axios.put(`${process.env.API_URL}/getActas/update/${Actau._id}`, values)
+            if (response.status === 200) {
                 Swal.fire({
                     title: 'Acta Actualizada',
                     text: 'El acta se ha modificado correctamente',
                     icon: 'success',
                     confimButtinText: 'Ok'
                 }).then((result) => {
-                    if (result.isConfirmed){
+                    if (result.isConfirmed) {
                         router.push('/options/ActaAdmin')
                     }
                 })
-            }else{
+            } else {
                 Swal.fire({
                     title: 'Error',
                     text: 'Error al ingresar los nuevos parametros',
@@ -65,7 +65,7 @@ const updateActa = (data) => {
                     confimButtonText: 'Ok'
                 })
             }
-        }catch{
+        } catch {
             Swal.fire({
                 title: 'Error',
                 text: 'No se ha podido actualizar el Acta',
@@ -81,12 +81,14 @@ const updateActa = (data) => {
         })
     }
 
+    const deletef = axios.put(`${process.env.API_URL}/file/delete/${Actau.idacta}`)
+
     return (
         <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254"}>
             <NavTabAdmin />
             <Card backgroundColor={'white'} bordeusRadius={10} boxShadow={'md'}>
                 <CardBody>
-                    <Text textColor={'black'} fontWeight={'bold'} fontSize={20}>Modifique el Acta</Text> 
+                    <Text textColor={'black'} fontWeight={'bold'} fontSize={20}>Modifique el Acta</Text>
                 </CardBody>
             </Card>
             <Container maxW="container.md" centerContent>
@@ -102,6 +104,9 @@ const updateActa = (data) => {
                     <FormControl>
                         <FormLabel>Fecha</FormLabel>
                         <Input type="Date" name={"date"} defaultValue={Actau.date} onChange={onChange} />
+                    </FormControl>
+                    <FormControl>
+                    <Button coloScheme={'red'} onClick={() => deletef()}>Eliminar</Button>
                     </FormControl>
                     <Stack>
                         <ButtonGroup variant='outline' spacing='6' my={4} mb={4}>

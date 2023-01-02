@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { Stack, Text, Card, CardHeader, Heading, CardBody, SimpleGrid} from '@chakra-ui/react'
 import axios from 'axios'
 import NavTab from '../components/NavTab'
+import ArrowDownIcon from '@chakra-ui/icons'
 
 const Acta = () => {
 
@@ -31,21 +32,27 @@ const Acta = () => {
             )
         }else{
             return Actas.map(Actap => {
-                return(
-                    <Card key={Actap._id} boxShadow='lg' ml={30} my={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
-                        <CardHeader>
-                            <Heading size='md'>{Actap.name}</Heading>
-                            <Text>{Actap.description}</Text>
-                            <Text>{Acta.date}</Text>
-                        </CardHeader>
-                    </Card>
-                )
+                return dow.map(dowa =>{
+                    return(
+                        <Card key={Actap._id} boxShadow='lg' ml={30} my={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
+                            <CardHeader>
+                                <Heading size='md'>{Actap.name}</Heading>
+                                <Text>{Actap.description}</Text>
+                                <Text>{Acta.date}</Text>
+                                <Button leftIcon={<ArrowDownIcon />} colorScheme='blue' variant='solid' margin={4} onClick={() => download(dowa._idacta)} >Descargar</Button>
+                            </CardHeader>
+                        </Card>
+                    )
+                })
             })
         }
     }
 
+    const [dow, setDown] = useState([])
+
     const download = async () => {
-        const down = await axios.get(`${process.env.API_URL}/getSFiles/`)
+        const down = await axios.get(`${process.env.API_URL}/file/download`)
+        setDown(down.data)
     }
 
     return (

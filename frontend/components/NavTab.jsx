@@ -39,19 +39,23 @@ const NavTab = () => {
       <Center>
         <Breadcrumb separator='-'>
           <BreadcrumbItem>
-            <BreadcrumbLink href='http://localhost:3000'>Inicio</BreadcrumbLink>
+            <BreadcrumbLink href='/'>Inicio</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href='http://localhost:3000/asambleas'>Asambleas</BreadcrumbLink>
+            <BreadcrumbLink href='/asambleas'>Asambleas</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href='http://localhost:3000/user'>Lista de vecinos</BreadcrumbLink>
+            <BreadcrumbLink href='/Acta'>Actas</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href='http://localhost:3000/voting_activity_basic'>Actividad de votación</BreadcrumbLink>
+            <BreadcrumbLink href='/user'>Lista de vecinos</BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <BreadcrumbLink href='/voting_activity_basic'>Actividad de votación</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem isCurrentPage>
