@@ -1,21 +1,30 @@
 const { application } = require("express");
+const { Acta } = require("../../frontend/pages/Acta");
 const fileUpload = require("../models/file");
 const uploadfile = (req, res) => {
   const { files } = req
-  let aux = files.map((file) => {
-    const newFile = new fileUpload({
-      url: file.path,
-      name: file.originalname,
-      mimeType: file.mimetype
+  Acta.findById(id , (err, actaf) => {
+    if (err) {
+      return res.status(400).send({ message: "Error al subir archivo"});
+    }
+    if (!actaf) {
+      return res.status(400).send({ message: "No hay actas para subir archivo"});
+    }
+    let aux = files.map((file) => {
+      const newFile = new fileUpload({
+        url: file.path,
+        name: file.originalname,
+        mimeType: file.mimetype
+      });
+      newFile.save((err, fileSaved) => {
+        if (err) {
+          return res.status(400).send({ message: "Error al guardar el archivo" });
+        }
+        return newFile;
+      });
+      return res.status(201).send(aux);
     });
-    newFile.save((err, fileSaved) => {
-      if (err) {
-        return res.status(400).send({ message: "Error al guardar el archivo" });
-      }
-      return newFile;
-    });
-  });
-  return res.status(201).send(aux);
+  })
 }
 
 const getFiles = (req, res) => {
