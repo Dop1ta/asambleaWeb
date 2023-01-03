@@ -1,10 +1,10 @@
 const express = require("express");
-const TargetVoteController = require("../controllers/TargetVoteController");
+const targetVoteController = require("../controllers/target_voteController");
 const api = express.Router();
 
-api.post("/createTargetVote/:id", TargetVoteController.createTargetVote);
-api.get("/getTargetVote", TargetVoteController.getTargetVote);
-api.put("/updateTargetVote/:id/:userid", TargetVoteController.updateTargetVote);
-api.delete("/deleteTargetVote/:id/:userid", TargetVoteController.deleteTargetVote);
+api.post("/createTargetVote/:id", targetVoteController.createTargetVote);
+api.get("/getTargetVote", targetVoteController.getTargetVote);
+api.put("/updateTargetVote/:id/:userid", targetVoteController.updateTargetVote);
+api.delete("/deleteTargetVote/:id/:userid", targetVoteController.deleteTargetVote);
 
 module.exports = api;

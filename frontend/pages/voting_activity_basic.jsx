@@ -1,59 +1,67 @@
-import { Container, Stack, Radio, RadioGroup,Button, useToast, Text, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, Box} from '@chakra-ui/react'
-import React from 'react'
-import MenuButtonIcon from '../components/MenuButton'
+import { Stack, Radio, RadioGroup, Button, Text, Box, SimpleGrid, Card, CardHeader, CardBody, Heading } from '@chakra-ui/react'
+import { useState, useEffect } from 'react'
 import Tab_votingActivity_basic from '../components/Tab_votingActivity_basic';
+import axios from 'axios'
+import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 
 
-const voting_activity_basic = () => {
-    const toast = useToast();
-    return (
-        <Stack alignItems={"center"} backgroundColor={"rgb(244,247,254)"} >
-        <Tab_votingActivity_basic/>
-        <Container maxW={"container.md"}>
-              <Text as='b' fontSize='3xl'>Votar</Text>
-              <Accordion allowToggle size={"xl"}>
-                <AccordionItem>
-                  <h2>
-                    <AccordionButton>
-                      <Box as="span" flex='1' textAlign='left'>Votación Presidencia</Box>
-                    <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel pb={4}>
-                  <RadioGroup alignItems>
-                        <Stack direction='row'>
-                            <Radio value='1'>Persona 1</Radio>
-                            <Radio value='2'>Persona 2</Radio>
-                            <Radio value='3'>Persona 3</Radio>
-                            <Radio value='4'>Persona 4</Radio>
-                            <Button colorScheme="blue" size="md"type="sumbit" onClick={() => toast({ title: "Has votado correctamente" })}>Guardar Voto</Button>
-                        </Stack>
-                    </RadioGroup>
-                  </AccordionPanel>
-                </AccordionItem>
-                <AccordionItem>
-                  <h2>
-                    <AccordionButton>
-                    <Box as="span" flex='1' textAlign='left'>Votación Secretario</Box>
-                    <AccordionIcon />
-                    </AccordionButton>
-                  </h2>
-                  <AccordionPanel pb={4}>
-                  <RadioGroup>
-                        <Stack direction='row'>
-                            <Radio value='1'>Persona 1</Radio>
-                            <Radio value='2'>Persona 2</Radio>
-                            <Radio value='3'>Persona 3</Radio>
-                            <Radio value='4'>Persona 4</Radio>
-                            <Button colorScheme="blue" size="md"type="sumbit" onClick={() => toast({ title: "Has votado correctamente" })}>Guardar Voto</Button>
-                        </Stack>
-                    </RadioGroup>
-                  </AccordionPanel>
-                  </AccordionItem>
-              </Accordion>
-            </Container>
-        </Stack>
-    )
+const voting_activity = () => {
+  const [votingAct, setVotingAct] = useState([])
+
+  const router = useRouter()
+
+  const getVotingAct = async () => {
+    try {
+      const response = await axios.get(`${process.env.API_URL}/getVotingActivityByState/search/1`)
+      setVotingAct(response.data)
+    } catch (error) {
+    }
+  }
+
+  useEffect(() => {
+    getVotingAct()
+  }, [])
+
+  const castAVote = (id) => {
+    router.push(`/vote/${id}`)
+  }
+  const showVotingActs = () => {
+    if (votingAct.length === 0) {
+      return (
+        <Card boxShadow='lg' marginLeft={30} marginTop={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"} width={'400px'}>
+          <CardHeader>
+            <Heading size='md'>Sin Votaciones Activas</Heading>
+          </CardHeader>
+          <CardBody>
+            <Text>No puedes votar hasta que se agende una nueva votación</Text>
+          </CardBody>
+        </Card>
+      )
+    } else {
+      console.log(votingAct)
+      return votingAct.map(votingActs => {
+        return (
+          <Card key={votingActs._id}>
+            <CardHeader>
+              <Heading size='md'>{votingActs.name}</Heading>
+              <Text>Fecha de inicio: {votingActs.startDate_vote}</Text>
+              <Text>Fecha de caducidad: {votingActs.endDate_vote}</Text>
+              <Button colorScheme="blue" size="md" type="sumbit" onClick={() => castAVote(votingActs._id)}>Abrir votación</Button>
+            </CardHeader>
+          </Card>
+        )
+      })
+    }
+  }
+  return (
+    <Stack alignItems={"center"} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>
+      <Tab_votingActivity_basic />
+      <SimpleGrid columns={3}>
+        {showVotingActs()}
+      </SimpleGrid>
+    </Stack>
+  )
 }
 
-export default voting_activity_basic
+export default voting_activity

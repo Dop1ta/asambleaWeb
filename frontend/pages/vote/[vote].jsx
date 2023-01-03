@@ -1,6 +1,6 @@
 import Tab_votingActivity from "../../components/Tab_votingActivity";
 import axios from 'axios'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from "next/router"; 
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
@@ -8,7 +8,7 @@ import { Stack, Radio, RadioGroup, Button, Text } from "@chakra-ui/react";
 
 export async function getServerSideProps(context) {
     try {
-        const res = await axios.get(`${process.env.API_URL}/getVotingActivity/search/${context.params.voteAdmin}`)
+        const res = await axios.get(`${process.env.API_URL}/getVotingActivity/search/${context.params.vote}`)
         return {
             props: {
                 data: res.data
@@ -24,26 +24,30 @@ export async function getServerSideProps(context) {
     }
 }
 
-const voteAdmin = (data)  =>{
+const vote = (data)  =>{
     const router = useRouter()
     const [Vote] = useState(data.data)
 
-    
+    const [user, setUser] = useState([])
+
+    const getUser = async () => {
+      const response = await axios.get(`${process.env.API_URL}/getUsers/rut/${Cookies.get('rut')}`)
+      setUser(response.data)
+  }
+    useEffect(() => {
+    getUser()
+    }, [])
     let [values, setValues] = useState({
         rut: Cookies.get('rut'),
         rut_v: '',
         name_v: Vote._id,
       })
-    
+
     const onSumbit = async (e) => {
+        console.log(values)
         e.preventDefault()
-        for (const key in values) {
-          if (values[key] === '') {
-              values[key] = Vote[key]
-          }
-      }
         try {
-            const response = await axios.post(`${process.env.API_URL}/createTargetVote/${Cookies.get('_id')}`, values)
+            const response = await axios.post(`${process.env.API_URL}/createTargetVote/${user._id}`, values)
             if (response.status === 201) {
               Swal.fire({
                 title: 'Producto creado',
@@ -96,4 +100,4 @@ const voteAdmin = (data)  =>{
     )
 }
 
-export default voteAdmin
+export default vote

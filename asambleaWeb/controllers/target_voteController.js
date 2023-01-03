@@ -6,19 +6,20 @@ const createTargetVote = (req, res) => {
   const { id } = req.params;
 
   user.findById(id, (error, person) => {
+    console.log(person.rol)
     if (error) {
       return res.status(400).send({ message: "Error al buscar el usuario." });
     }
     if (!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if (person.rol === "vecino") {
+    if (person.rol !== "administrador") {
       const newTargetVote = new TargetVote({
       rut,
       rut_v,
       name_v,
       });
-      newTargetVote.save((error, TargetVote) => {
+      newTargetVote.save((error, vote) => {
         if (error) {
           return res.status(400).send({ message: "Error al crear la votación." });
         }
