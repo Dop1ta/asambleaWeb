@@ -2,10 +2,13 @@ import { useState, useEffect } from 'react'
 import { Stack, Text, Card, CardHeader, Heading, CardBody, SimpleGrid, Button, ButtonGroup } from '@chakra-ui/react'
 import axios from 'axios'
 import NavTab from '../components/NavTab'
+import { useRouter } from 'next/router'
 
 const Acta = () => {
 
     const [Actas, setActas] = useState([])
+
+    const router = useRouter()
 
     const getActa = async () => {
         const response = await axios.get(`${process.env.API_URL}/getActas`)
@@ -39,7 +42,7 @@ const Acta = () => {
                             <Text>{Actap.description}</Text>
                             <Text>{Actap.date}</Text>
                             <ButtonGroup>
-                                <Button colorScheme='blue' variant='solid' margin={4} onClick={()=> router.push('${process.env.API_URL}/file/download/${Actap._id}')}>Descargar</Button>
+                                <Button colorScheme='blue' variant='solid' margin={4} onClick={()=> router.push(`${process.env.API_URL}/file/download/${Actap._id}`)}>Descargar</Button>
                             </ButtonGroup>
                         </CardHeader>
                     </Card>

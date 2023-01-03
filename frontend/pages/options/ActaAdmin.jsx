@@ -59,8 +59,8 @@ const ActaAdmin = () => {
         router.push(`/updateActa/${id}`)
     }
 
-    const upload_file = () => {
-        router.push('/file_upload')
+    const upload_file = (id) => {
+        router.push(`/file_upload/${id}`)
     }
 
     const showActas = () => {
