@@ -6,7 +6,7 @@ import showA from '../components/showA'
 
 export default function Home() {
   return (
-    <Stack bg={'rgb(244, 247, 254)'} textAlign={'center'}>
+    <Stack bg={'rgb(244, 247, 254)'} textAlign={'center'} alignItems={'center'}>
       <Head>
         <title>Inicio</title>
         <link rel="icon" href="/icon.png" />
@@ -22,15 +22,13 @@ export default function Home() {
         color='blackAlpha.700'
         fontWeight='bold'
       >
-        <GridItem pl='2' area={'nav'} margin={4} >
-          {directiva()}
-        </GridItem>
       </Grid>
-      <GridItem pl='2' margin={4} bg={'rgb(244, 247, 254)'} height={600}>
-        <VStack>
-          <Heading>Asamblea recientemente agregadas</Heading>
-          {showA()}
-        </VStack>
+      <GridItem pl='2' area={'nav'} margin={4} width={500}>
+        {directiva()}
+      </GridItem>
+      <GridItem pl='2' margin={4} bg={'rgb(244, 247, 254)'}>
+        <Heading>Asamblea recientemente agregadas</Heading>
+        {showA()}
       </GridItem>
     </Stack>
   )
