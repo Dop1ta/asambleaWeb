@@ -81,7 +81,7 @@ const updateActa = (data) => {
         })
     }
 
-    const onDelete = (e) => {
+    const onDelete = async (e) => {
         e.preventDefault()
         for (const key in values) {
             if (values[key] === '') {
@@ -89,7 +89,7 @@ const updateActa = (data) => {
             }
         }
         try {
-            const deletef = axios.put(`${process.env.API_URL}/file/delete/${Actau._id}`, values)
+            const deletef = await axios.put(`${process.env.API_URL}/file/delete/${Actau._id}`)
             if (deletef.status === 200) {
                 Swal.fire({
                     title: 'Archivo Eliminado',
@@ -104,7 +104,7 @@ const updateActa = (data) => {
             } else {
                 Swal.fire({
                     title: 'Error',
-                    text: 'Error al eliminar archivo',
+                    text: 'No existe ningun archivo en esta acta',
                     icon: 'error',
                     confimButtonText: 'Ok'
                 })
