@@ -12,6 +12,10 @@ const createUser = (req, res) => {
     return res.status(407).send({ message: 'Email mal ingresado.' });
   }
 
+  if(!number.match(/^9\d\d\d\d\d\d\d\d$/)) {
+    return res.status(408).send({ message: 'Numero mal ingresado.' });
+  }
+
   user.findOne({ rut: rut }, (error, person) => {
 
     if (error) {
@@ -19,7 +23,7 @@ const createUser = (req, res) => {
     }
     try {
       if (rut === person.rut) {
-        return res.status(400).send({ message: 'El rut no se puede repetir.' })
+        return res.status(409).send({ message: 'El rut no se puede repetir.' })
       }
     } catch (error) {
     }
