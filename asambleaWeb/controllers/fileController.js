@@ -18,8 +18,9 @@ const uploadfile = (req, res) => {
         url: file.path,
         name: file.originalname,
         mimeType: file.mimetype,
-        idacta: actaf._id
+        idacta: id
       });
+      console.log(id)
       newFile.save((err, fileSaved) => {
         if (err) {
           return res.status(400).send({ message: "Error al guardar el archivo" });
@@ -42,41 +43,89 @@ const getFiles = (req, res) => {
 
 const getFilesByActaId = (req, res) => {
   const { idacta } = req.params
-  fileUpload.find({ idacta }, (error, file) => {
+  fileUpload.findOne({idacta}, (error, file) => {
     if (error) {
       return res.status(400).send({ message: "Error al obtener los archivos" });
     }
-    return res.status(200).send(file);
-  });
+    if (!file) {
+      return res.status(404).send({ message: "Archivo no encontrado." })
+    }
+    fileUpload.findById(file.id, (error, fine) => {
+      if (error) {
+        return res.status(400).send({ message: "Error al obtener los archivos" });
+      }
+      if(!fine){
+        return res.status(400).send({ message: "No encontrado" });
+      }
+        return res.status(200).send(fine);
+      });
+  })
 }
 
 const getSFiles = (req, res) => {
   const { idacta } = req.params
-  fileUpload.findById(idacta, (error, file) => {
+  fileUpload.findOne({idacta}, (error, file) => {
     if (error) {
-      return res.status(400).send({ message: "Error al obtener el archivo" })
+      return res.status(400).send({ message: "Error al obtener los archivos" });
     }
     if (!file) {
-      return res.status(404).send({ message: "Archivo no existe" })
+      return res.status(404).send({ message: "Archivo no encontrado." })
     }
-    return res.download('./' + file.url)
+    fileUpload.findById(file.id, (error, fix) => {
+      if (error) {
+        return res.status(400).send({ message: "Error al obtener el archivo" })
+      }
+      if (!fix) {
+        return res.status(404).send({ message: "Archivo no existe" })
+      }
+      return res.download('./' + fix.url)
+    })
   });
 }
 
 const deleteFiles = async (req, res) => {
   const { idacta } = req.params
-  fileUpload.findByIdAndDelete(idacta, (error, file) => {
+  fileUpload.findOne({idacta}, (error, file) => {
+    if (error) {
+      return res.status(400).send({ message: "Error al obtener los archivos" });
+    }
+    if (!file) {
+      return res.status(404).send({ message: "Archivo no encontrado 1." })
+    }
+    fileUpload.findByIdAndDelete(file._id, (error, fmas) => {
+      if (error) {
+        return res.status(400).send({ message: "Error." })
+      }
+      if (!fmas) {
+        return res.status(404).send({ message: "Archivo no encontrado." })
+      }
+      fs.unlink(fmas.url, (error) => {
+        if(error){
+          return res.status(404).send({ message: "Error." })
+        }
+        if(!fmas){
+          return res.status(404).send({ message: "Error" })
+        }
+        return res.status(200).send({ message: "Archivo Eliminado"})
+      })
+    });
+  });
+}
+
+const deleteFilesS = async (req, res) => {
+  const { id } = req.params
+  fileUpload.findByIdAndDelete(id, (error, file) => {
     if (error) {
       return res.status(400).send({ message: "Error." })
     }
     if (!file) {
       return res.status(404).send({ message: "Archivo no encontrado." })
     }
-    fs.unlink(idacta, (error) => {
+    fs.unlink(file.url, (error) => {
       if(error){
         return res.status(404).send({ message: "Error." })
       }
-      if(!idacta){
+      if(!file){
         return res.status(404).send({ message: "Error" })
       }
       return res.status(200).send({ message: "Archivo Eliminado"})
@@ -87,7 +136,8 @@ const deleteFiles = async (req, res) => {
 module.exports = {
   uploadfile,
   getFiles,
+  getFilesByActaId,
   getSFiles,
   deleteFiles,
-  getFilesByActaId
+  deleteFilesS
 };

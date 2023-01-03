@@ -89,7 +89,7 @@ const updateActa = (data) => {
             }
         }
         try {
-            const deletef = await axios.put(`${process.env.API_URL}/file/delete/${Actau._id}`)
+            const deletef = await axios.delete(`${process.env.API_URL}/file/delete/${Actau._id}`)
             if (deletef.status === 200) {
                 Swal.fire({
                     title: 'Archivo Eliminado',
