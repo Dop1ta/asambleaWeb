@@ -1,7 +1,7 @@
 import Tab_votingActivity from "../../components/Tab_votingActivity";
 import axios from 'axios'
 import { useState, useEffect } from 'react'
-import { useRouter } from "next/router"; 
+import { useRouter } from "next/router";
 import Cookies from "js-cookie";
 import Swal from "sweetalert2";
 import { Stack, Radio, RadioGroup, Button, Text } from "@chakra-ui/react";
