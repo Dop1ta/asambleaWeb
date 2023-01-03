@@ -9,24 +9,15 @@ const [votingAct, setVotingAct] = useState([])
 
   const getVotingAct = async () => {
     try {
-      const response = await axios.get(`${process.env.API_URL}/getVotingActivityByState/search/1`)
+      const response = await axios.get(`${process.env.API_URL}/getVotingActivityByState/search/0`)
       setVotingAct(response.data)
     } catch (error) {
     }
   }
 
-    const closeVote = async(id) =>{
-    try {
-      await axios.put(`${process.env.API_URL}/closeVotingActivity/${id}`)
-    } catch(error){
-
-    }
-  }
 
   useEffect(() => {
     getVotingAct()
-
-    closeVote()
   }, [])
 
   const showVotingAct = () => {
@@ -50,7 +41,7 @@ const [votingAct, setVotingAct] = useState([])
               <Heading size='md'>{votingActs.name}</Heading>
               <Text>Fecha de Inicio: {votingActs.startDate_vote}</Text>
               <Text>Fecha de Finalización: {votingActs.endDate_vote}</Text>
-              <Text>Ganador: {votingActs.ganador}</Text>
+              <Text>El(la) nuevo(va) {votingActs.name} es {votingActs.ganador} con {votingActs.votos_ganador} votos.</Text>
             </CardHeader>
           </Card >
         )

@@ -12,5 +12,5 @@ api.get("/getUsers/search/:id/:userid", userController.getUserById);
 api.get("/getUsers/rut/:rut", userController.getUserByRut);
 api.get("/getEmails", userController.getUsersEmail);
 api.get("/getUsers/email/:id/:userid", userController.getUserEmailById);
-api.get("/updateUserVote/:rut/:userid", userController.updateUserVote);
+api.get("/updateUserVote/:id/:userid", userController.updateUserVote);
 module.exports = api;

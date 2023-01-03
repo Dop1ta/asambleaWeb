@@ -239,17 +239,15 @@ const getUserEmailById = (req, res) => {
 };
 
 const updateUserVote = (req, res) => {
-  const { userid } = req.params;
-  const { rut } = req.body;
-  user.findOne({ rut: rut }, (error, person) => {
+  const {id, userid } = req.params;
+  user.findOne({ userid}, (error, person) => {
     if (error) {
       return res.status(400).send({ message: "Error al buscar el usuario." });
     }
     if (!person) {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
-    if (person.rol === "administrador") {
-      user.findByIdAndUpdate(userid, req.body, (error, person) => {
+      user.findByIdAndUpdate(id, req.body, (error, person) => {
         if (error) {
           return res.status(400).send({ message: "Error al actualizar el usuario." });
         }
@@ -258,9 +256,6 @@ const updateUserVote = (req, res) => {
         }
         return res.status(201).send({ message: "Usuario actualizado." });
       });
-    } else {
-      return res.status(404).send({ message: "Usuario no permitido." })
-    }
   });
 };
 

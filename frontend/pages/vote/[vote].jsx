@@ -41,13 +41,39 @@ const vote = (data) => {
   useEffect(() => {
     getUser()
   }, [])
+
+  const getUserSelected = async () => {
+    try {
+      const response1 = await axios.get(`${process.env.API_URL}/getUsers/rut/${rut}`)
+      setUserSelected(response1.data)
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const[userSelected,setUserSelected] = useState([])
+
   let [values, setValues] = useState({
+    rut: '',
+  })
+
+  const [user2, setUser2] = useState({
+    votos: userSelected.votos + 1
+})
+/*  let [values, setValues] = useState({
     rut: Cookies.get('rut'),
     rut_v: '',
     name_v: Vote._id,
   })
+  */
+  const onSumbit = async(e) =>{
+    try{
+        await axios.put(`${process.env.API_URL}/updateUserVote/${userSelected._id}/${user._id}`, user2)
+    } catch(error) {
 
-  const onSumbit = async (e) => {
+    }
+  }
+  /*const onSumbit = async (e) => {
     e.preventDefault()
     // console.log(user._id)
     // console.log(values)
@@ -55,8 +81,8 @@ const vote = (data) => {
       const response = await axios.post(`${process.env.API_URL}/createTargetVote/${user._id}`, values)
       if (response.status === 201) {
         Swal.fire({
-          title: 'Producto creado',
-          text: 'El producto se ha creado correctamente',
+          title: 'Voto emitido',
+          text: 'El voto se ha guardado correctamente',
           icon: 'success',
           confirmButtonText: 'Ok'
         }).then((result) => {
@@ -80,7 +106,7 @@ const vote = (data) => {
         confirmButtonText: 'Ok'
       })
     }
-  }
+  }*/
 
   const onChange = (e) => {
     setValues({
@@ -94,10 +120,10 @@ const vote = (data) => {
       <Text>Votación para {Vote.name}</Text>
       <RadioGroup>
         <Stack direction='row'>
-          <Radio value={Vote.rut1} name='rut_v' onChange={onChange}>{Vote.rut1}</Radio>
-          <Radio value={Vote.rut2} name='rut_v' onChange={onChange}>{Vote.rut2}</Radio>
-          <Radio value={Vote.rut3} name='rut_v' onChange={onChange}>{Vote.rut3}</Radio>
-          <Radio value={Vote.rut4} name='rut_v' onChange={onChange}>{Vote.rut4}</Radio>
+          <Radio value={Vote.rut1} name='rut' onChange={onChange}>{Vote.rut1}</Radio>
+          <Radio value={Vote.rut2} name='rut' onChange={onChange}>{Vote.rut2}</Radio>
+          <Radio value={Vote.rut3} name='rut' onChange={onChange}>{Vote.rut3}</Radio>
+          <Radio value={Vote.rut4} name='rut' onChange={onChange}>{Vote.rut4}</Radio>
           <Button colorScheme="blue" size="md" type="sumbit" onClick={onSumbit}>Guardar Voto</Button>
         </Stack>
       </RadioGroup>

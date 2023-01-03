@@ -9,11 +9,16 @@ const votingActivitySchema = new schema({
     maxLength: 100,
   },
   startDate_vote: {
-    type: Date,
+    type: String,
+    required: true,
+    
+  },
+  startHour_vote:{
+    type: String,
     required: true,
   },
   endDate_vote: {
-    type: Date,
+    type: String,
     required: true,
   },
   ganador: {
