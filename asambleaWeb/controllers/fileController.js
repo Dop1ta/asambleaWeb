@@ -1,6 +1,7 @@
 const { application } = require("express");
 const Acta = require("../models/acta_meeting");
 const fileUpload = require("../models/file");
+const fs = require("fs");
 
 const uploadfile = (req, res) => {
   const { files } = req
@@ -64,14 +65,22 @@ const getSFiles = (req, res) => {
 
 const deleteFiles = async (req, res) => {
   const { idacta } = req.params
-  fileUpload.findByIdAndDelete(idacta, (error, meeting) => {
+  fileUpload.findByIdAndDelete(idacta, (error, file) => {
     if (error) {
       return res.status(400).send({ message: "Error." })
     }
     if (!file) {
-      return res.status(404).send({ message: "Archvio no encontrado." })
+      return res.status(404).send({ message: "Archivo no encontrado." })
     }
-    return res.status(200).send(file)
+    fs.unlink(idacta, (error) => {
+      if(error){
+        return res.status(404).send({ message: "Error." })
+      }
+      if(!idacta){
+        return res.status(404).send({ message: "Error" })
+      }
+      return res.status(200).send({ message: "Archivo Eliminado"})
+    })
   });
 }
 
