@@ -48,7 +48,7 @@ const Acta = () => {
         } else {
             return Actas.map(Actap => {
                 console.log(Actap._id)
-                    if(getFileUp(Actap._id) === true){
+                    if(getFileUp(Actap._id)){
                         return (
                             <Card key={Actap._id} boxShadow='lg' ml={30} my={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
                                 <CardHeader>
