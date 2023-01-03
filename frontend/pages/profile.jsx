@@ -19,46 +19,44 @@ const profile = () => {
     }
 
     const showUser = () => {
-        return user.map(user => {
-            if(user.rut === '0.000.000-0') {
-                return null
-            } else {
-                return (
-                    <Card key={user._id} backgroundColor={'white'} align={'center'} minW='md'>
-                        <CardHeader>
-                            <Heading size='md'>{user.name}</Heading>
-                        </CardHeader>
-                        <CardBody>
-                            <Stack divider={<StackDivider/>} spacing='4'>
-                                <Box>
-                                    <Heading size='xs' >RUT</Heading>
-                                    <Text pt='2' fontSize='sm'>{user.rut}</Text>
-                                </Box>
-                                <Box>
-                                    <Heading size='xs' >ROL</Heading>
-                                    <Text pt='2' fontSize='sm'>{user.rol}</Text>
-                                </Box>
-                                <Box>
-                                    <Heading size='xs' >EMAIL</Heading>
-                                    <Text pt='2' fontSize='sm'>{user.email}</Text>
-                                </Box>
-                                <Box>
-                                    <Heading size='xs' >TELEFONO</Heading>
-                                    <Text pt='2' fontSize='sm'>{user.number}</Text>
-                                </Box>
-                                <Box>
-                                    <Heading size='xs' >DIRECCION</Heading>
-                                    <Text pt='2' fontSize='sm'>{user.address}</Text>
-                                </Box>
-                            </Stack>
-                        </CardBody>
-                        <CardFooter>
-                            <Button colorScheme={'blue'} leftIcon={<EditIcon/>} onClick={() => router.push(`/updateprofile/${user._id}`)}>Editar</Button>
-                        </CardFooter>
-                    </Card>
-                )
-            }
-        })
+        if(user.rut === '0.000.000-0') {
+            return null
+        } else {
+            return (
+                <Card backgroundColor={'white'} align={'center'} minW='md'>
+                    <CardHeader>
+                        <Heading size='md'>{user.name}</Heading>
+                    </CardHeader>
+                    <CardBody>
+                        <Stack divider={<StackDivider/>} spacing='4'>
+                            <Box>
+                                <Heading size='xs' >RUT</Heading>
+                                <Text pt='2' fontSize='sm'>{user.rut}</Text>
+                            </Box>
+                            <Box>
+                                <Heading size='xs' >ROL</Heading>
+                                <Text pt='2' fontSize='sm'>{user.rol}</Text>
+                            </Box>
+                            <Box>
+                                <Heading size='xs' >EMAIL</Heading>
+                                <Text pt='2' fontSize='sm'>{user.email}</Text>
+                            </Box>
+                            <Box>
+                                <Heading size='xs' >TELEFONO</Heading>
+                                <Text pt='2' fontSize='sm'>{user.number}</Text>
+                            </Box>
+                            <Box>
+                                <Heading size='xs' >DIRECCION</Heading>
+                                <Text pt='2' fontSize='sm'>{user.address}</Text>
+                            </Box>
+                        </Stack>
+                    </CardBody>
+                    <CardFooter>
+                        <Button colorScheme={'blue'} leftIcon={<EditIcon/>} onClick={() => router.push(`/updateprofile/${user._id}`)}>Editar</Button>
+                    </CardFooter>
+                </Card>
+            )
+        }
     }
 
     useEffect(() => {
