@@ -59,6 +59,10 @@ const ActaAdmin = () => {
         router.push(`/updateActa/${id}`)
     }
 
+    const upload_file = () => {
+        router.push('/file_upload')
+    }
+
     const showActas = () => {
         try {
             return Actas.map(Actap => {
@@ -68,6 +72,7 @@ const ActaAdmin = () => {
                             <Heading size='md'>{Actap.name}</Heading>
                             <Text>{Actap.description}</Text>
                             <Text>{Actap.date}</Text>
+                            <Button leftIcon={<AiOutlinePlus />} colorScheme='blue' variant='solid' margin={4} onClick={() => upload_file()} >Subir Archivo</Button>
                             <Button leftIcon={<EditIcon />} colorScheme='blue' variant='solid' margin={4} onClick={() => updateActa(Actap._id)} >Editar</Button>
                             <Button leftIcon={<TrashIcon />} colorScheme='red' variant='solid' margin={4} onClick={() => deleteId(Actap._id)} >Eliminar</Button>
                         </CardHeader>

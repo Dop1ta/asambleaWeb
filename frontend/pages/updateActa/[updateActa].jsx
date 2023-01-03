@@ -81,7 +81,43 @@ const updateActa = (data) => {
         })
     }
 
-    const deletef = axios.put(`${process.env.API_URL}/file/delete/${Actau.idacta}`)
+    const onDelete = (e) => {
+        e.preventDefault()
+        for (const key in values) {
+            if (values[key] === '') {
+                values[key] = Actau[key]
+            }
+        }
+        try {
+            const deletef = axios.put(`${process.env.API_URL}/file/delete/${Actau._id}`, values)
+            if (deletef.status === 200) {
+                Swal.fire({
+                    title: 'Archivo Eliminado',
+                    text: 'Archivo Eliminado correctamente',
+                    icon: 'success',
+                    confimButtinText: 'Ok'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        router.push('/options/ActaAdmin')
+                    }
+                })
+            } else {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Error al eliminar archivo',
+                    icon: 'error',
+                    confimButtonText: 'Ok'
+                })
+            }
+        } catch {
+            Swal.fire({
+                title: 'Error',
+                text: 'No se ha podido eliminar',
+                icon: 'error',
+                confirmButonText: 'Ok'
+            })
+        }
+    }
 
     return (
         <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254"}>
@@ -106,7 +142,7 @@ const updateActa = (data) => {
                         <Input type="Date" name={"date"} defaultValue={Actau.date} onChange={onChange} />
                     </FormControl>
                     <FormControl>
-                    <Button coloScheme={'red'} onClick={() => deletef()}>Eliminar</Button>
+                    <Button coloScheme={'red'} onClick={onDelete}>Eliminar Archivo</Button>
                     </FormControl>
                     <Stack>
                         <ButtonGroup variant='outline' spacing='6' my={4} mb={4}>

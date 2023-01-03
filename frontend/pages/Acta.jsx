@@ -39,7 +39,7 @@ const Acta = () => {
                             <Text>{Actap.description}</Text>
                             <Text>{Actap.date}</Text>
                             <ButtonGroup>
-                                <Button colorScheme='blue' variant='solid' margin={4} >Descargar</Button>
+                                <Button colorScheme='blue' variant='solid' margin={4} onClick={()=> router.push('${process.env.API_URL}/file/download/${Actap._id}')}>Descargar</Button>
                             </ButtonGroup>
                         </CardHeader>
                     </Card>
