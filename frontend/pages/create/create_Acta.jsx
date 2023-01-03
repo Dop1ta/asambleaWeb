@@ -80,7 +80,6 @@ const create_Acta = () => {
                         <FormLabel>Fecha</FormLabel>
                         <Input placeholder="Seleccione fecha" size="md" type="Date" onChange={onChange} name={"date"} />
                     </FormControl>
-                    <Files_upload />
                     <Stack>
                         <ButtonGroup variant='outline' spacing='6'>
                             <Button colorScheme={'blue'} onClick={onSubmit}>Crear</Button>
