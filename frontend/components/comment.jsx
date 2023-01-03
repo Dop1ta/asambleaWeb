@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Card, CardBody, Heading, Stack, Text, SimpleGrid, Button, Textarea, CardFooter, Container } from '@chakra-ui/react'
+import { Card, CardBody, Heading, Stack, Text, SimpleGrid, Button, Textarea, CardFooter, Container, StackDivider } from '@chakra-ui/react'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
@@ -108,10 +108,12 @@ const comment = (cid) => {
                 return null
             } else {
                 return (
-                    <Card key={comments._id} alignItems={'center'}>
+                    <Card key={comments._id} minW={'sm'} variant={'filled'}>
                         <CardBody>
-                            <Heading>{comments.username}</Heading>
-                            <Text>{comments.comment}</Text>
+                            <Stack>
+                                <Heading size={'md'}>{comments.username}</Heading>
+                                <Text py={'2'}>{comments.comment}</Text>
+                            </Stack>
                         </CardBody>
                         <CardFooter>
                             {showDelete(comments.userid, comments._id)}
@@ -143,7 +145,7 @@ const comment = (cid) => {
                 <Button colorScheme={'blue'} onClick={addComment}>Comentar</Button>
                 <Button onClick={() => router.reload()}>Cancelar</Button>
             </Stack>
-            <SimpleGrid>
+            <SimpleGrid spacing={2}>
                 {showComments()}
             </SimpleGrid>
         </Container>
