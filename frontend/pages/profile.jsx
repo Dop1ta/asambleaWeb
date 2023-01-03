@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { EditIcon } from '@chakra-ui/icons'
 import Cookies from 'js-cookie'
 import Head from 'next/head'
+import NavTabAdmin from '../components/NavTabAdmin'
 
 const profile = () => {
 
@@ -68,7 +69,7 @@ const profile = () => {
             <Head>
                 <title>Perfil</title>
             </Head>
-            <NavTab/>
+            {Cookies.get('rut') === '0.000.000-0' ? <NavTabAdmin/> : <NavTab/>}
             <Container maxW="container.md" my={4}>
                 <Heading textAlign={"center"} my={4}>Perfil</Heading>
                 <Stack alignItems={'center'}>

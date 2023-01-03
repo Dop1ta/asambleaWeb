@@ -54,7 +54,7 @@ function MenuButtonIcon() {
         <HamburgerIcon/>
       </MenuButton>
       <MenuList>
-        {Cookies.get('rut') === '0.000.000-0' ? null : <MenuItem onClick={profileRouter}>Perfil</MenuItem>}
+        <MenuItem onClick={profileRouter}>Perfil</MenuItem>
         <MenuItem onClick={loginRouter}>{name}</MenuItem>
       </MenuList>
     </Menu>
