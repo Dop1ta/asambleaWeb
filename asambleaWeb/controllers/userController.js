@@ -4,7 +4,7 @@ const createUser = (req, res) => {
   const { name, rut, rol, email, number, address, votos, admin } = req.body;
   const { id } = req.params;
 
-  if(!name.match(/^[A-Za-z]+$/)) {
+  if(!name.match(/^([a-zA-Z]+( [a-zA-Z]+)+)$/)) {
     return res.status(405).send({ message: 'El nombre solo debe contener letras.' });
   }
 
@@ -121,7 +121,20 @@ const getUsersAll = (req, res) => {
 };
 
 const updateUser = (req, res) => {
+  const { name, rol, email, number, address } = req.body;
   const { id, userid } = req.params;
+
+  if(!name.match(/^([a-zA-Z]+( [a-zA-Z]+)+)$/)) {
+    return res.status(405).send({ message: 'El nombre solo debe contener letras.' });
+  }
+
+  if(!email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)) {
+    return res.status(407).send({ message: 'Email mal ingresado.' });
+  }
+
+  if(!number.match(/^9\d\d\d\d\d\d\d\d$/)) {
+    return res.status(408).send({ message: 'Numero mal ingresado.' });
+  }
 
   user.findById(id, (error, person) => {
     if (error) {
