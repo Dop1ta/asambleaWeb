@@ -30,21 +30,14 @@ const create_voting_activity = () => {
           const response = await axios.post(`${process.env.API_URL}/createVotingActivity/639a48dffe299c865e0ea1f9`, values)
           if (response.status === 201) {
             Swal.fire({
-              title: 'Producto creado',
-              text: 'El producto se ha creado correctamente',
+              title: 'Votación creada',
+              text: 'La votación ha sido creada correctamente.',
               icon: 'success',
               confirmButtonText: 'Ok'
             }).then((result) => {
               if (result.isConfirmed) {
                 router.push('/voting_activity')
               }
-            })
-          } else {
-            Swal.fire({
-              title: 'Error',
-              text: 'Ha ocurrido un error',
-              icon: 'error',
-              confirmButtonText: 'Ok'
             })
           }
         } catch (error) {

@@ -33,8 +33,8 @@ const voting_activity = () => {
         const response = await axios.put(`${process.env.API_URL}/closeVotingActivity/${id}/639a48dffe299c865e0ea1f9/`, votingAct.state)
         if (response.status === 201) {
             Swal.fire({
-                title: 'Usuario Actualizado',
-                text: 'El usuario se ha actualizado correctamente',
+                title: 'Votación cerrada',
+                text: 'La votación se ha cerrado correctamente.',
                 icon: 'success',
                 confirmButtonText: 'Ok'
             }).then((result) => {
@@ -42,18 +42,11 @@ const voting_activity = () => {
                     router.push('/userview')
                 }
             })
-        } else {
-            Swal.fire({
-                title: 'Error',
-                text: 'Error al ingresar los parametros',
-                icon: 'error',
-                confirmButtonText: 'Ok'
-            })
         }
     } catch (err) {
         Swal.fire({
             title: 'Error',
-            text: 'No se ha podido actualizar el usuario',
+            text: 'No se ha podido cerrar la votación correctamente.',
             icon: 'error',
             confirmButtonText: 'Ok'
         })

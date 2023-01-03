@@ -29,7 +29,7 @@ const Tab_votingActivity = () => {
       <Center>
         <Breadcrumb separator='-'>
           <BreadcrumbItem>
-            <BreadcrumbLink href='/viewAdmin'>Inicio</BreadcrumbLink>
+            <BreadcrumbLink href='/userView'>Inicio</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem>
@@ -41,7 +41,7 @@ const Tab_votingActivity = () => {
           </BreadcrumbItem>
 
           <BreadcrumbItem>
-            <BreadcrumbLink href='view_voting'>Resultados de Votación</BreadcrumbLink>
+            <BreadcrumbLink href='/view_voting'>Resultados de Votación</BreadcrumbLink>
           </BreadcrumbItem>
 
           <BreadcrumbItem isCurrentPage>
