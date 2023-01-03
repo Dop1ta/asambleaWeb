@@ -37,6 +37,7 @@ export default function CrearA() {
             const [time, hour] = values.time.split('T')
             values.time = time
             values.hour = hour
+            console.log(values)
             const response = await axios.post(`${process.env.API_URL}/createMeeting/639a48dffe299c865e0ea1f9`, values)
             if (response.status === 201) {
               Swal.fire({

@@ -35,16 +35,19 @@ const Asambleas = () => {
       )
     } else {
       return asamblea.map(asambleas => {
-        return (
-          <Card key={asambleas._id} boxShadow='lg' marginLeft={30} marginTop={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"} width={'350px'}>
-            <CardHeader textAlign={'center'}>
-              <Heading size='md' margin={4}>{asambleas.name}</Heading>
-              <Text>Dia: {asambleas.time}</Text>
-              <Text>Hora: {asambleas.hour}</Text>
-              <Text>{asambleas.description}</Text>
-            </CardHeader>
-          </Card >
-        )
+        const dateA = asambleas.time + 'T' + asambleas.hour
+        if (Date.parse(dateA) >= Date.now()) {
+          return (
+            <Card key={asambleas._id} boxShadow='lg' marginLeft={30} marginTop={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"} width={'350px'}>
+              <CardHeader textAlign={'center'}>
+                <Heading size='md' margin={4}>{asambleas.name}</Heading>
+                <Text>Dia: {asambleas.time}</Text>
+                <Text>Hora: {asambleas.hour}</Text>
+                <Text>{asambleas.description}</Text>
+              </CardHeader>
+            </Card >
+          )
+        }
       }).reverse()
     }
   }

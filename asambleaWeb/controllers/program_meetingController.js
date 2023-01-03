@@ -28,7 +28,10 @@ const createMeeting = (req, res) => {
       message: "Un parametro no fue ingresado.",
     });
   }
-  if (Date.parse(time) < Date.now()) {
+
+  const dateA = time + 'T' + hour
+
+  if (Date.parse(dateA) <= Date.now()) {
     return res.status(400).send({
       message: "La fecha no puede ser menor a la actual.",
     });
@@ -81,14 +84,17 @@ const getMeetings = (req, res) => {
 
 const updateMeeting = (req, res) => {
   const { id, idadmin } = req.params;
-  const { name, time, place, description } = req.body;
+  const { name, time, hour, place, description } = req.body;
 
   if (!useRegex(name) || !useRegex(description) || !useRegex(place)) {
     return res.status(400).send({
       message: "El nombre, lugar y descripcion solo puede contener letras.",
     });
   }
-  if (Date.parse(time) < Date.now()) {
+
+  const dateA = time + 'T' + hour
+
+  if (Date.parse(dateA) < Date.now()) {
     return res.status(400).send({
       message: "La fecha no puede ser menor a la actual.",
     });
