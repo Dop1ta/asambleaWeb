@@ -9,7 +9,7 @@ const file_upload = () => {
 
     const router = useRouter()
     let files = null;
-    let botonm = "Subir Archivo"
+    //let botonm = "Subir Archivo"
 
 
     const upload = async (e) => {
