@@ -157,6 +157,32 @@ const getVotingActivity = (req, res) => {
     });
   };
 
+  const closeVotingActivity = (req, res) =>{
+    const { id, userid } = req.params;
+    user.findById(userid, (error, person) => {
+      if (error) {
+        return res.status(400).send({ message: "Error al buscar el usuario." });
+      }
+      if (!person) {
+        return res.status(404).send({ message: "Usuario no encontrado." });
+      }
+      if (person.rol === "administrador") {
+    votingActivity.findByIdAndUpdate(id, req.body, (error, vote) => {
+      if (error) {
+        return res.status(400).send({ message: "Error al actualizar la actividad de votación." });
+      }
+      if (!vote) {
+        return res.status(404).send({ message: "Votación no encontrada." });
+      }
+      return res.status(200).send({ message: "Votación actualizada." });
+    });
+  }else{
+    return res.status(404).send({ message: "Usuario no permitido." })
+  }
+});
+  }
+
+
 module.exports = {
   createVotingActivity,
   getVotingActivity,
@@ -165,4 +191,5 @@ module.exports = {
   getVotingActivityById,
   modificarPorRut,
   getVotingActivityByState,
+  closeVotingActivity,
 };

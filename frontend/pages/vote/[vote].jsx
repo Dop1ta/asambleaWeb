@@ -1,4 +1,4 @@
-import Tab_votingActivity from "../../components/Tab_votingActivity";
+import Tab_votingActivity_basic from "../../components/Tab_votingActivity_basic";
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import { useRouter } from "next/router";
@@ -90,7 +90,7 @@ const vote = (data) => {
   }
   return (
     <Stack alignItems={'center'} textAlign={'center'}>
-      <Tab_votingActivity />
+      <Tab_votingActivity_basic/>
       <Text>Votación para {Vote.name}</Text>
       <RadioGroup>
         <Stack direction='row'>

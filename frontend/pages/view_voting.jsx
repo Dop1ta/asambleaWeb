@@ -9,14 +9,24 @@ const [votingAct, setVotingAct] = useState([])
 
   const getVotingAct = async () => {
     try {
-      const response = await axios.get(`${process.env.API_URL}/getAllVotingActivity`)
+      const response = await axios.get(`${process.env.API_URL}/getVotingActivityByState/search/1`)
       setVotingAct(response.data)
     } catch (error) {
     }
   }
 
+    const closeVote = async(id) =>{
+    try {
+      await axios.put(`${process.env.API_URL}/closeVotingActivity/${id}`)
+    } catch(error){
+
+    }
+  }
+
   useEffect(() => {
     getVotingAct()
+
+    closeVote()
   }, [])
 
   const showVotingAct = () => {

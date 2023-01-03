@@ -8,5 +8,6 @@ api.put("/updateVotingActivity/:id/:userid", votingActivityController.updateVoti
 api.delete("/deleteVotingActivity/:id/:userid", votingActivityController.deleteVotingActivity);
 api.get("/getVotingActivity/search/:id", votingActivityController.getVotingActivityById);
 api.get("/getVotingActivityByState/search/:state", votingActivityController.getVotingActivityByState);
+api.get("/closeVotingActivity/:id/:userid", votingActivityController.closeVotingActivity)
 
 module.exports = api;

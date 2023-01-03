@@ -4,6 +4,7 @@ import Tab_votingActivity from '../components/Tab_votingActivity';
 import axios from 'axios'
 import Cookies from 'js-cookie';
 import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
 
 
 const voting_activity = () => {
@@ -14,6 +15,7 @@ const voting_activity = () => {
   const getVotingAct = async () => {
     try {
       const response = await axios.get(`${process.env.API_URL}/getVotingActivityByState/search/1`)
+      console.log(response.data)
       setVotingAct(response.data)
     } catch (error) {
     }
@@ -23,9 +25,41 @@ const voting_activity = () => {
     getVotingAct()
   }, [])
 
-  const castAVote = (id) => {
-    router.push(`/vote/${id}`)
-  }
+
+  const closeVotingActivity = async (id) => {
+    votingAct.state = '0'
+    try {
+        console.log(id)
+        const response = await axios.put(`${process.env.API_URL}/closeVotingActivity/${id}/639a48dffe299c865e0ea1f9/`, votingAct.state)
+        if (response.status === 201) {
+            Swal.fire({
+                title: 'Usuario Actualizado',
+                text: 'El usuario se ha actualizado correctamente',
+                icon: 'success',
+                confirmButtonText: 'Ok'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    router.push('/userview')
+                }
+            })
+        } else {
+            Swal.fire({
+                title: 'Error',
+                text: 'Error al ingresar los parametros',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            })
+        }
+    } catch (err) {
+        Swal.fire({
+            title: 'Error',
+            text: 'No se ha podido actualizar el usuario',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        })
+    }
+}
+
   const showVotingActs = () => {
     if (votingAct.length === 0) {
       return (
@@ -39,7 +73,6 @@ const voting_activity = () => {
         </Card>
       )
     } else {
-      console.log(votingAct)
       return votingAct.map(votingActs => {
         return (
           <Card key={votingActs._id}>
@@ -47,7 +80,7 @@ const voting_activity = () => {
               <Heading size='md'>{votingActs.name}</Heading>
               <Text>Fecha de inicio: {votingActs.startDate_vote}</Text>
               <Text>Fecha de caducidad: {votingActs.endDate_vote}</Text>
-              <Button colorScheme="blue" size="md" type="sumbit" onClick={() => castAVote(votingActs._id)}>Abrir votación</Button>
+              <Button colorScheme="blue" size="md" type="sumbit" onClick={() => closeVotingActivity(votingActs._id)}>Cerrar Votación</Button>
             </CardHeader>
           </Card>
         )
