@@ -1,12 +1,15 @@
-const TargetVote = require("../models/TargetVote");
+const TargetVote = require("../models/target_vote");
 const user = require("../models/users");
 
 const createTargetVote = (req, res) => {
   const { rut, rut_v, name_v } = req.body;
   const { id } = req.params;
 
+
+
+
   user.findById(id, (error, person) => {
-    console.log(person.rol)
+    console.log(person)
     if (error) {
       return res.status(400).send({ message: "Error al buscar el usuario." });
     }
@@ -19,6 +22,7 @@ const createTargetVote = (req, res) => {
         rut_v,
         name_v,
       });
+      console.log(newTargetVote)
       newTargetVote.save((error, vote) => {
         if (error) {
           return res.status(400).send({ message: "Error al crear la votación." });

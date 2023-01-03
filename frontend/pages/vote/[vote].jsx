@@ -31,8 +31,12 @@ const vote = (data) => {
   const [user, setUser] = useState([])
 
   const getUser = async () => {
-    const response = await axios.get(`${process.env.API_URL}/getUsers/rut/${Cookies.get('rut')}`)
-    setUser(response.data)
+    try {
+      const response = await axios.get(`${process.env.API_URL}/getUsers/rut/${Cookies.get('rut')}`)
+      setUser(response.data)
+    } catch (error) {
+      console.log(error)
+    }
   }
   useEffect(() => {
     getUser()
@@ -44,8 +48,9 @@ const vote = (data) => {
   })
 
   const onSumbit = async (e) => {
-    console.log(values)
     e.preventDefault()
+    // console.log(user._id)
+    // console.log(values)
     try {
       const response = await axios.post(`${process.env.API_URL}/createTargetVote/${user._id}`, values)
       if (response.status === 201) {

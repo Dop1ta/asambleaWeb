@@ -11,6 +11,7 @@ const userRoutes = require("./routes/userRoutes");
 const votingActivityRoutes = require("./routes/votingActivityRoutes");
 const fileRoutes = require("./routes/fileRoutes");
 const foroRoutes = require("./routes/foroRoutes");
+const target_vate = require("./routes/targetVoteRoutes");
 
 app.use(cors());
 app.use(express.json());
@@ -21,6 +22,7 @@ app.use("/api", userRoutes);
 app.use("/api", votingActivityRoutes);
 app.use("/api", fileRoutes);
 app.use("/api", foroRoutes);
+app.use("/api", target_vate);
 
 const options = {
   useNewUrlParser: true,

@@ -15,7 +15,7 @@ const TargetVoteSchema = new schema({
     maxLength: 12,
   },
   name_v: {
-    type: Date,
+    type: String,
     required: true,
     minLength: 1,
     maxLength: 100000,
