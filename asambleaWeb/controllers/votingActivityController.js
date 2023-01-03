@@ -3,7 +3,7 @@ const user = require("../models/users");
 const transporter = require("../controllers/mailerController");
 
 const createVotingActivity = (req, res) => {
-  const { name, startDate_vote, endDate_vote, rut1, rut2, rut3, rut4} = req.body;
+  const { name, startDate_vote, endDate_vote, rut1, rut2, rut3, rut4 } = req.body;
   const { id } = req.params;
 
   user.findById(id, (error, person) => {
@@ -15,17 +15,18 @@ const createVotingActivity = (req, res) => {
     }
     if (person.rol === "administrador") {
       const newVotingActivity = new votingActivity({
-      name,
-      startDate_vote,
-      endDate_vote,
-      rut1,
-      rut2,
-      rut3,
-      rut4,
-      state: 1,
+        name,
+        startDate_vote,
+        endDate_vote,
+        rut1,
+        rut2,
+        rut3,
+        rut4,
+        state: 1,
       });
 
       newVotingActivity.save((error, vote) => {
+        console.log(vote)
         if (error) {
           return res.status(400).send({ message: "Error al crear la votación." });
         }
@@ -62,20 +63,20 @@ const createVotingActivity = (req, res) => {
 };
 
 const getVotingActivity = (req, res) => {
-    votingActivity.find({}, (error, vote) => {
-      if (error) {
-        return res.status(400).send({ message: "Error al encontrar una actividad de votación." });
-      }
-      if (votingActivity.length === 0) {
-        return res.status(404).send({ message: "Votación no encontrada." });
-      }
-      return res.status(200).send(vote);
-    });
-  };
+  votingActivity.find({}, (error, vote) => {
+    if (error) {
+      return res.status(400).send({ message: "Error al encontrar una actividad de votación." });
+    }
+    if (votingActivity.length === 0) {
+      return res.status(404).send({ message: "Votación no encontrada." });
+    }
+    return res.status(200).send(vote);
+  });
+};
 
-  const updateVotingActivity = (req, res) => {
-    const { id, userid } = req.params;
-    user.findById(userid, (error, person) => {
+const updateVotingActivity = (req, res) => {
+  const { id, userid } = req.params;
+  user.findById(userid, (error, person) => {
     if (error) {
       return res.status(400).send({ message: "Error al buscar el usuario." });
     }
@@ -92,15 +93,15 @@ const getVotingActivity = (req, res) => {
         }
         return res.status(200).send({ message: "Votación actualizada." });
       });
-      } else {
-        return res.status(404).send({ message: "No tienes permisos para actualizar una votación." });
-      }
+    } else {
+      return res.status(404).send({ message: "No tienes permisos para actualizar una votación." });
+    }
   })
 }
 
-  const deleteVotingActivity = (req, res) => {
-    const { id, userid } = req.params;
-    user.findById(userid, (error, person) => {
+const deleteVotingActivity = (req, res) => {
+  const { id, userid } = req.params;
+  user.findById(userid, (error, person) => {
     if (error) {
       return res.status(400).send({ message: "Error al buscar el usuario." });
     }
@@ -108,79 +109,79 @@ const getVotingActivity = (req, res) => {
       return res.status(404).send({ message: "Usuario no encontrado." });
     }
     if (person.rol === "administrador") {
-    votingActivity.findByIdAndDelete(id, (error, vote) => {
-      if (error) {
-        return res.status(400).send({ message: "Error al eliminar la actividad de votación." });
-      }
-      if (!vote) {
-        return res.status(404).send({ message: "Votación no encontrada." });
-      }
-      return res.status(200).send({ message: "Votación eliminada." });
-    });
-  } else {
-    return res.status(404).send({ message: "No tienes permisos para eliminar una votación." });
-  }
-})
+      votingActivity.findByIdAndDelete(id, (error, vote) => {
+        if (error) {
+          return res.status(400).send({ message: "Error al eliminar la actividad de votación." });
+        }
+        if (!vote) {
+          return res.status(404).send({ message: "Votación no encontrada." });
+        }
+        return res.status(200).send({ message: "Votación eliminada." });
+      });
+    } else {
+      return res.status(404).send({ message: "No tienes permisos para eliminar una votación." });
+    }
+  })
 }
 
 
-  const getVotingActivityById = (req, res) => {
-    const { id } = req.params;
-    votingActivity.findById(id, (error, vote) => {
-      if (error) {
-        return res.status(400).send({ message: "Error." });
-      }
-      if (!vote) {
-        return res.status(404).send({ message: "Votación no encontrada." });
-      }
-      return res.status(200).send(vote);
-    });
-  };
+const getVotingActivityById = (req, res) => {
+  const { id } = req.params;
+  votingActivity.findById(id, (error, vote) => {
+    if (error) {
+      return res.status(400).send({ message: "Error." });
+    }
+    if (!vote) {
+      return res.status(404).send({ message: "Votación no encontrada." });
+    }
+    return res.status(200).send(vote);
+  });
+};
 
 
-  const modificarPorRut = (req, res) =>{
-    const {rut} = req.body;
-    user.findOneAndUpdate({ rut: rut }, (error, person) => {
-      })
-  }
+const modificarPorRut = (req, res) => {
+  const { rut } = req.body;
+  user.findOneAndUpdate({ rut: rut }, (error, person) => {
+  })
+}
 
-  const getVotingActivityByState = (req, res) => {
-    const { state } = req.params;
-    votingActivity.find({state: state}, (error, vote) => {
-      if (error) {
-        return res.status(400).send({ message: "Error." });
-      }
-      if (!vote) {
-        return res.status(404).send({ message: "Votación no encontrada." });
-      }
-      return res.status(200).send(vote);
-    });
-  };
+const getVotingActivityByState = (req, res) => {
+  const { state } = req.params;
+  votingActivity.find({ state: state }, (error, vote) => {
+    if (error) {
+      return res.status(400).send({ message: "Error." });
+    }
+    if (!vote) {
+      return res.status(404).send({ message: "Votación no encontrada." });
+    }
+    return res.status(200).send(vote);
+  });
+};
 
-  const closeVotingActivity = (req, res) =>{
-    const { id, userid } = req.params;
-    user.findById(userid, (error, person) => {
-      if (error) {
-        return res.status(400).send({ message: "Error al buscar el usuario." });
-      }
-      if (!person) {
-        return res.status(404).send({ message: "Usuario no encontrado." });
-      }
-      if (person.rol === "administrador") {
-    votingActivity.findByIdAndUpdate(id, req.body, (error, vote) => {
-      if (error) {
-        return res.status(400).send({ message: "Error al actualizar la actividad de votación." });
-      }
-      if (!vote) {
-        return res.status(404).send({ message: "Votación no encontrada." });
-      }
-      return res.status(200).send({ message: "Votación actualizada." });
-    });
-  }else{
-    return res.status(404).send({ message: "Usuario no permitido." })
-  }
-});
-  }
+const closeVotingActivity = (req, res) => {
+  const { id, userid } = req.params;
+  user.findById(userid, (error, person) => {
+    if (error) {
+      return res.status(400).send({ message: "Error al buscar el usuario." });
+    }
+    if (!person) {
+      return res.status(404).send({ message: "Usuario no encontrado." });
+    }
+    if (person.rol === "administrador") {
+      votingActivity.findByIdAndUpdate(id, req.body, (error, vote) => {
+        if (error) {
+          return res.status(400).send({ message: "Error al actualizar la actividad de votación." });
+        }
+        if (!vote) {
+          return res.status(404).send({ message: "Votación no encontrada." });
+        }
+        return res.status(200).send({ message: "Votación actualizada." });
+      });
+    } else {
+      return res.status(404).send({ message: "Usuario no permitido." })
+    }
+  });
+}
 
 
 module.exports = {

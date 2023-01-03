@@ -9,16 +9,12 @@ const votingActivitySchema = new schema({
     maxLength: 100,
   },
   startDate_vote: {
-    type: String,
+    type: Date,
     required: true,
-    
-  },
-  startHour_vote:{
-    type: String,
-    required: true,
+
   },
   endDate_vote: {
-    type: String,
+    type: Date,
     required: true,
   },
   ganador: {
@@ -31,31 +27,31 @@ const votingActivitySchema = new schema({
     type: Number,
     required: false,
   },
-  rut1:{
+  rut1: {
     type: String,
     required: true,
     minLength: 1,
     maxLength: 12,
   },
-  rut2:{
+  rut2: {
     type: String,
     required: true,
     minLength: 1,
     maxLength: 12,
   },
-  rut3:{
+  rut3: {
     type: String,
     required: true,
     minLength: 1,
     maxLength: 12,
   },
-  rut4:{
+  rut4: {
     type: String,
     required: true,
     minLength: 1,
     maxLength: 12,
   },
-  state:{
+  state: {
     type: Number,
     required: true,
   }
