@@ -3,10 +3,13 @@ import { useState, useEffect } from 'react'
 import Tab_votingActivity from '../components/Tab_votingActivity';
 import axios from 'axios'
 import Cookies from 'js-cookie';
+import { useRouter } from 'next/router';
 
 
 const voting_activity = () => {
   const [votingAct, setVotingAct] = useState([])
+
+  const router = useRouter()
 
   const getVotingAct = async () => {
     try {
@@ -20,66 +23,8 @@ const voting_activity = () => {
     getVotingAct()
   }, [])
 
-  const getNameByRuts = async (rut) => {
-    try {
-      const personrut = await axios.get(`${process.env.API_URL}/getUsers/rut/${rut}`)
-      console.log(personrut.data)
-      return personrut.data.name
-    } catch (error) {
-      return {
-        redirect: {
-          destination: '',
-          permanet: false
-        }
-      }
-    }
-  }
-
-  let [values, setValues] = useState({
-    rut: Cookies.get('rut'),
-    rut_v: '',
-    name_v: votingAct._id,
-  })
-
-  const onSumbit = async (e) => {
-    e.preventDefault()
-    try {
-      const response = await axios.post(`${process.env.API_URL}/createTargetVote/${User._id}`, values)
-      if (response.status === 201) {
-        Swal.fire({
-          title: 'Producto creado',
-          text: 'El producto se ha creado correctamente',
-          icon: 'success',
-          confirmButtonText: 'Ok'
-        }).then((result) => {
-          if (result.isConfirmed) {
-            router.push('/voting_activity')
-          }
-        })
-      } else {
-        Swal.fire({
-          title: 'Error',
-          text: 'Ha ocurrido un error',
-          icon: 'error',
-          confirmButtonText: 'Ok'
-        })
-      }
-    } catch (error) {
-      Swal.fire({
-        title: 'Error',
-        text: 'Ha ocurrido un error',
-        icon: 'error',
-        confirmButtonText: 'Ok'
-      })
-    }
-  }
-
-  const onChange = (e) => {
-    setValues(prevValues => ({
-      ...prevValues,
-      [e.target.name]: e.target.value,
-    }));
-    
+  const castAVote = (id) => {
+    router.push(`/vote/${id}`)
   }
   const showVotingActs = () => {
     if (votingAct.length === 0) {
@@ -98,16 +43,12 @@ const voting_activity = () => {
       return votingAct.map(votingActs => {
         return (
           <Card key={votingActs._id}>
-            <Box as="span" flex='1' textAlign='left'>Votación Presidencia</Box>
-            <RadioGroup>
-              <Stack direction='row'>
-                <Radio value={votingActs.rut1} name='rut_v' onChange={onChange}>{getNameByRuts(votingActs.rut1)}</Radio>
-                <Radio value={votingActs.rut2} name='rut_v' onChange={onChange}>{getNameByRuts(votingActs.rut1)}</Radio>
-                <Radio value={votingActs.rut3} name='rut_v' onChange={onChange}>{getNameByRuts(votingActs.rut1)}</Radio>
-                <Radio value={votingActs.rut4} name='rut_v' onChange={onChange}>{getNameByRuts(votingActs.rut1)}</Radio>
-                <Button colorScheme="blue" size="md" type="sumbit" onClick={onSumbit}>Guardar Voto</Button>
-              </Stack>
-            </RadioGroup>
+            <CardHeader>
+              <Heading size='md'>{votingActs.name}</Heading>
+              <Text>Fecha de inicio: {votingActs.startDate_vote}</Text>
+              <Text>Fecha de caducidad: {votingActs.endDate_vote}</Text>
+              <Button colorScheme="blue" size="md" type="sumbit" onClick={() => castAVote(votingActs._id)}>Abrir votación</Button>
+            </CardHeader>
           </Card>
         )
       })
