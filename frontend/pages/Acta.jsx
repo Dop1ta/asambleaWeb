@@ -8,8 +8,6 @@ const Acta = () => {
 
     const [Actas, setActas] = useState([])
 
-    //const [status, setStatus] = useState()
-
     const router = useRouter()
 
     const getActa = async () => {
