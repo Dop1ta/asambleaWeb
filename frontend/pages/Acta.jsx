@@ -16,6 +16,10 @@ const Acta = () => {
         setActas(response.data)
     }
 
+    const getFile = (idacta) => {
+        const res = axios.get(`${process.env.API_URL}/file/get/${idacta}`)
+        return res.status
+    }
 
     useEffect(() => {
         getActa()
@@ -35,28 +39,33 @@ const Acta = () => {
             )
         } else {
             return Actas.map(Actap => {
-                return (
-                    <Card key={Actap._id} boxShadow='lg' ml={30} my={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
-                        <CardHeader>
-                            <Heading size='md'>{Actap.name}</Heading>
-                            <Text>{Actap.description}</Text>
-                            <Text>{Actap.date}</Text>
-                            <ButtonGroup>
-                                <Button colorScheme='blue' variant='solid' margin={4} onClick={()=> router.push(`${process.env.API_URL}/file/download/${Actap._id}`)}>Descargar</Button>
-                            </ButtonGroup>
-                        </CardHeader>
-                    </Card>
-                )
+                if(getFile(Actap._id) === 201){
+                    return (
+                        <Card key={Actap._id} boxShadow='lg' ml={30} my={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
+                            <CardHeader>
+                                <Heading size='md'>{Actap.name}</Heading>
+                                <Text>{Actap.description}</Text>
+                                <Text>{Actap.date}</Text>
+                                <ButtonGroup>
+                                    <Button colorScheme='blue' variant='solid' margin={4} onClick={()=> router.push(`${process.env.API_URL}/file/download/${Actap._id}`)}>Descargar</Button>
+                                </ButtonGroup>
+                            </CardHeader>
+                        </Card>
+                    )
+                }else{
+                    return (
+                        <Card key={Actap._id} boxShadow='lg' ml={30} my={4} variant='outline' overflow='hidden' alignItems='center' borderRadius={20} backgroundColor={"white"}>
+                            <CardHeader>
+                                <Heading size='md'>{Actap.name}</Heading>
+                                <Text>{Actap.description}</Text>
+                                <Text>{Actap.date}</Text>
+                            </CardHeader>
+                        </Card>
+                    )
+                }
             })
         }
     }
-
-    //const [dow, setDown] = useState([])
-
-    /*const download = async () => {
-        const down = await axios.get(`${process.env.API_URL}/file/download`)
-        setDown(down.data)
-    }*/
 
     return (
         <Stack alignItems={'center'} textAlign={'center'} backgroundColor={"rgb(244,247,254)"}>

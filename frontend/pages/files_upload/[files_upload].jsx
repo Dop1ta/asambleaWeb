@@ -1,6 +1,6 @@
 import { useState, } from 'react';
 import axios from 'axios';
-import { Input, Stack, Button, Container, FormControl } from '@chakra-ui/react'
+import { Input, Stack, button, Container, FormControl } from '@chakra-ui/react'
 import NavTabAdmin from '../../components/NavTabAdmin'
 import { useRouter } from 'next/router'
 
@@ -10,6 +10,8 @@ const file_upload = () => {
     const router = useRouter()
     let files = null;
 
+    const idacta = router.query
+    console.log(idacta)
 
     const upload = async (e) => {
         e.preventDefault()
@@ -21,7 +23,7 @@ const file_upload = () => {
             console.log(formData)
             const response = await axios.post(`${process.env.API_URL}/file/:archivo/${files_upload}`, formData)
             if (response.status === 201) {
-                console.log("Archivo subido")
+                router.push("/options/ActaAdmin")
             }
         } catch (error) {
         }
@@ -35,7 +37,6 @@ const file_upload = () => {
 
     return (
         <div className="container">
-            <NavTabAdmin />
             <div className="row">
                 <form onSubmit={upload}>
                     <div className="form-group">
